@@ -23,11 +23,11 @@ public class SnakeComponent extends JComponent {
 
     }
 
-    private void drawFood(Graphics g, Food food) {
+    private void drawGarden(Graphics g, Garden garden) {
 
     }
 
-    private void drawGarden(Graphics g, Garden garden) {
+    private void drawFood(Graphics g, Food food) {
 
     }
 

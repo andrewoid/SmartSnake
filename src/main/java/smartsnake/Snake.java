@@ -1,6 +1,7 @@
 package smartsnake;
 
-import java.awt.*;
+import java.awt.Point;
+import java.util.List;
 
 public class Snake {
 
@@ -9,8 +10,8 @@ public class Snake {
     /**
      * @return the number of segments in the Snake.
      */
-    public int getSegments() {
-        return 0;
+    public List<Point> getSegments() {
+        return null;
     }
 
     /**
@@ -22,8 +23,9 @@ public class Snake {
 
     /**
      * Moves the Snake one square in the direction it's facing.
+     * @param grow true if he Snake should grow as it moves, otherwise false
      */
-    public void tick() {
+    public void tick(boolean grow) {
 
     }
 
@@ -31,7 +33,7 @@ public class Snake {
 
     }
 
-    public Point getLocation() {
+    public Point getHead() {
         return null;
     }
 

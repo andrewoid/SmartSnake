@@ -9,7 +9,7 @@ public class SnakeThread extends Thread {
         while (!interrupted()) {
             component.repaint();
             try {
-                Thread.sleep(1000);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

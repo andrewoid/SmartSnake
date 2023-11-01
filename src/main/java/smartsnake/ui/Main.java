@@ -10,8 +10,9 @@ import java.awt.event.KeyListener;
 import static java.awt.event.KeyEvent.VK_LEFT;
 
 public class Main {
+
     public static void main(String[] args) {
-        Garden garden = new Garden(30, 20);
+        Garden garden = new Garden(40, 30);
         SnakeComponent component = new SnakeComponent(garden);
         SnakeFrame frame = new SnakeFrame(component);
         frame.addKeyListener(new SnakeKeyAdapter(garden.getSnake()));

@@ -9,7 +9,9 @@ import java.awt.*;
 
 public class SnakeComponent extends JComponent {
 
-    private Garden garden;
+    private static final int SQUARE_SIZE = 10;
+
+    private final Garden garden;
 
     public SnakeComponent(Garden garden) {
         this.garden = garden;
@@ -17,9 +19,11 @@ public class SnakeComponent extends JComponent {
 
     /**
      * Calls garden.tick() then draws the Garden, Snake and Food
+     *
      * @param g the <code>Graphics</code> object to protect
      */
-    @Override public void paintComponent(Graphics g) {
+    @Override
+    public void paintComponent(Graphics g) {
 
     }
 

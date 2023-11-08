@@ -1,6 +1,6 @@
 package smartsnake;
 
-import java.awt.Point;
+import java.awt.*;
 import java.util.List;
 
 public class Snake {
@@ -23,6 +23,7 @@ public class Snake {
 
     /**
      * Moves the Snake one square in the direction it's facing.
+     *
      * @param grow true if he Snake should grow as it moves, otherwise false
      */
     public void tick(boolean grow) {
@@ -33,16 +34,15 @@ public class Snake {
 
     }
 
-    public Point getHead() {
+    public Point getHeadLocation() {
         return null;
     }
 
     /**
-     *
      * @param food
      * @return true if the head intersects any part of the food, otherwise false
      */
-    public boolean intersects(Food food) {
+    public boolean intersectsHead(Food food) {
         return false;
     }
 
@@ -56,7 +56,7 @@ public class Snake {
     /**
      * @return if the Food intersects any part of the tail, otherwise false.
      */
-    public boolean intersectsTail(Food food) {
+    public boolean intersects(Food food) {
         return false;
     }
 

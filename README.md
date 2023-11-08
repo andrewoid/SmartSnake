@@ -1,6 +1,7 @@
 ## Smart Snake Game
 
-We will be writing a Snake game and then "solving it" using **A*** and then **Genetic Algorithms** and **Neural Networks**.
+We will be writing a Snake game and then "solving it" using **A*** and then **Genetic Algorithms** and **Neural
+Networks**.
 
 #### Classes to use
 
@@ -11,6 +12,8 @@ We will be writing a Snake game and then "solving it" using **A*** and then **Ge
 [A*](https://en.wikipedia.org/wiki/A*_search_algorithm)
 
 [A* in Java](https://codegym.cc/groups/posts/a-search-algorithm-in-java)
+
+[A* Path Finding (YouTube)](https://www.youtube.com/watch?v=-L-WgKMFuhE)
 
 [Genetic Algorithms](https://en.wikipedia.org/wiki/Genetic_algorithm)
 

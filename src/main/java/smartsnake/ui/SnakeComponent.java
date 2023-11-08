@@ -9,6 +9,9 @@ import java.awt.*;
 
 public class SnakeComponent extends JComponent {
 
+    /**
+     * Each square should be SQUARE_SIZE x SQUARE_SIZE pixels when drawn.
+     */
     private static final int SQUARE_SIZE = 10;
 
     private final Garden garden;

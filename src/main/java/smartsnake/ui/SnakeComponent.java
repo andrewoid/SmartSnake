@@ -19,8 +19,9 @@ public class SnakeComponent extends JComponent {
     private static final int SQUARE_SIZE = 10;
 
     private final Garden garden;
-    Color darkGreen = new Color(0,200,0);
-    Color lightGreen = new Color(0,175,0);
+    Color darkGreen = new Color(0, 200, 0);
+    Color lightGreen = new Color(0, 175, 0);
+
     public SnakeComponent(Garden garden) {
         this.garden = garden;
     }
@@ -33,8 +34,8 @@ public class SnakeComponent extends JComponent {
     @Override
     public void paintComponent(Graphics g) {
 
-    garden.tick();
-    drawGarden(g, garden);
+        garden.tick();
+        drawGarden(g, garden);
 
     }
 

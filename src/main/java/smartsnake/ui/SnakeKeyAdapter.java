@@ -5,8 +5,11 @@ import smartsnake.Snake;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * Cohen
+ */
 public class SnakeKeyAdapter extends KeyAdapter {
-    private Snake snake;
+    private final Snake snake;
 
     public SnakeKeyAdapter(Snake snake) {
         this.snake = snake;
@@ -14,6 +17,7 @@ public class SnakeKeyAdapter extends KeyAdapter {
 
     /**
      * Sets the Direction of the Snake based on the event
+     *
      * @param event the event to be processed
      */
     @Override

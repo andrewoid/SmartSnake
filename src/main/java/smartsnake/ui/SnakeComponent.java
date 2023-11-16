@@ -7,6 +7,9 @@ import smartsnake.Snake;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Weiss
+ */
 public class SnakeComponent extends JComponent {
 
     /**

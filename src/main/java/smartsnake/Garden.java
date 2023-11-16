@@ -1,5 +1,8 @@
 package smartsnake;
 
+/**
+ * Chambre, Runge
+ */
 public class Garden {
 
     private final int width;

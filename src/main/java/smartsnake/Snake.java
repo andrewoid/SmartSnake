@@ -3,6 +3,9 @@ package smartsnake;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Kenigsberg, Halberstam
+ */
 public class Snake {
 
     public static final int STARVE_LIMIT = 50;
@@ -47,14 +50,14 @@ public class Snake {
     }
 
     /**
-     * @return if the head intersects any part of the tail, otherwise false.
+     * @return true if the head intersects any part of the tail, otherwise false.
      */
     public boolean intersectsItself() {
         return false;
     }
 
     /**
-     * @return if the Food intersects any part of the tail, otherwise false.
+     * @return true if the Food intersects any part of the Snake, otherwise false.
      */
     public boolean intersects(Food food) {
         return false;

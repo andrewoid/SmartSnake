@@ -8,7 +8,7 @@ public class SnakeFrame extends JFrame {
         setLayout(new BorderLayout());
         setTitle("Smart Snake");
         add(component, BorderLayout.CENTER);
-        setSize(800, 600);
+        setSize(400, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 }

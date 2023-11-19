@@ -1,5 +1,7 @@
 package smartsnake;
 
+import java.awt.*;
+
 /**
  * Chambre, Runge
  */
@@ -7,6 +9,8 @@ public class Garden {
 
     private final int width;
     private final int height;
+    private Snake snake;
+    private Food food;
 
     public Garden(int width, int height) {
         this.width = width;
@@ -16,24 +20,23 @@ public class Garden {
     }
 
     private void createSnake() {
-        //created with a fixed length and width, in a fixed position at the center of the screen
-
+        snake = new Snake();
+        snake.setDirection(Direction.Right);
     }
 
     private void createFood() {
-        //created initially with a fixed position in front of the snake
-
+        int x = getSnake().getHeadLocation().x;
+        int y = getSnake().getHeadLocation().y;
+        food = new Food(x+5, y);
     }
 
     public Snake getSnake() {
-        //bring the snake into this class from where it was created in the Snake class
-        //create a Snake object here
-        return null;
+        return snake;
     }
 
     public Food getFood() {
         //create a Food object to bring the Food into this class
-        return null;
+        return food;
     }
 
     /**

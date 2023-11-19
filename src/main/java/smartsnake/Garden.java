@@ -25,7 +25,7 @@ public class Garden {
     }
 
     private void createFood() {
-        food = new Food((int) Math.random(), (int) Math.random());
+        food = new Food((int) (Math.random() * 40), (int) (Math.random() * 30));
     }
 
     public Snake getSnake() {

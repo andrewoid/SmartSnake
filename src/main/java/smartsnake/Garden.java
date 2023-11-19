@@ -27,7 +27,7 @@ public class Garden {
     private void createFood() {
         int x = getSnake().getHeadLocation().x;
         int y = getSnake().getHeadLocation().y;
-        food = new Food(x+5, y);
+        food = new Food(x + 5, y);
     }
 
     public Snake getSnake() {
@@ -49,8 +49,8 @@ public class Garden {
     public boolean tick() {
         //Question: unsure if the tick method is supposed to have calculations of snake moving or turning?
         //every tick will be 1. a movement of the snake
-                            //2. consume any food in its path and then spawn more food
-                            //3. end the game if the snake hits itself or the wall
+        //2. consume any food in its path and then spawn more food
+        //3. end the game if the snake hits itself or the wall
         return false;
     }
 

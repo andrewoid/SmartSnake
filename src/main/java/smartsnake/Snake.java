@@ -27,7 +27,7 @@ public class Snake {
     /**
      * Moves the Snake one square in the direction it's facing.
      *
-     * @param grow true if he Snake should grow as it moves, otherwise false
+     * @param grow true if the Snake should grow as it moves, otherwise false
      */
     public void tick(boolean grow) {
 

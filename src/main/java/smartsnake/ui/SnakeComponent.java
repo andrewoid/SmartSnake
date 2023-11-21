@@ -6,7 +6,6 @@ import smartsnake.Snake;
 
 import javax.swing.*;
 import java.awt.*;
-import java.lang.reflect.Array;
 
 /**
  * Weiss
@@ -21,7 +20,6 @@ public class SnakeComponent extends JComponent {
     private final Garden garden;
     static final Color darkGreen = new Color(0, 200, 0);
     static final Color lightGreen = new Color(0, 175, 0);
-    //Snake snake = new Snake();
 
     public SnakeComponent(Garden garden) {
         this.garden = garden;
@@ -42,20 +40,20 @@ public class SnakeComponent extends JComponent {
         //if(garden.tick()) {
         drawGarden(g, garden);
         drawFood(g, food);
-        //drawSnake(g, snake);
+        drawSnake(g, snake);
 
         //}
     }
 
     private void drawGarden(Graphics g, Garden garden) {
-        for (int i = 0; i < garden.getWidth(); i++) {
-            for (int ix = 0; ix < garden.getHeight(); ix++) {
-                if ((i + ix) % 2 == 0) {
+        for (int x = 0; x < garden.getWidth(); x++) {
+            for (int y = 0; y < garden.getHeight(); y++) {
+                if ((x + y) % 2 == 0) {
                     g.setColor(darkGreen);
                 } else {
                     g.setColor(lightGreen);
                 }
-                g.fillRect(i * SQUARE_SIZE, ix * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+                g.fillRect(x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
             }
         }
     }
@@ -70,13 +68,10 @@ public class SnakeComponent extends JComponent {
     private void drawSnake(Graphics g, Snake snake) {
         Point point = snake.getHeadLocation();
         for (int x = 0; x < snake.getSegments().size(); x++) {
-            for (int y = 0; y < 1; y++) {
-
-                g.setColor(Color.BLUE);
-                //g.fillRect(x * SQUARE_SIZE, SQUARE_SIZE * 15, SQUARE_SIZE, SQUARE_SIZE);
-                g.fillRect(point.x * SQUARE_SIZE, point.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
-            }
+            //g.fillRect(x * SQUARE_SIZE, SQUARE_SIZE * 15, SQUARE_SIZE, SQUARE_SIZE);
+            g.fillRect(point.x * SQUARE_SIZE, point.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
         }
+        g.setColor(Color.BLUE);
     }
 
 }

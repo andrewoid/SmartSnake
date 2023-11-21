@@ -21,8 +21,7 @@ public class SnakeComponent extends JComponent {
     private final Garden garden;
     static final Color darkGreen = new Color(0, 200, 0);
     static final Color lightGreen = new Color(0, 175, 0);
-    Snake snake = new Snake();
-    Food food = new Food();
+    //Snake snake = new Snake();
 
     public SnakeComponent(Garden garden) {
         this.garden = garden;
@@ -36,15 +35,19 @@ public class SnakeComponent extends JComponent {
     @Override
     public void paintComponent(Graphics g) {
 
+
+        Snake snake = garden.getSnake();
+        Food food = garden.getFood();
+
         //if(garden.tick()) {
         drawGarden(g, garden);
         drawFood(g, food);
-        drawSnake(g, snake);
+        //drawSnake(g, snake);
+
         //}
     }
 
     private void drawGarden(Graphics g, Garden garden) {
-        //int fullGrid = garden.getHeight() * garden.getWidth();
         for (int i = 0; i < garden.getWidth(); i++) {
             for (int ix = 0; ix < garden.getHeight(); ix++) {
                 if ((i + ix) % 2 == 0) {
@@ -65,12 +68,13 @@ public class SnakeComponent extends JComponent {
     }
 
     private void drawSnake(Graphics g, Snake snake) {
-
-        for (int x = 0; x < 3; x++) {
-            for (int y = 0; y < 3; y++) {
+        Point point = snake.getHeadLocation();
+        for (int x = 0; x < snake.getSegments().size(); x++) {
+            for (int y = 0; y < 1; y++) {
 
                 g.setColor(Color.BLUE);
-                g.fillRect(x * SQUARE_SIZE, SQUARE_SIZE * 15, SQUARE_SIZE, SQUARE_SIZE);
+                //g.fillRect(x * SQUARE_SIZE, SQUARE_SIZE * 15, SQUARE_SIZE, SQUARE_SIZE);
+                g.fillRect(point.x * SQUARE_SIZE, point.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
             }
         }
     }

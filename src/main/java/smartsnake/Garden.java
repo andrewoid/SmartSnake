@@ -1,6 +1,7 @@
 package smartsnake;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Chambre, Runge
@@ -25,7 +26,20 @@ public class Garden {
     }
 
     private void createFood() {
-        food = new Food((int) (Math.random() * 40), (int) (Math.random() * 30));
+        ArrayList<Point> points = new ArrayList<>();
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                points.add(new Point(x, y));
+            }
+        }
+
+        points.remove(snake.getHeadLocation());
+
+        int randomIndex = (int) (Math.random() * points.size());
+        food = new Food(points.get(randomIndex));
+
+        //need to remove snakes body points from list
     }
 
     public Snake getSnake() {
@@ -50,12 +64,12 @@ public class Garden {
 
         if (snake.starved()) {
             canContinue = false;
-        } else{
+        } else {
             if (snake.intersectsItself()) {
                 canContinue = false;
-            } //else if (snake.hitsWall()) {
-            //QUESTION: how does the snake hit the wall?
-            //}
+            } else if (snake.getHeadLocation().x == width || snake.getHeadLocation().y == height) {
+                canContinue = false;
+            }
             else if (snake.intersects(food)) {
                 canContinue = false;
             } else {

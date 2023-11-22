@@ -65,7 +65,7 @@ public class SnakeComponent extends JComponent {
         int y = (int) foodY;
 
         g.setColor(Color.RED);
-        g.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE);
+        g.fillRect(x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
     }
 
     public void drawSnake(Graphics g, Snake snake) {

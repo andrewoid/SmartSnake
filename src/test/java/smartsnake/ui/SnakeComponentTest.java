@@ -46,7 +46,7 @@ class SnakeComponentTest {
         snakeComponent.drawFood(graphics, food);
 
         //then
-        Mockito.verify(graphics).fillRect(food.x, food.y, SQUARE_SIZE, SQUARE_SIZE);
+        Mockito.verify(graphics).fillRect(food.x * SQUARE_SIZE, food.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
         Mockito.verify(graphics).setColor(Color.RED);
 
 
@@ -58,7 +58,7 @@ class SnakeComponentTest {
 
         doReturn(snake).when(garden).getSnake();
         doReturn(segments).when(snake).getSegments();
-        Point point1 = segments.get(0);
+        Point point = segments.get(0);
         Point point2 = segments.get(1);
         Point point3 = segments.get(2);
 
@@ -67,9 +67,10 @@ class SnakeComponentTest {
         snakeComponent.drawSnake(graphics, snake);
 
         //then
-        Mockito.verify(graphics).fillRect(point1.x, point1.y, SQUARE_SIZE, SQUARE_SIZE);
-        Mockito.verify(graphics).fillRect(point2.x, point2.y, SQUARE_SIZE, SQUARE_SIZE);
-        Mockito.verify(graphics).fillRect(point3.x, point3.y, SQUARE_SIZE, SQUARE_SIZE);
+        Mockito.verify(graphics).fillRect(point.x * SQUARE_SIZE, point.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+        Mockito.verify(graphics).fillRect(point2.x * SQUARE_SIZE, point2.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+        Mockito.verify(graphics).fillRect(point3.x * SQUARE_SIZE, point3.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+
 
     }
 }

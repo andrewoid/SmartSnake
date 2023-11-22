@@ -24,9 +24,9 @@ class SnakeComponentTest {
     private final Food food = new Food(2, 3);
     private final Snake snake = mock();
     List<Point> segments = new ArrayList<>(List.of(
-            new Point(1,1),
-            new Point(2,1),
-            new Point(3,1)
+            new Point(1, 1),
+            new Point(2, 1),
+            new Point(3, 1)
     ));
 
 
@@ -58,9 +58,9 @@ class SnakeComponentTest {
 
         doReturn(snake).when(garden).getSnake();
         doReturn(segments).when(snake).getSegments();
-        Point point = segments.get(0);
-        Point point2 = segments.get(1);
-        Point point3 = segments.get(2);
+        final Point point = segments.get(0);
+        final Point point2 = segments.get(1);
+        final Point point3 = segments.get(2);
 
 
         //when

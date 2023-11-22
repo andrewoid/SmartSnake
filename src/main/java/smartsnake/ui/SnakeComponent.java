@@ -5,7 +5,10 @@ import smartsnake.Garden;
 import smartsnake.Snake;
 
 import javax.swing.*;
+import javax.swing.text.Segment;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Weiss
@@ -20,6 +23,7 @@ public class SnakeComponent extends JComponent {
     private final Garden garden;
     static final Color darkGreen = new Color(0, 200, 0);
     static final Color lightGreen = new Color(0, 175, 0);
+    public List<Point> segments = new ArrayList<>();
 
     public SnakeComponent(Garden garden) {
         this.garden = garden;
@@ -69,11 +73,11 @@ public class SnakeComponent extends JComponent {
     }
 
     public void drawSnake(Graphics g, Snake snake) {
-        for (int i = 0; i < snake.getSegments().size(); i++) {
-            Point point = snake.getSegments().get(i);
-            g.setColor(Color.BLUE);
-            g.fillRect(point.x * SQUARE_SIZE, point.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+        segments = snake.getSegments();
+        for (Point segment : segments) {
+            g.fillRect(segment.x * SQUARE_SIZE, segment.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
         }
+        g.setColor(Color.BLUE);
     }
 
 }

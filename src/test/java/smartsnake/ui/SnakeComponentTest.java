@@ -38,8 +38,8 @@ class SnakeComponentTest {
 
     @Test
     void drawFood() {
-        //given
 
+        //given
         doReturn(food).when(garden).getFood();
 
         //when
@@ -54,14 +54,13 @@ class SnakeComponentTest {
 
     @Test
     void drawSnake() {
-        //given
 
+        //given
         doReturn(snake).when(garden).getSnake();
         doReturn(segments).when(snake).getSegments();
         final Point point = segments.get(0);
         final Point point2 = segments.get(1);
         final Point point3 = segments.get(2);
-
 
         //when
         snakeComponent.drawSnake(graphics, snake);
@@ -70,7 +69,16 @@ class SnakeComponentTest {
         Mockito.verify(graphics).fillRect(point.x * SQUARE_SIZE, point.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
         Mockito.verify(graphics).fillRect(point2.x * SQUARE_SIZE, point2.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
         Mockito.verify(graphics).fillRect(point3.x * SQUARE_SIZE, point3.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+        Mockito.verify(graphics).setColor(Color.BLUE);
 
 
+    }
+
+    @Test
+    void drawGarden() {
+
+        //given
+        //when
+        //then
     }
 }

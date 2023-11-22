@@ -45,7 +45,7 @@ public class SnakeComponent extends JComponent {
         //}
     }
 
-    private void drawGarden(Graphics g, Garden garden) {
+    public void drawGarden(Graphics g, Garden garden) {
         for (int x = 0; x < garden.getWidth(); x++) {
             for (int y = 0; y < garden.getHeight(); y++) {
                 if ((x + y) % 2 == 0) {
@@ -58,20 +58,19 @@ public class SnakeComponent extends JComponent {
         }
     }
 
-    private void drawFood(Graphics g, Food food) {
+    public void drawFood(Graphics g, Food food) {
         int x = food.x;
         int y = food.y;
         g.setColor(Color.RED);
         g.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE);
     }
 
-    private void drawSnake(Graphics g, Snake snake) {
-        Point point = snake.getHeadLocation();
-        for (int x = 0; x < snake.getSegments().size(); x++) {
-            //g.fillRect(x * SQUARE_SIZE, SQUARE_SIZE * 15, SQUARE_SIZE, SQUARE_SIZE);
+    public void drawSnake(Graphics g, Snake snake) {
+        for(int i = 0; i < snake.getSegments().size(); i++){
+            Point point = snake.getSegments().get(i);
+            g.setColor(Color.BLUE);
             g.fillRect(point.x * SQUARE_SIZE, point.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
         }
-        g.setColor(Color.BLUE);
     }
 
 }

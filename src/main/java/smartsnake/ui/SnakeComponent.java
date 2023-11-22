@@ -66,7 +66,7 @@ public class SnakeComponent extends JComponent {
     }
 
     public void drawSnake(Graphics g, Snake snake) {
-        for(int i = 0; i < snake.getSegments().size(); i++){
+        for (int i = 0; i < snake.getSegments().size(); i++) {
             Point point = snake.getSegments().get(i);
             g.setColor(Color.BLUE);
             g.fillRect(point.x * SQUARE_SIZE, point.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);

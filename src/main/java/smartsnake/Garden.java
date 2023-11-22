@@ -60,28 +60,24 @@ public class Garden {
     public boolean tick() {
         tickCounter++;
 
-        boolean canContinue = true;
-
         if (snake.starved()) {
-            canContinue = false;
+            return false;
+        } else if (snake.intersectsItself()) {
+            return false;
+        } else if (snake.getHeadLocation().x == width
+                || snake.getHeadLocation().y == height) {
+            return false;
         } else {
-            if (snake.intersectsItself()) {
-                canContinue = false;
-            } else if (snake.getHeadLocation().x == width
-                    || snake.getHeadLocation().y == height)
-            {
-                canContinue = false;
+            if (snake.intersectsHead(food)) {
+                snake.tick(true);
+                createFood();
             } else {
-                if (snake.intersectsHead(food)) {
-                    snake.tick(true);
-                    createFood();
-                } else {
-                    snake.tick(false);
-                }
+                snake.tick(false);
             }
         }
-        return canContinue;
+        return true;
     }
+
 
     /**
      * @return the number of times tick() was called successfully.

@@ -15,7 +15,7 @@ public class SnakeComponent extends JComponent {
     /**
      * Each square should be SQUARE_SIZE x SQUARE_SIZE pixels when drawn.
      */
-    private static final int SQUARE_SIZE = 10;
+    public static final int SQUARE_SIZE = 10;
 
     private final Garden garden;
     static final Color darkGreen = new Color(0, 200, 0);
@@ -59,8 +59,11 @@ public class SnakeComponent extends JComponent {
     }
 
     public void drawFood(Graphics g, Food food) {
-        int x = food.x;
-        int y = food.y;
+        double foodX = food.getX();
+        int x = (int) foodX;
+        double foodY = food.getY();
+        int y = (int) foodY;
+
         g.setColor(Color.RED);
         g.fillRect(x, y, SQUARE_SIZE, SQUARE_SIZE);
     }

@@ -37,12 +37,12 @@ public class SnakeComponent extends JComponent {
         Snake snake = garden.getSnake();
         Food food = garden.getFood();
 
-        //if(garden.tick()) {
-        drawGarden(g, garden);
-        drawFood(g, food);
-        drawSnake(g, snake);
+        if (garden.tick()) {
+            drawGarden(g, garden);
+            drawFood(g, food);
+            drawSnake(g, snake);
 
-        //}
+        }
     }
 
     public void drawGarden(Graphics g, Garden garden) {

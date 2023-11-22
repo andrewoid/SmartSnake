@@ -15,8 +15,8 @@ import static org.mockito.Mockito.mock;
 class SnakeComponentTest {
     //mock garden, snake, and regular food, mock graphics
     //You have a given, a do return, and a verify
-    private final Garden garden = mock(Garden.class);
-    private final Graphics graphics = mock(Graphics.class);
+    private final Garden garden = mock();
+    private final Graphics graphics = mock();
     private final SnakeComponent snakeComponent = new SnakeComponent(garden);
     private final Food food = new Food();
 
@@ -29,15 +29,15 @@ class SnakeComponentTest {
     @Test
     void drawFood() {
         //given
-        //int SQUARE_SIZE = 10;
-        doReturn(food.x).when(garden.getFood().getX());
-        doReturn(food.y).when(garden.getFood().getY());
+        int SQUARE_SIZE = 10;
+        doReturn(food).when(garden).getFood();
 
         //when
         snakeComponent.drawFood(graphics, food);
 
         //then
-        Mockito.verify(graphics.getColor().equals(Color.RED));
+        Mockito.verify(graphics).fillRect(food.x, food.y, SQUARE_SIZE, SQUARE_SIZE);
+
 
     }
 }

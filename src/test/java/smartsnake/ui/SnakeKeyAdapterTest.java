@@ -25,13 +25,14 @@ class SnakeKeyAdapterTest
     }
 
     @Test
-    void keyPressed_left_KP()
+    void keyPressed_left_kp()
     {
         KeyEvent left2 = mock();
         doReturn(KeyEvent.VK_KP_LEFT).when(left2).getKeyCode();
         keyAdapter.keyPressed(left2);
         verify(snake).setDirection(Direction.Left);
     }
+
     @Test
     void keyPressed_right()
     {
@@ -42,13 +43,14 @@ class SnakeKeyAdapterTest
     }
 
     @Test
-    void keyPressed_right_KP()
+    void keyPressed_right_kp()
     {
         KeyEvent right2 = mock();
         doReturn(KeyEvent.VK_KP_RIGHT).when(right2).getKeyCode();
         keyAdapter.keyPressed(right2);
         verify(snake).setDirection(Direction.Right);
     }
+
     @Test
     void keyPressed_up()
     {
@@ -59,13 +61,14 @@ class SnakeKeyAdapterTest
     }
 
     @Test
-    void keyPressed_up_KP()
+    void keyPressed_up_kp()
     {
         KeyEvent up2 = mock();
         doReturn(KeyEvent.VK_KP_UP).when(up2).getKeyCode();
         keyAdapter.keyPressed(up2);
         verify(snake).setDirection(Direction.Up);
     }
+
     @Test
     void keyPressed_down()
     {
@@ -76,7 +79,7 @@ class SnakeKeyAdapterTest
     }
 
     @Test
-    void keyPressed_down_KP()
+    void keyPressed_down_kp()
     {
         KeyEvent down2 = mock();
         doReturn(KeyEvent.VK_KP_DOWN).when(down2).getKeyCode();

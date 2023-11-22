@@ -18,72 +18,72 @@ class SnakeKeyAdapterTest
     @Test
     void keyPressed_left()
     {
-        KeyEvent left1 = mock();
-        doReturn(KeyEvent.VK_LEFT).when(left1).getKeyCode();
-        keyAdapter.keyPressed(left1);
+        KeyEvent event = mock();
+        doReturn(KeyEvent.VK_LEFT).when(event).getKeyCode();
+        keyAdapter.keyPressed(event);
         verify(snake).setDirection(Direction.Left);
     }
 
     @Test
     void keyPressed_left_kp()
     {
-        KeyEvent left2 = mock();
-        doReturn(KeyEvent.VK_KP_LEFT).when(left2).getKeyCode();
-        keyAdapter.keyPressed(left2);
+        KeyEvent event = mock();
+        doReturn(KeyEvent.VK_KP_LEFT).when(event).getKeyCode();
+        keyAdapter.keyPressed(event);
         verify(snake).setDirection(Direction.Left);
     }
 
     @Test
     void keyPressed_right()
     {
-        KeyEvent right1 = mock();
-        doReturn(KeyEvent.VK_RIGHT).when(right1).getKeyCode();
-        keyAdapter.keyPressed(right1);
+        KeyEvent event = mock();
+        doReturn(KeyEvent.VK_RIGHT).when(event).getKeyCode();
+        keyAdapter.keyPressed(event);
         verify(snake).setDirection(Direction.Right);
     }
 
     @Test
     void keyPressed_right_kp()
     {
-        KeyEvent right2 = mock();
-        doReturn(KeyEvent.VK_KP_RIGHT).when(right2).getKeyCode();
-        keyAdapter.keyPressed(right2);
+        KeyEvent event = mock();
+        doReturn(KeyEvent.VK_KP_RIGHT).when(event).getKeyCode();
+        keyAdapter.keyPressed(event);
         verify(snake).setDirection(Direction.Right);
     }
 
     @Test
     void keyPressed_up()
     {
-        KeyEvent up1 = mock();
-        doReturn(KeyEvent.VK_UP).when(up1).getKeyCode();
-        keyAdapter.keyPressed(up1);
+        KeyEvent event = mock();
+        doReturn(KeyEvent.VK_UP).when(event).getKeyCode();
+        keyAdapter.keyPressed(event);
         verify(snake).setDirection(Direction.Up);
     }
 
     @Test
     void keyPressed_up_kp()
     {
-        KeyEvent up2 = mock();
-        doReturn(KeyEvent.VK_KP_UP).when(up2).getKeyCode();
-        keyAdapter.keyPressed(up2);
+        KeyEvent event = mock();
+        doReturn(KeyEvent.VK_KP_UP).when(event).getKeyCode();
+        keyAdapter.keyPressed(event);
         verify(snake).setDirection(Direction.Up);
     }
 
     @Test
     void keyPressed_down()
     {
-        KeyEvent down1 = mock();
-        doReturn(KeyEvent.VK_DOWN).when(down1).getKeyCode();
-        keyAdapter.keyPressed(down1);
+        KeyEvent event = mock();
+        doReturn(KeyEvent.VK_DOWN).when(event).getKeyCode();
+        keyAdapter.keyPressed(event);
         verify(snake).setDirection(Direction.Down);
     }
 
     @Test
     void keyPressed_down_kp()
     {
-        KeyEvent down2 = mock();
-        doReturn(KeyEvent.VK_KP_DOWN).when(down2).getKeyCode();
-        keyAdapter.keyPressed(down2);
+        KeyEvent event = mock();
+        doReturn(KeyEvent.VK_KP_DOWN).when(event).getKeyCode();
+        keyAdapter.keyPressed(event);
         verify(snake).setDirection(Direction.Down);
     }
 }

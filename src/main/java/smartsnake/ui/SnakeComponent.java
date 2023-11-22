@@ -23,7 +23,6 @@ public class SnakeComponent extends JComponent {
     private final Garden garden;
     static final Color darkGreen = new Color(0, 200, 0);
     static final Color lightGreen = new Color(0, 175, 0);
-    public List<Point> segments = new ArrayList<>();
 
     public SnakeComponent(Garden garden) {
         this.garden = garden;
@@ -73,11 +72,12 @@ public class SnakeComponent extends JComponent {
     }
 
     public void drawSnake(Graphics g, Snake snake) {
-        segments = snake.getSegments();
+        List<Point> segments = snake.getSegments();
+        g.setColor(Color.BLUE);
         for (Point segment : segments) {
             g.fillRect(segment.x * SQUARE_SIZE, segment.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
         }
-        g.setColor(Color.BLUE);
+
     }
 
 }

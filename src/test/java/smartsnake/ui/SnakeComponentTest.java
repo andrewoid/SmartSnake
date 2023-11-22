@@ -78,7 +78,13 @@ class SnakeComponentTest {
     void drawGarden() {
 
         //given
+        doReturn(40).when(garden).getWidth();
+        doReturn(30).when(garden).getHeight();
+
         //when
+        snakeComponent.drawGarden(graphics, garden);
+
         //then
+
     }
 }

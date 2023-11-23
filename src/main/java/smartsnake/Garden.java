@@ -35,11 +35,10 @@ public class Garden {
         }
 
         points.remove(snake.getHeadLocation());
+        points.remove(snake.getSegments());
 
         int randomIndex = (int) (Math.random() * points.size());
         food = new Food(points.get(randomIndex));
-
-        //need to remove snakes body points from list
     }
 
     public Snake getSnake() {

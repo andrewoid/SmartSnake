@@ -43,12 +43,8 @@ public class Garden {
                 points.add(new Point(x, y));
             }
         }
-        if (snake.getHeadLocation() != null) {
-            points.remove(snake.getHeadLocation());
-        }
-        if (snake.getSegments() != null) {
-            points.removeAll(snake.getSegments());
-        }
+
+        points.removeAll(snake.getSegments());
 
         int randomIndex = (random.nextInt(points.size()));
         food = new Food(points.get(randomIndex));

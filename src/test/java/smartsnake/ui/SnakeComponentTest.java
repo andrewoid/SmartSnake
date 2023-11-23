@@ -1,6 +1,7 @@
 package smartsnake.ui;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import smartsnake.Food;
 import smartsnake.Garden;
@@ -28,6 +29,8 @@ class SnakeComponentTest {
             new Point(2, 1),
             new Point(3, 1)
     ));
+    static final Color darkGreen = new Color(0, 200, 0);
+    static final Color lightGreen = new Color(0, 175, 0);
 
 
 
@@ -80,11 +83,16 @@ class SnakeComponentTest {
         //given
         doReturn(40).when(garden).getWidth();
         doReturn(30).when(garden).getHeight();
+        int x = garden.getWidth() + garden.getHeight();
+        int y = garden.getWidth() + garden.getHeight() / 2;
 
         //when
         snakeComponent.drawGarden(graphics, garden);
 
         //then
-
+        Mockito.verify(graphics).fillRect(x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+        Mockito.verify(graphics).setColor(darkGreen);
+        Mockito.verify(graphics).fillRect(x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+        Mockito.verify(graphics).setColor(lightGreen);
     }
 }

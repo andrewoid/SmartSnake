@@ -10,8 +10,7 @@ import smartsnake.Snake;
 import java.awt.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 class GardenTest {
 
@@ -50,21 +49,8 @@ class GardenTest {
         doReturn(point).when(snake).getHeadLocation();
 
         //then
+        verify(snake).tick(true);
         assertTrue(garden.tick());
-    }
-
-    @Test
-    void getTurns() {
-        //given
-        Snake snake = mock();
-        Point point = mock();
-        Garden garden = new Garden(40, 30, snake);
-        doReturn(point).when(snake).getHeadLocation();
-
-        //when
-        garden.tick();
-
-        //then
         assertEquals(1, garden.getTurns());
     }
 }

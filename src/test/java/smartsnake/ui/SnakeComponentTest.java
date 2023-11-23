@@ -1,6 +1,7 @@
 package smartsnake.ui;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import smartsnake.Food;
 import smartsnake.Garden;
@@ -28,6 +29,7 @@ class SnakeComponentTest {
             new Point(2, 1),
             new Point(3, 1)
     ));
+
 
 
 
@@ -85,6 +87,7 @@ class SnakeComponentTest {
         snakeComponent.drawGarden(graphics, garden);
 
         //then
+        Mockito.verify(graphics).fillRect(SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
 
     }
 }

@@ -1,32 +1,79 @@
 package smartsnake;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.awt.*;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SnakeTest {
+public class SnakeTest {
 
     @Test
-    void starved() {
+    public void getSegments() {
+        // given
+        Snake snake = new Snake();
+        Point resultPoint = new Point(10,5);
+
+        // when
+        List<Point> snakeResult = snake.getSegments();
+
+        // then
+        Assertions.assertEquals(resultPoint, snakeResult.get(0));
     }
 
     @Test
-    void tick() {
+    public void starved() {
+        // given
+
+        // when
+
+        // then
     }
 
     @Test
-    void setDirection() {
+    public void tick() {
+        // given
+
+        // when
+
+        // then
     }
 
     @Test
-    void intersects() {
+    public void setDirection() {
+        // given
+
+        // when
+
+        // then
     }
 
     @Test
-    void intersectsItself() {
+    public void intersects() {
+        // given
+
+        // when
+
+        // then
     }
 
     @Test
-    void intersectsTail() {
+    public void intersectsItself() {
+        // given
+
+        // when
+
+        // then
+    }
+
+    @Test
+    public void intersectsTail() {
+        // given
+
+        // when
+
+        // then
     }
 }

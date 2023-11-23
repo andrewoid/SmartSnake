@@ -45,20 +45,27 @@ public class Snake {
      */
     public void tick(boolean grow) {
         Point facing = getHeadLocation();
-        if (this.direction == Direction.Right) {
+        if (grow && this.direction == Direction.Right) {
+            snake.add(0, new Point((int) (facing.getX() + 1), (int) facing.getY()));
+        } else if ((!grow) && this.direction == Direction.Right) {
             snake.add(0, new Point((int) (facing.getX() + 1), (int) facing.getY()));
             snake.remove(snake.size() - 1);
-        } else if (this.direction == Direction.Left) {
+        } else if (grow && this.direction == Direction.Left) {
+            snake.add(0, new Point((int) (facing.getX() - 1), (int) (facing.getY())));
+        } else if ((!grow) && this.direction == Direction.Left) {
             snake.add(0, new Point((int) (facing.getX() - 1), (int) (facing.getY())));
             snake.remove(snake.size() - 1);
-        } else if (this.direction == Direction.Up) {
+        } else if (grow && this.direction == Direction.Up) {
+            snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() + 1)));
+        } else if ((!grow) && this.direction == Direction.Up) {
             snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() + 1)));
             snake.remove(snake.size() - 1);
-        } else if (this.direction == Direction.Down) {
+        } else if (grow && this.direction == Direction.Down) {
+            snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() - 1)));
+        } else if ((!grow) && this.direction == Direction.Down) {
             snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() - 1)));
             snake.remove(snake.size() - 1);
         }
-        //Cannot access food so right now it just moves in the correct location
     }
 
     public void setDirection(Direction direction) {
@@ -74,7 +81,7 @@ public class Snake {
      * @return true if the head intersects any part of the food, otherwise false
      */
     public boolean intersectsHead(Food food) {
-        return getHeadLocation() == food.getLocation();
+        return getHeadLocation().equals(food);
     }
 
     /**
@@ -82,7 +89,7 @@ public class Snake {
      */
     public boolean intersectsItself() {
         for (int i = 1; i < snake.size(); i++) {
-            if (getHeadLocation() == snake.get(i).getLocation()) {
+            if (getHeadLocation().equals(snake.get(i))) {
                 return true;
             }
         }
@@ -93,11 +100,6 @@ public class Snake {
      * @return true if the Food intersects any part of the Snake, otherwise false.
      */
     public boolean intersects(Food food) {
-        for (int i = 0; i < snake.size(); i++) {
-            if (food.getLocation() == snake.get(i).getLocation()) {
-                return true;
-            }
-        }
-        return false;
+        return snake.contains(food);
     }
 }

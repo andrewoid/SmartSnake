@@ -73,7 +73,9 @@ public class Garden {
         } else if (snake.intersectsItself()) {
             return false;
         } else if (snake.getHeadLocation().x == width
-                || snake.getHeadLocation().y == height) {
+                || snake.getHeadLocation().y == height
+                || snake.getHeadLocation().x == 0
+                || snake.getHeadLocation().y == 0) {
             return false;
         } else {
             if (snake.intersectsHead(food)) {

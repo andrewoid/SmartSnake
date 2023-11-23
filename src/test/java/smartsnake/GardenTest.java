@@ -44,7 +44,7 @@ class GardenTest
     void tick() {
         //given
         Snake snake = mock();
-        Point point = mock();
+        Point point = new Point(0,0);
         Garden garden = new Garden(40, 30, snake);
         doReturn(point).when(snake).getHeadLocation();
 
@@ -52,7 +52,7 @@ class GardenTest
         garden.tick();
 
         //then
-        assertEquals(garden.getSnake().getHeadLocation(), snake.getHeadLocation());
+        assertFalse(garden.tick());
     }
 
     @Test

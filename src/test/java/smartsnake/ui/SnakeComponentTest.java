@@ -9,7 +9,6 @@ import smartsnake.Snake;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,8 +29,7 @@ class SnakeComponentTest {
             new Point(2, 1),
             new Point(3, 1)
     ));
-    static final Color darkGreen = new Color(0, 200, 0);
-    static final Color lightGreen = new Color(0, 175, 0);
+
 
 
 
@@ -89,7 +87,7 @@ class SnakeComponentTest {
         snakeComponent.drawGarden(graphics, garden);
 
         //then
-        Mockito.verify(graphics).fillRect(0, SQUARE_SIZE * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+        Mockito.verify(graphics).fillRect(SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
 
     }
 }

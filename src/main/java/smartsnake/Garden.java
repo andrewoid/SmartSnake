@@ -2,6 +2,7 @@ package smartsnake;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Chambre, Runge
@@ -34,10 +35,9 @@ public class Garden {
             }
         }
 
-        points.remove(snake.getHeadLocation());
-        points.remove(snake.getSegments());
-
-        int randomIndex = (int) (Math.random() * points.size());
+        points.removeAll(snake.getSegments());
+        Random random = new Random();
+        int randomIndex = (random.nextInt(points.size()));
         food = new Food(points.get(randomIndex));
     }
 

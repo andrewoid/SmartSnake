@@ -11,6 +11,8 @@ public class Garden {
 
     private final int width;
     private final int height;
+    private final Random random = new Random();
+
     private int tickCounter;
     private Snake snake;
     private Food food;
@@ -22,11 +24,18 @@ public class Garden {
         createFood();
     }
 
-    private void createSnake() {
+    public Garden(int width, int height, Snake snake) {
+        this.width = width;
+        this.height = height;
+        this.snake = snake;
+        createFood();
+    }
+
+    public void createSnake() {
         snake = new Snake();
     }
 
-    private void createFood() {
+    public void createFood() {
         ArrayList<Point> points = new ArrayList<>();
 
         for (int x = 0; x < width; x++) {
@@ -34,9 +43,13 @@ public class Garden {
                 points.add(new Point(x, y));
             }
         }
+        if (snake.getHeadLocation() != null) {
+            points.remove(snake.getHeadLocation());
+        }
+        if (snake.getSegments() != null) {
+            points.removeAll(snake.getSegments());
+        }
 
-        points.removeAll(snake.getSegments());
-        Random random = new Random();
         int randomIndex = (random.nextInt(points.size()));
         food = new Food(points.get(randomIndex));
     }

@@ -13,16 +13,15 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
-class GardenTest
-{
+class GardenTest {
 
     @Test
     void getSnake() {
         //given
         Snake snake = mock();
-        Garden garden = new Garden(30, 40, snake);
 
         //when
+        Garden garden = new Garden(30, 40, snake);
 
         //then
         assertNotNull(garden.getSnake());
@@ -32,9 +31,9 @@ class GardenTest
     void getFood() {
         //given
         Snake snake = mock();
-        Garden garden = new Garden(30, 40, snake);
 
         //when
+        Garden garden = new Garden(30, 40, snake);
 
         //then
         assertNotNull(garden.getFood());
@@ -44,7 +43,7 @@ class GardenTest
     void tick() {
         //given
         Snake snake = mock();
-        Point point = new Point(0,0);
+        Point point = new Point(0, 0);
         Garden garden = new Garden(40, 30, snake);
         doReturn(point).when(snake).getHeadLocation();
 

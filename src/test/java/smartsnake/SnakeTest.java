@@ -14,7 +14,7 @@ public class SnakeTest {
     public void getSegments() {
         // given
         Snake snake = new Snake();
-        Point resultPoint = new Point(10,5);
+        Point resultPoint = new Point(10, 5);
 
         // when
         List<Point> snakeResult = snake.getSegments();

@@ -13,13 +13,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
-class GardenTest {
+class GardenTest
+{
 
     @Test
     void getSnake() {
         //given
         Snake snake = mock();
-        Garden garden = new Garden(30,40,snake);
+        Garden garden = new Garden(30, 40, snake);
 
         //when
 
@@ -31,7 +32,7 @@ class GardenTest {
     void getFood() {
         //given
         Snake snake = mock();
-        Garden garden = new Garden(30,40, snake);
+        Garden garden = new Garden(30, 40, snake);
 
         //when
 
@@ -66,6 +67,6 @@ class GardenTest {
         garden.tick();
 
         //then
-        assertEquals(1,garden.getTurns());
+        assertEquals(1, garden.getTurns());
     }
 }

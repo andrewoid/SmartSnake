@@ -47,11 +47,10 @@ class GardenTest {
         //when
         Garden garden = new Garden(40, 30, snake);
         doReturn(point).when(snake).getHeadLocation();
-        snake.tick(true);
 
         //then
-        verify(snake).tick(true);
         assertTrue(garden.tick());
+        verify(snake).tick(anyBoolean());
         assertEquals(1, garden.getTurns());
     }
 }

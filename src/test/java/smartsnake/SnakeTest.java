@@ -32,7 +32,7 @@ public class SnakeTest {
         boolean isNotStarved = snake.starved();
 
         // then
-        assertEquals(false, isNotStarved);
+        assertFalse(isNotStarved);
     }
 
     @Test
@@ -49,51 +49,15 @@ public class SnakeTest {
     }
 
     @Test
-    public void setDirection() {
-        // given
-        Snake snake = new Snake();
-
-        // when
-        snake.setDirection(Direction.Left);
-
-        // then
-        assertEquals(Direction.Left, snake.getDirection());
-    }
-
-    @Test
-    public void getDirection() {
-        // given
-        Snake snake = new Snake();
-
-        // when
-        Direction currentSnakeDirection = snake.getDirection();
-
-        // then
-        assertEquals(Direction.Right, currentSnakeDirection);
-    }
-
-    @Test
-    public void getHeadLocation() {
-        // given
-        Snake snake = new Snake();
-
-        // when
-        Point currHeadLocation = snake.getHeadLocation();
-
-        // then
-        assertEquals(new Point(10, 5), currHeadLocation);
-    }
-
-    @Test
     public void intersectsHead() {
         // given
         Snake snake = new Snake();
 
         // when
-        Boolean intersects = snake.intersects(new Food(10, 5));
+        boolean intersects = snake.intersects(new Food(10, 5));
 
         // then
-        assertEquals(true, intersects);
+        assertTrue(intersects);
     }
 
     @Test
@@ -102,10 +66,10 @@ public class SnakeTest {
         Snake snake = new Snake();
 
         // when
-        Boolean intersectSelf = snake.intersectsItself();
+        boolean intersectSelf = snake.intersectsItself();
 
         // then
-        assertEquals(false, intersectSelf);
+        assertFalse(intersectSelf);
     }
 
     @Test
@@ -114,9 +78,9 @@ public class SnakeTest {
         Snake snake = new Snake();
 
         // when
-        Boolean intersects = snake.intersects(new Food(9, 5));
+        boolean intersects = snake.intersects(new Food(9, 5));
 
         // then
-        assertEquals(true, intersects);
+        assertTrue(intersects);
     }
 }

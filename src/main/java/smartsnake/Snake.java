@@ -23,7 +23,7 @@ public class Snake {
 
         direction = Direction.Right;
 
-        starveTicks = 50;
+        starveTicks = 0;
     }
 
     /**
@@ -37,7 +37,7 @@ public class Snake {
      * @return true if the Snake hasn't eaten for STARVE_LIMIT, otherwise false
      */
     public boolean starved() {
-        return (starveTicks == 0);
+        return starveTicks == STARVE_LIMIT;
     }
 
     /**
@@ -46,23 +46,21 @@ public class Snake {
      * @param grow true if the Snake should grow as it moves, otherwise false
      */
     public void tick(boolean grow) {
-
         Point facing = getHeadLocation();
-        if (this.direction == Direction.Right) {
-            snake.add(0, new Point((int) (facing.getX() + 1), (int) facing.getY()));
-        } else if (this.direction == Direction.Left) {
-            snake.add(0, new Point((int) (facing.getX() - 1), (int) (facing.getY())));
-        } else if (this.direction == Direction.Up) {
-            snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() + 1)));
-        } else if (this.direction == Direction.Down) {
-            snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() - 1)));
-        }
-        if (!grow) {
-            snake.remove(snake.size() - 1);
-            starveTicks--;
+        if (grow) {
+            if (this.direction == Direction.Right) {
+                snake.add(0, new Point((int) (facing.getX() + 1), (int) facing.getY()));
+            } else if (this.direction == Direction.Left) {
+                snake.add(0, new Point((int) (facing.getX() - 1), (int) (facing.getY())));
+            } else if (this.direction == Direction.Up) {
+                snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() + 1)));
+            } else if (this.direction == Direction.Down) {
+                snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() - 1)));
+            }
+            starveTicks = 0; // reset it if the snake eats
         } else {
-            // reset it if the snake eats
-            starveTicks = 50;
+            snake.remove(snake.size() - 1);
+            starveTicks++;
         }
     }
 
@@ -90,8 +88,9 @@ public class Snake {
      * @return true if the head intersects any part of the tail, otherwise false.
      */
     public boolean intersectsItself() {
+        Point headLocation = getHeadLocation();
         for (int i = 1; i < snake.size(); i++) {
-            if (getHeadLocation().equals(snake.get(i))) {
+            if (headLocation.equals(snake.get(i))) {
                 return true;
             }
         }

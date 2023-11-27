@@ -45,7 +45,7 @@ public class SnakeTest {
 
         // then
         assertEquals(new Point(11, 5), snake.getHeadLocation());
-        assertEquals(new Point(8, 5), snake.getSegments().get(snake.getSegments().size()-1));
+        assertEquals(new Point(8, 5), snake.getSegments().get(snake.getSegments().size() - 1));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class SnakeTest {
         Point currHeadLocation = snake.getHeadLocation();
 
         // then
-        assertEquals(new Point(10,5), currHeadLocation);
+        assertEquals(new Point(10, 5), currHeadLocation);
     }
 
     @Test

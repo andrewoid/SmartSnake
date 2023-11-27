@@ -57,13 +57,10 @@ public class Snake {
         } else if (this.direction == Direction.Down) {
             snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() - 1)));
         }
-        if (!grow)
-        {
-            snake.remove(snake.size()-1);
+        if (!grow) {
+            snake.remove(snake.size() - 1);
             starveTicks--;
-        }
-        else
-        {
+        } else {
             // reset it if the snake eats
             starveTicks = 50;
         }
@@ -73,8 +70,7 @@ public class Snake {
         this.direction = direction;
     }
 
-    public Direction getDirection()
-    {
+    public Direction getDirection() {
         return direction;
     }
 

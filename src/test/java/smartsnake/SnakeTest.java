@@ -20,60 +20,103 @@ public class SnakeTest {
         List<Point> snakeSegments = snake.getSegments();
 
         // then
-        Assertions.assertEquals(resultPoint, snakeSegments.get(0));
+        assertEquals(resultPoint, snakeSegments.get(0));
     }
 
     @Test
     public void starved() {
         // given
+        Snake snake = new Snake();
 
         // when
+        boolean isNotStarved = snake.starved();
 
         // then
+        assertEquals(false, isNotStarved);
     }
 
     @Test
     public void tick() {
         // given
+        Snake snake = new Snake();
 
         // when
+        snake.tick(true); //direction is currently right
 
         // then
+        assertEquals(new Point(11, 5), snake.getHeadLocation());
+        assertEquals(new Point(8, 5), snake.getSegments().get(snake.getSegments().size()-1));
     }
 
     @Test
     public void setDirection() {
         // given
+        Snake snake = new Snake();
 
         // when
+        snake.setDirection(Direction.Left);
 
         // then
+        assertEquals(Direction.Left, snake.getDirection());
     }
 
     @Test
-    public void intersects() {
+    public void getDirection() {
         // given
+        Snake snake = new Snake();
 
         // when
+        Direction currentSnakeDirection = snake.getDirection();
 
         // then
+        assertEquals(Direction.Right, currentSnakeDirection);
+    }
+
+    @Test
+    public void getHeadLocation() {
+        // given
+        Snake snake = new Snake();
+
+        // when
+        Point currHeadLocation = snake.getHeadLocation();
+
+        // then
+        assertEquals(new Point(10,5), currHeadLocation);
+    }
+
+    @Test
+    public void intersectsHead() {
+        // given
+        Snake snake = new Snake();
+
+        // when
+        Boolean intersects = snake.intersects(new Food(10, 5));
+
+        // then
+        assertEquals(true, intersects);
     }
 
     @Test
     public void intersectsItself() {
         // given
+        Snake snake = new Snake();
 
         // when
+        Boolean intersectSelf = snake.intersectsItself();
 
         // then
+        assertEquals(false, intersectSelf);
     }
 
     @Test
-    public void intersectsTail() {
+    public void intersects() {
         // given
+        Snake snake = new Snake();
 
         // when
+        Boolean intersects = snake.intersects(new Food(9, 5));
 
         // then
+        assertEquals(true, intersects);
     }
 }

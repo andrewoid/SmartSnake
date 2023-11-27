@@ -36,7 +36,7 @@ public class Snake {
     /**
      * @return true if the Snake hasn't eaten for STARVE_LIMIT, otherwise false
      */
-    boolean starved() {
+    public boolean starved() {
         return (starveTicks == 0);
     }
 
@@ -71,6 +71,11 @@ public class Snake {
 
     public void setDirection(Direction direction) {
         this.direction = direction;
+    }
+
+    public Direction getDirection()
+    {
+        return direction;
     }
 
     public Point getHeadLocation() {

@@ -17,10 +17,10 @@ public class SnakeTest {
         Point resultPoint = new Point(10, 5);
 
         // when
-        List<Point> snakeResult = snake.getSegments();
+        List<Point> snakeSegments = snake.getSegments();
 
         // then
-        Assertions.assertEquals(resultPoint, snakeResult.get(0));
+        Assertions.assertEquals(resultPoint, snakeSegments.get(0));
     }
 
     @Test

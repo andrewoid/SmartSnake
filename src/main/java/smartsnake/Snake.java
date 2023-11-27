@@ -12,6 +12,7 @@ public class Snake {
     public static final int STARVE_LIMIT = 50;
     private List<Point> snake;
     private Direction direction;
+    private int starveTicks;
 
     public Snake() {
         //this depends on how the initial snake setup will be
@@ -21,6 +22,8 @@ public class Snake {
         snake.add(new Point(8, 5));
 
         direction = Direction.Right;
+
+        starveTicks = 50;
     }
 
     /**
@@ -34,8 +37,7 @@ public class Snake {
      * @return true if the Snake hasn't eaten for STARVE_LIMIT, otherwise false
      */
     boolean starved() {
-        //Don't know where its keeping track of the ticks and where to access that info
-        return false;
+        return (starveTicks == 0);
     }
 
     /**
@@ -44,27 +46,26 @@ public class Snake {
      * @param grow true if the Snake should grow as it moves, otherwise false
      */
     public void tick(boolean grow) {
+
         Point facing = getHeadLocation();
-        if (grow && this.direction == Direction.Right) {
+        if (this.direction == Direction.Right) {
             snake.add(0, new Point((int) (facing.getX() + 1), (int) facing.getY()));
-        } else if ((!grow) && this.direction == Direction.Right) {
-            snake.add(0, new Point((int) (facing.getX() + 1), (int) facing.getY()));
-            snake.remove(snake.size() - 1);
-        } else if (grow && this.direction == Direction.Left) {
+        } else if (this.direction == Direction.Left) {
             snake.add(0, new Point((int) (facing.getX() - 1), (int) (facing.getY())));
-        } else if ((!grow) && this.direction == Direction.Left) {
-            snake.add(0, new Point((int) (facing.getX() - 1), (int) (facing.getY())));
-            snake.remove(snake.size() - 1);
-        } else if (grow && this.direction == Direction.Up) {
+        } else if (this.direction == Direction.Up) {
             snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() + 1)));
-        } else if ((!grow) && this.direction == Direction.Up) {
-            snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() + 1)));
-            snake.remove(snake.size() - 1);
-        } else if (grow && this.direction == Direction.Down) {
+        } else if (this.direction == Direction.Down) {
             snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() - 1)));
-        } else if ((!grow) && this.direction == Direction.Down) {
-            snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() - 1)));
-            snake.remove(snake.size() - 1);
+        }
+        if (!grow)
+        {
+            snake.remove(snake.size()-1);
+            starveTicks--;
+        }
+        else
+        {
+            // reset it if the snake eats
+            starveTicks = 50;
         }
     }
 

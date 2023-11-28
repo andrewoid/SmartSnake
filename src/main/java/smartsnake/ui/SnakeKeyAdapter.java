@@ -1,6 +1,7 @@
 package smartsnake.ui;
 
 import smartsnake.Direction;
+import smartsnake.Food;
 import smartsnake.Snake;
 
 import java.awt.event.KeyAdapter;
@@ -33,11 +34,13 @@ public class SnakeKeyAdapter extends KeyAdapter
         // KeyCodes - https://docs.oracle.com/javase/8/docs/api/java/awt/event/KeyEvent.html
         switch (event.getKeyCode())
         {
-            case VK_UP, VK_KP_UP -> snake.setDirection(Direction.Up);
-            case VK_DOWN, VK_KP_DOWN -> snake.setDirection(Direction.Down);
+            case VK_UP, VK_KP_UP -> snake.setDirection(Direction.Down);
+            case VK_DOWN, VK_KP_DOWN -> snake.setDirection(Direction.Up);
             case VK_LEFT, VK_KP_LEFT -> snake.setDirection(Direction.Left);
             case VK_RIGHT, VK_KP_RIGHT -> snake.setDirection(Direction.Right);
-            default -> { /* do nothing - any other key press is ignored */ }
+            default ->
+            { /* do nothing - any other key press is ignored */ }
+            //only allows for four keystrokes
         }
     }
 }

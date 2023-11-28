@@ -9,13 +9,12 @@ import java.util.List;
  */
 public class Snake {
 
-    public static final int STARVE_LIMIT = 50;
-    private List<Point> snake;
+    public static final int STARVE_LIMIT = 250;
+    private final List<Point> snake;
     private Direction direction;
     private int starveTicks;
 
     public Snake() {
-        //this depends on how the initial snake setup will be
         snake = new ArrayList<>();
         snake.add(new Point(10, 5));
         snake.add(new Point(9, 5));

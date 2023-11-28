@@ -5,8 +5,6 @@ import smartsnake.Direction;
 import smartsnake.Snake;
 
 import java.awt.event.KeyEvent;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class SnakeKeyAdapterTest

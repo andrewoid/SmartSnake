@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Kenigsberg, Halberstam
+ * Snake class that handles movement, growing and starving.
  */
 public class Snake {
 
     public static final int STARVE_LIMIT = 50;
-    private List<Point> snake;
+    private final List<Point> snake;
     private Direction direction;
     private int starveTicks;
 

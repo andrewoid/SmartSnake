@@ -59,6 +59,17 @@ public class Snake {
             }
             starveTicks = 0; // reset it if the snake eats
         } else {
+            for (Point snakeSegment : snake) {
+                if (this.direction == Direction.Right) {
+                    snakeSegment.x = snakeSegment.x + 1;
+                } else if (this.direction == Direction.Left) {
+                    snakeSegment.x = snakeSegment.x - 1;
+                } else if (this.direction == Direction.Up) {
+                    snakeSegment.y = snakeSegment.y + 1;
+                } else if (this.direction == Direction.Down) {
+                    snakeSegment.y = snakeSegment.y - 1;
+                }
+            }
             starveTicks++;
         }
     }

@@ -49,6 +49,19 @@ public class SnakeTest {
     }
 
     @Test
+    public void tickFalse() {
+        // given
+        Snake snake = new Snake();
+
+        // when
+        snake.tick(false); //direction is currently right
+
+        // then
+        assertEquals(new Point(10, 5), snake.getHeadLocation());
+        assertEquals(new Point(8, 5), snake.getSegments().get(snake.getSegments().size() - 1));
+    }
+
+    @Test
     public void intersectsHead() {
         // given
         Snake snake = new Snake();

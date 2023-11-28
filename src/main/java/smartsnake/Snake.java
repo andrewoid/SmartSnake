@@ -59,7 +59,6 @@ public class Snake {
             }
             starveTicks = 0; // reset it if the snake eats
         } else {
-            snake.remove(snake.size() - 1);
             starveTicks++;
         }
     }

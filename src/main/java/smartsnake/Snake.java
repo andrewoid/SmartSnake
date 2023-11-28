@@ -47,28 +47,19 @@ public class Snake {
      */
     public void tick(boolean grow) {
         Point facing = getHeadLocation();
+        if (this.direction == Direction.Right) {
+            snake.add(0, new Point((int) (facing.getX() + 1), (int) facing.getY()));
+        } else if (this.direction == Direction.Left) {
+            snake.add(0, new Point((int) (facing.getX() - 1), (int) (facing.getY())));
+        } else if (this.direction == Direction.Up) {
+            snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() + 1)));
+        } else if (this.direction == Direction.Down) {
+            snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() - 1)));
+        }
         if (grow) {
-            if (this.direction == Direction.Right) {
-                snake.add(0, new Point((int) (facing.getX() + 1), (int) facing.getY()));
-            } else if (this.direction == Direction.Left) {
-                snake.add(0, new Point((int) (facing.getX() - 1), (int) (facing.getY())));
-            } else if (this.direction == Direction.Up) {
-                snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() + 1)));
-            } else if (this.direction == Direction.Down) {
-                snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() - 1)));
-            }
             starveTicks = 0; // reset it if the snake eats
         } else {
-            if (this.direction == Direction.Right) {
-                snake.add(0, new Point((int) (facing.getX() + 1), (int) facing.getY()));
-            } else if (this.direction == Direction.Left) {
-                snake.add(0, new Point((int) (facing.getX() - 1), (int) (facing.getY())));
-            } else if (this.direction == Direction.Up) {
-                snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() + 1)));
-            } else if (this.direction == Direction.Down) {
-                snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() - 1)));
-            }
-            snake.remove(snake.size()-1);
+            snake.remove(snake.size() - 1);
             starveTicks++;
         }
     }

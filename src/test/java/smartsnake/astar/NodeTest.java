@@ -42,12 +42,12 @@ class NodeTest {
     @Test
     public void getDirectionFromStart() {
         // given
-        Point aLocation = new Point(3, 4); // start
-        Point bLocation = new Point(4, 4);
-        Point cLocation = new Point(4, 5); // end
-        Node a = new Node(aLocation, cLocation);
-        Node b = new Node(bLocation, cLocation);
-        Node c = new Node(cLocation, cLocation);
+        Point start = new Point(3, 4); // start
+        Point middle = new Point(4, 4);
+        Point end = new Point(4, 5); // end
+        Node a = new Node(start, end);
+        Node b = new Node(middle, end);
+        Node c = new Node(end, end);
 
         // when
         b.setParent(a, Direction.Right);

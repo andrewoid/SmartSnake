@@ -8,7 +8,6 @@ import java.awt.*;
 import java.util.Objects;
 
 /**
- * Node class to use when implementing
  * <a href="https://www.youtube.com/watch?v=-L-WgKMFuhE">A* Pathfinding</a>
  */
 public class Node implements Comparable<Node> {
@@ -18,14 +17,8 @@ public class Node implements Comparable<Node> {
      */
     private static final int NEIGHBOR_COST = 10;
 
-    /**
-     * Location of this Node in the Garden.
-     */
     private final Point location;
 
-    /**
-     * Location of the Food in Snake.
-     */
     private final Point endLocation;
 
     /**
@@ -70,9 +63,6 @@ public class Node implements Comparable<Node> {
 
     /**
      * Sets the parent of this node if it would lower it's "fromStart" value.
-     *
-     * @param parent
-     * @param parentDirection
      */
     public void setParent(Node parent, Direction parentDirection) {
         if (fromStart == 0 || parent.fromStart + NEIGHBOR_COST < fromStart) {
@@ -97,21 +87,17 @@ public class Node implements Comparable<Node> {
 
     @Override
     public String toString() {
-        return "Node{" +
-                "location=" + location +
-                ", fromStart=" + fromStart +
-                ", fromEnd=" + fromEnd +
-                '}';
+        return "Node{"
+                + "location=" + location
+                + ", fromStart=" + fromStart
+                + ", fromEnd=" + fromEnd
+                + '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
         Node node = (Node) o;
         return location.equals(node.location);
     }

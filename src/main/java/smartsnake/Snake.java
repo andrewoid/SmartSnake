@@ -15,7 +15,6 @@ public class Snake {
     private int starveTicks;
 
     public Snake() {
-        //this depends on how the initial snake setup will be
         snake = new ArrayList<>();
         snake.add(new Point(10, 5));
         snake.add(new Point(9, 5));
@@ -52,9 +51,9 @@ public class Snake {
         } else if (this.direction == Direction.Left) {
             snake.add(0, new Point((int) (facing.getX() - 1), (int) (facing.getY())));
         } else if (this.direction == Direction.Up) {
-            snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() + 1)));
-        } else if (this.direction == Direction.Down) {
             snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() - 1)));
+        } else if (this.direction == Direction.Down) {
+            snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() + 1)));
         }
         if (grow) {
             starveTicks = 0; // reset it if the snake eats

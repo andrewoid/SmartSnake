@@ -1,6 +1,6 @@
 package smartsnake;
 
-import java.awt.*;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +13,8 @@ public class Snake {
     private final List<Point> snake;
     private Direction direction;
     private int starveTicks;
+
+    private final Brain brain = new SimpleBrain();
 
     public Snake() {
         snake = new ArrayList<>();
@@ -101,5 +103,9 @@ public class Snake {
      */
     public boolean intersects(Food food) {
         return snake.contains(food);
+    }
+
+    public Brain getBrain() {
+        return brain;
     }
 }

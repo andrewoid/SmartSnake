@@ -1,6 +1,6 @@
 package smartsnake;
 
-import java.awt.*;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -67,6 +67,10 @@ public class Garden {
      */
     public boolean tick() {
         tickCounter++;
+
+        Brain brain = snake.getBrain();
+        Direction newDirection = brain.move(snake, food, this);
+        snake.setDirection(newDirection);
 
         if (snake.starved()) {
             return false;

@@ -1,6 +1,7 @@
 package smartsnake.ui;
 
 import smartsnake.Direction;
+import smartsnake.Food;
 import smartsnake.Snake;
 
 import java.awt.event.KeyAdapter;
@@ -37,7 +38,9 @@ public class SnakeKeyAdapter extends KeyAdapter
             case VK_DOWN, VK_KP_DOWN -> snake.setDirection(Direction.Down);
             case VK_LEFT, VK_KP_LEFT -> snake.setDirection(Direction.Left);
             case VK_RIGHT, VK_KP_RIGHT -> snake.setDirection(Direction.Right);
-            default -> { /* do nothing - any other key press is ignored */ }
+            default ->
+            { /* do nothing - any other key press is ignored */ }
+            //only allows for four keystrokes
         }
     }
 }

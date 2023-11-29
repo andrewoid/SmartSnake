@@ -14,7 +14,7 @@ public class Snake {
     private Direction direction;
     private int starveTicks;
 
-    private final Brain brain = new SimpleBrain();
+    private Brain brain = new SimpleBrain();
 
     public Snake() {
         snake = new ArrayList<>();
@@ -107,5 +107,9 @@ public class Snake {
 
     public Brain getBrain() {
         return brain;
+    }
+
+    public void setBrain(Brain brain) {
+        this.brain = brain;
     }
 }

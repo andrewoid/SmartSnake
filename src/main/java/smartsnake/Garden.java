@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Chambre, Runge
+ * Garden class that manages objects of Snake and handles the rules of the game.
  */
 public class Garden {
 

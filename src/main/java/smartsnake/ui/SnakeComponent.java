@@ -5,13 +5,11 @@ import smartsnake.Garden;
 import smartsnake.Snake;
 
 import javax.swing.*;
-import javax.swing.text.Segment;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Weiss
+ * Swing Component that displays the Garden, Snake and Food
  */
 public class SnakeComponent extends JComponent {
 
@@ -35,8 +33,6 @@ public class SnakeComponent extends JComponent {
      */
     @Override
     public void paintComponent(Graphics g) {
-
-
         Snake snake = garden.getSnake();
         Food food = garden.getFood();
 
@@ -44,7 +40,6 @@ public class SnakeComponent extends JComponent {
             drawGarden(g, garden);
             drawFood(g, food);
             drawSnake(g, snake);
-
         }
     }
 
@@ -77,7 +72,6 @@ public class SnakeComponent extends JComponent {
         for (Point segment : segments) {
             g.fillRect(segment.x * SQUARE_SIZE, segment.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
         }
-
     }
 
 }

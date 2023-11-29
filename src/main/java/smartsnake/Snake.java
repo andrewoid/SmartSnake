@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Kenigsberg, Halberstam
+ * Snake class that handles movement, growing and starving.
  */
 public class Snake {
 

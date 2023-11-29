@@ -42,18 +42,18 @@ public class Node implements Comparable<Node> {
     /**
      * The Node that leads to this Node with the smallest cost.
      */
-    private Node parent;
+    private @Nullable Node parent;
 
     /**
      * The Direction to get from the parent Node to this Node.
      */
-    private Direction parentDirection;
+    private @Nullable Direction parentDirection;
 
     public Node(Point nodeLocation, Point endLocation) {
         this.location = nodeLocation;
         this.endLocation = endLocation;
         this.fromEnd = DistanceFormula.distance(this.location, endLocation);
-        cost = fromEnd;
+        cost = fromStart + fromEnd;
     }
 
     public Point getLocation() {
@@ -65,7 +65,7 @@ public class Node implements Comparable<Node> {
     }
 
     /**
-     * Sets the parent of this node if it would lower it's "fromStart" value.
+     * Sets the parent of this Node if it would lower it's "fromStart" value.
      */
     public void setParent(Node parent, Direction parentDirection) {
         if (fromStart == 0 || parent.fromStart + NEIGHBOR_COST < fromStart) {
@@ -137,6 +137,12 @@ public class Node implements Comparable<Node> {
      */
     public List<Point> getPath() {
         List<Point> points = new ArrayList<>();
+
+        Node node = this;
+        do {
+            points.add(node.location);
+            node = node.parent;
+        } while (node != null);
 
         Collections.reverse(points);
 

@@ -3,7 +3,8 @@ package smartsnake.astar;
 import org.junit.jupiter.api.Test;
 import smartsnake.Direction;
 
-import java.awt.*;
+import java.awt.Point;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -55,6 +56,25 @@ class NodeTest {
 
         // then
         assertEquals(Direction.Right, c.getDirectionFromStart());
+    }
+
+    @Test
+    public void getPath() {
+        // given
+        Point start = new Point(3, 4); // start
+        Point middle = new Point(4, 4);
+        Point end = new Point(4, 5); // end
+        Node a = new Node(start, end);
+        Node b = new Node(middle, end);
+        Node c = new Node(end, end);
+        b.setParent(a, Direction.Right);
+        c.setParent(b, Direction.Down);
+
+        // when
+        List<Point> path = c.getPath();
+
+        // then
+        assertEquals(List.of(start, middle, end), path);
     }
 
 }

@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Snake {
 
-    public static final int STARVE_LIMIT = 250;
+    public static final int STARVE_LIMIT = 50;
     private final List<Point> snake;
     private Direction direction;
     private int starveTicks;
@@ -51,9 +51,9 @@ public class Snake {
         } else if (this.direction == Direction.Left) {
             snake.add(0, new Point((int) (facing.getX() - 1), (int) (facing.getY())));
         } else if (this.direction == Direction.Up) {
-            snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() + 1)));
-        } else if (this.direction == Direction.Down) {
             snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() - 1)));
+        } else if (this.direction == Direction.Down) {
+            snake.add(0, new Point((int) (facing.getX()), (int) (facing.getY() + 1)));
         }
         if (grow) {
             starveTicks = 0; // reset it if the snake eats

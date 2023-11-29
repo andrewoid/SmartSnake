@@ -5,6 +5,9 @@ import org.jetbrains.annotations.Nullable;
 import smartsnake.Direction;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -127,6 +130,17 @@ public class Node implements Comparable<Node> {
             node = node.parent;
         }
         return node.parentDirection;
+    }
+
+    /**
+     * @return a List of Points
+     */
+    public List<Point> getPath() {
+        List<Point> points = new ArrayList<>();
+
+        Collections.reverse(points);
+
+        return points;
     }
 
     @Override

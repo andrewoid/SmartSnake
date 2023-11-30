@@ -55,6 +55,7 @@ class GardenTest {
         //then
         assertTrue(garden.tick());
         verify(snake).tick(anyBoolean());
+        verify(snake).setDirection(Direction.Up);
         assertEquals(1, garden.getTurns());
     }
 }

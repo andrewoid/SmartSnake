@@ -1,10 +1,10 @@
 package smartsnake;
 
-import org.jetbrains.annotations.Nullable;
+/**
+ * An interface that decides which Direction the Snake should move in based on the Snake, Garden and Food.
+ */
+public interface Brain {
 
-interface Brain {
-
-    @Nullable
     Direction move(Snake snake, Food food, Garden garden);
 
 }

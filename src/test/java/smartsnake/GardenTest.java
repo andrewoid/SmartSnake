@@ -1,16 +1,17 @@
 package smartsnake;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import smartsnake.Direction;
-import smartsnake.Food;
-import smartsnake.Garden;
-import smartsnake.Snake;
 
-import java.awt.*;
+import java.awt.Point;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class GardenTest {
 
@@ -43,6 +44,9 @@ class GardenTest {
         //given
         Snake snake = mock();
         Point point = new Point(0, 0);
+        Brain brain = mock();
+        doReturn(brain).when(snake).getBrain();
+        doReturn(Direction.Up).when(brain).move(any(), any(), any());
 
         //when
         Garden garden = new Garden(40, 30, snake);
@@ -51,6 +55,7 @@ class GardenTest {
         //then
         assertTrue(garden.tick());
         verify(snake).tick(anyBoolean());
+        verify(snake).setDirection(Direction.Up);
         assertEquals(1, garden.getTurns());
     }
 }

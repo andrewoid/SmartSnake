@@ -67,12 +67,15 @@ public class Node implements Comparable<Node> {
     /**
      * Sets the parent of this Node if it would lower it's "fromStart" value.
      */
-    public void setParent(Node parent, Direction parentDirection) {
+    public boolean setParent(Node parent, Direction parentDirection) {
         if (fromStart == 0 || parent.fromStart + NEIGHBOR_COST < fromStart) {
             this.parent = parent;
             this.parentDirection = parentDirection;
             this.fromStart = parent.fromStart + NEIGHBOR_COST;
             cost = fromStart + fromEnd;
+            return true;
+        } else {
+            return false;
         }
     }
 

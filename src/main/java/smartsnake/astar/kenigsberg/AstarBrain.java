@@ -28,8 +28,7 @@ public class AstarBrain implements Brain {
         openNodes.add(startNode);
 
         List<Point> snakeSegments = snake.getSegments();
-        for (int i = 1; i < snakeSegments.size(); i++)
-        {
+        for (int i = 1; i < snakeSegments.size(); i++) {
             closedNodes.add(new Node(snakeSegments.get(i).getLocation(), food));
         }
 
@@ -46,37 +45,55 @@ public class AstarBrain implements Brain {
             openNodes.remove(current);
             closedNodes.add(current);
 
-            if (current.getLocation().equals(food.getLocation())) {
+            if (current.getLocation().equals(food)) {
                 return current.getDirectionFromStart();
             }
 
             ArrayList<Node> neighborsOfCurrent = new ArrayList<>();
-            Node rightNode = new Node(new Point(current.getLocation().x + 1, current.getLocation().y), food);
-            rightNode.setParent(current, Direction.Right);
-            neighborsOfCurrent.add(rightNode);
 
-            Node aboveNode = new Node(new Point(current.getLocation().x, current.getLocation().y - 1), food);
-            aboveNode.setParent(current, Direction.Up);
-            neighborsOfCurrent.add(aboveNode);
+            if (!openNodes.contains(new Node(new Point(current.getLocation().x + 1, current.getLocation().y), food))) {
+                Node rightNode = new Node(new Point(current.getLocation().x + 1, current.getLocation().y), food);
+                rightNode.setParent(current, Direction.Right);
+                neighborsOfCurrent.add(rightNode);
+            } else {
+                int index = openNodes.indexOf(new Node(new Point(current.getLocation().x + 1, current.getLocation().y), food));
+                neighborsOfCurrent.add(openNodes.get(index));
+            }
 
-            Node leftNode = new Node(new Point(current.getLocation().x - 1, current.getLocation().y), food);
-            leftNode.setParent(current, Direction.Left);
-            neighborsOfCurrent.add(leftNode);
+            if (!openNodes.contains(new Node(new Point(current.getLocation().x, current.getLocation().y - 1), food))) {
+                Node aboveNode = new Node(new Point(current.getLocation().x, current.getLocation().y - 1), food);
+                aboveNode.setParent(current, Direction.Up);
+                neighborsOfCurrent.add(aboveNode);
+            } else {
+                int index = openNodes.indexOf(new Node(new Point(current.getLocation().x, current.getLocation().y - 1), food));
+                neighborsOfCurrent.add(openNodes.get(index));
+            }
 
-            Node belowNode = new Node(new Point(current.getLocation().x, current.getLocation().y + 1), food);
-            belowNode.setParent(current, Direction.Down);
-            neighborsOfCurrent.add(belowNode);
+            if (!openNodes.contains(new Node(new Point(current.getLocation().x - 1, current.getLocation().y), food))) {
+                Node leftNode = new Node(new Point(current.getLocation().x - 1, current.getLocation().y), food);
+                leftNode.setParent(current, Direction.Left);
+                neighborsOfCurrent.add(leftNode);
+            } else {
+                int index = openNodes.indexOf(new Node(new Point(current.getLocation().x - 1, current.getLocation().y), food));
+                neighborsOfCurrent.add(openNodes.get(index));
+            }
+
+            if (!openNodes.contains(new Node(new Point(current.getLocation().x, current.getLocation().y + 1), food))) {
+                Node belowNode = new Node(new Point(current.getLocation().x, current.getLocation().y + 1), food);
+                belowNode.setParent(current, Direction.Down);
+                neighborsOfCurrent.add(belowNode);
+            } else {
+                int index = openNodes.indexOf(new Node(new Point(current.getLocation().x, current.getLocation().y + 1), food));
+                neighborsOfCurrent.add(openNodes.get(index));
+            }
 
             for (Node neighbor : neighborsOfCurrent) {
-                if (snake.intersectsItself() || snake.intersectsHead(food)
-                        || snake.intersects(food) || closedNodes.contains(neighbor)) {
+                if (closedNodes.contains(neighbor)) {
                     break;
                 } else {
                     if (!openNodes.contains(neighbor)) {
                         neighbor.setParent(current, neighbor.getParentDirection());
-                        if (!openNodes.contains(neighbor)) {
-                            openNodes.add(neighbor);
-                        }
+                        openNodes.add(neighbor);
                     }
                 }
             }

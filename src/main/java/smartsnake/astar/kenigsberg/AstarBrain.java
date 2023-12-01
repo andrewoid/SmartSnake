@@ -30,10 +30,10 @@ public class AstarBrain implements Brain {
 
         while (!openNodes.isEmpty()) {
             Node current = openNodes.get(0);
-            double lowestFCost = openNodes.get(0).getCost();
+            double lowestfcost = openNodes.get(0).getCost();
             for (Node open : openNodes) {
-                if (open.getCost() < lowestFCost) {
-                    lowestFCost = open.getCost();
+                if (open.getCost() < lowestfcost) {
+                    lowestfcost = open.getCost();
                     current = open;
                 }
             }
@@ -63,7 +63,8 @@ public class AstarBrain implements Brain {
             neighborsOfCurrent.add(belowNode);
 
             for (Node neighbor : neighborsOfCurrent) {
-                if (snake.intersectsItself() || snake.intersectsHead(food) || snake.intersects(food) || closedNodes.contains(neighbor)) {
+                if (snake.intersectsItself() || snake.intersectsHead(food)
+                        || snake.intersects(food) || closedNodes.contains(neighbor)) {
                     break;
                 } else {
                     if (!openNodes.contains(neighbor)) {

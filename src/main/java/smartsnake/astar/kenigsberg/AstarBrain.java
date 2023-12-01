@@ -27,6 +27,11 @@ public class AstarBrain implements Brain {
         Node startNode = new Node(snake.getHeadLocation(), food.getLocation());
         openNodes.add(startNode);
 
+        List<Point> snakeSegments = snake.getSegments();
+        for (int i = 1; i < snakeSegments.size(); i++)
+        {
+            closedNodes.add(new Node(snakeSegments.get(i).getLocation(), food));
+        }
 
         while (!openNodes.isEmpty()) {
             Node current = openNodes.get(0);

@@ -56,7 +56,8 @@ public class AstarBrain implements Brain {
                 rightNode.setParent(current, Direction.Right);
                 neighborsOfCurrent.add(rightNode);
             } else {
-                int index = openNodes.indexOf(new Node(new Point(current.getLocation().x + 1, current.getLocation().y), food));
+                int index = openNodes.indexOf(new Node(new Point(
+                        current.getLocation().x + 1, current.getLocation().y), food));
                 neighborsOfCurrent.add(openNodes.get(index));
             }
 
@@ -65,7 +66,8 @@ public class AstarBrain implements Brain {
                 aboveNode.setParent(current, Direction.Up);
                 neighborsOfCurrent.add(aboveNode);
             } else {
-                int index = openNodes.indexOf(new Node(new Point(current.getLocation().x, current.getLocation().y - 1), food));
+                int index = openNodes.indexOf(new Node(new Point(
+                        current.getLocation().x, current.getLocation().y - 1), food));
                 neighborsOfCurrent.add(openNodes.get(index));
             }
 
@@ -74,7 +76,8 @@ public class AstarBrain implements Brain {
                 leftNode.setParent(current, Direction.Left);
                 neighborsOfCurrent.add(leftNode);
             } else {
-                int index = openNodes.indexOf(new Node(new Point(current.getLocation().x - 1, current.getLocation().y), food));
+                int index = openNodes.indexOf(new Node(new Point(
+                        current.getLocation().x - 1, current.getLocation().y), food));
                 neighborsOfCurrent.add(openNodes.get(index));
             }
 
@@ -83,7 +86,8 @@ public class AstarBrain implements Brain {
                 belowNode.setParent(current, Direction.Down);
                 neighborsOfCurrent.add(belowNode);
             } else {
-                int index = openNodes.indexOf(new Node(new Point(current.getLocation().x, current.getLocation().y + 1), food));
+                int index = openNodes.indexOf(new Node(new Point(
+                        current.getLocation().x, current.getLocation().y + 1), food));
                 neighborsOfCurrent.add(openNodes.get(index));
             }
 

@@ -7,7 +7,7 @@ import java.awt.event.KeyListener;
 
 public class Main {
     public static void main(String[] args) {
-        Garden garden = new Garden(40, 30);
+        Garden garden = new Garden(20, 15);
         SnakeComponent component = new SnakeComponent(garden);
         SnakeFrame frame = new SnakeFrame(component);
         Snake snake = garden.getSnake();

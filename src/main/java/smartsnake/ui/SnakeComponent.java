@@ -1,5 +1,6 @@
 package smartsnake.ui;
 
+import org.jetbrains.annotations.VisibleForTesting;
 import smartsnake.Food;
 import smartsnake.Garden;
 import smartsnake.Snake;
@@ -15,17 +16,25 @@ import java.util.List;
  */
 public class SnakeComponent extends JComponent {
 
-    /**
-     * Each square should be SQUARE_SIZE x SQUARE_SIZE pixels when drawn.
-     */
-    public static final int SQUARE_SIZE = 10;
-
-    private final Garden garden;
     static final Color darkGreen = new Color(0, 200, 0);
     static final Color lightGreen = new Color(0, 175, 0);
 
+    private final Garden garden;
+    private int squareWidth;
+    private int squareHeight;
+
     public SnakeComponent(Garden garden) {
         this.garden = garden;
+    }
+
+    @VisibleForTesting
+    public void setSquareWidth(int squareWidth) {
+        this.squareWidth = squareWidth;
+    }
+
+    @VisibleForTesting
+    public void setSquareHeight(int squareHeight) {
+        this.squareHeight = squareHeight;
     }
 
     /**
@@ -38,9 +47,29 @@ public class SnakeComponent extends JComponent {
         Snake snake = garden.getSnake();
         Food food = garden.getFood();
 
+        calculateSquareSizes();
+
+        garden.tick();
         drawGarden(g, garden);
         drawFood(g, food);
         drawSnake(g, snake);
+    }
+
+    /**
+     * This makes sure that the width and height of the squares do not go beyond
+     * the bounds of the Component and are the same.
+     */
+    @SuppressWarnings("SuspiciousNameCombination")
+    private void calculateSquareSizes() {
+        int width = getWidth();
+        int height = getHeight();
+        squareWidth = width / garden.getWidth();
+        squareHeight = height / garden.getHeight();
+        if (squareWidth < squareHeight) {
+            squareHeight = squareWidth;
+        } else {
+            squareWidth = squareHeight;
+        }
     }
 
     public void drawGarden(Graphics g, Garden garden) {
@@ -51,7 +80,7 @@ public class SnakeComponent extends JComponent {
                 } else {
                     g.setColor(lightGreen);
                 }
-                g.fillRect(x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+                g.fillRect(x * squareWidth, y * squareHeight, squareWidth, squareHeight);
             }
         }
     }
@@ -63,15 +92,16 @@ public class SnakeComponent extends JComponent {
         int y = (int) foodY;
 
         g.setColor(Color.RED);
-        g.fillRect(x * SQUARE_SIZE, y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+        g.fillRect(x * squareWidth, y * squareHeight, squareWidth, squareHeight);
     }
 
     public void drawSnake(Graphics g, Snake snake) {
         List<Point> segments = snake.getSegments();
         g.setColor(Color.BLUE);
         for (Point segment : segments) {
-            g.fillRect(segment.x * SQUARE_SIZE, segment.y * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+            g.fillRect(segment.x * squareWidth, segment.y * squareHeight, squareWidth, squareHeight);
         }
     }
+
 
 }

@@ -27,7 +27,7 @@ public class AstarBrain implements Brain {
 
         while (!openNodes.isEmpty()) {
             Node current = openNodes.get(0);
-            current = setLowestFCost(openNodes, current);
+            current = setLowestCost(openNodes, current);
 
             openNodes.remove(current);
             closedNodes.add(current);
@@ -92,7 +92,7 @@ public class AstarBrain implements Brain {
         return null;
     }
 
-    private static Node setLowestFCost(ArrayList<Node> openNodes, Node current) {
+    private static Node setLowestCost(ArrayList<Node> openNodes, Node current) {
         double lowestfcost = openNodes.get(0).getCost();
         for (Node open : openNodes) {
             if (open.getCost() < lowestfcost) {

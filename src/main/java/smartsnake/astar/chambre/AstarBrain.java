@@ -7,7 +7,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static smartsnake.astar.Node.NEIGHBOR_COST;
 
 public class AstarBrain implements Brain {
     @Override
@@ -45,39 +44,38 @@ public class AstarBrain implements Brain {
             }
 
             //foreach neighbor of the current node
-            // if one of the neighbors in in open then update the node to be that one
-
-            Node up = new Node(new Point(location.x, location.y - 1), food);
-            if(open.contains(up)){
-
-            }
-
-            Node down = new Node(new Point(location.x, location.y + 1), food);
-            Node left = new Node(new Point(location.x - 1, location.y), food);
-            Node right = new Node(new Point(location.x + 1, location.y), food);
-
-            List<Node> neighbors = new ArrayList<>(List.of(right, left, up, down));
-
-            for (Node neighbor : neighbors) {
-                //if the neighbor is not traversable or neighbor is in closed
-                if (snake.getSegments().contains(neighbor.getLocation()) || closed.contains(neighbor)) {
-                    continue;
-                }
-
-                //set parent of neighbour to current
-                neighbor.setParent(current, current.getParentDirection());
-                //if neighbour is not in open
-                if (!open.contains(neighbor)) {
-                    //add neighbour to open
-                    open.add(neighbor);
-                }
-            }
+            // if one of the neighbors in open then update the node to be that one
+            Point upPoint = new Point(location.x, location.y - 1);
+            updateDirection(upPoint, Direction.Up, food, open, closed, snake, current);
+            Point downPoint = new Point(location.x, location.y + 1);
+            updateDirection(downPoint, Direction.Down, food, open, closed, snake, current);
+            Point leftPoint = new Point(location.x - 1, location.y);
+            updateDirection(leftPoint, Direction.Left, food, open, closed, snake, current);
+            Point rightPoint = new Point(location.x + 1, location.y);
+            updateDirection(rightPoint, Direction.Right, food, open, closed, snake, current);
         }
     }
 
-}
+    private void updateDirection(Point point, Direction direction, Food food, List<Node> open, List<Node> closed, Snake snake, Node current) {
+        Node directionNode = new Node(point, food);
+        if (open.contains(directionNode)) {
+            directionNode = open.get(open.indexOf(directionNode));
+        }
+        //if the neighbor is not traversable or neighbor is in closed
+        if (snake.getSegments().contains(directionNode.getLocation()) || closed.contains(directionNode)) {
+            return;
+        }
 
-    private static Node getLowestCost(List<Node> open) {
+        //set parent of neighbour to current
+        directionNode.setParent(current, direction);
+        //if neighbour is not in open
+        if (!open.contains(directionNode)) {
+            //add neighbour to open
+            open.add(directionNode);
+        }
+    }
+
+    private Node getLowestCost(List<Node> open) {
         int lowestCostIndex = 0;
         Node lowestCost = open.get(lowestCostIndex);
 

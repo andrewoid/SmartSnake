@@ -1,6 +1,6 @@
 package smartsnake;
 
-import java.awt.Point;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -73,13 +73,16 @@ public class Garden {
         snake.setDirection(newDirection);
 
         if (snake.starved()) {
+            System.out.println("starved");
             return false;
         } else if (snake.intersectsItself()) {
+            System.out.println("intersected self");
             return false;
         } else if (snake.getHeadLocation().x == width
                 || snake.getHeadLocation().y == height
                 || snake.getHeadLocation().x == -1
                 || snake.getHeadLocation().y == -1) {
+            System.out.println("hit wall");
             return false;
         } else {
             if (snake.intersectsHead(food)) {

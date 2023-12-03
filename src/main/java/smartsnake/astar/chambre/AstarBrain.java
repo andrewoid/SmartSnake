@@ -18,9 +18,9 @@ public class AstarBrain implements Brain {
         Node pointA = new Node(snake.getHeadLocation(), food);
         //Point B is food
 
-        //Open List- set of nodes to be evaluated
+        //Open List set of nodes to be evaluated
         List<Node> open = new ArrayList<>();
-        //Closed List- set of nodes already evaluated
+        //Closed List set of nodes already evaluated
         List<Node> closed = new ArrayList<>();
 
         //add the start node to open
@@ -46,33 +46,43 @@ public class AstarBrain implements Brain {
             //foreach neighbor of the current node
             // if one of the neighbors in open then update the node to be that one
             Point upPoint = new Point(location.x, location.y - 1);
-            updateDirection(upPoint, Direction.Up, food, open, closed, snake, current);
+            updateDirection(upPoint, Direction.Up, food, open, closed, snake, current, garden);
             Point downPoint = new Point(location.x, location.y + 1);
-            updateDirection(downPoint, Direction.Down, food, open, closed, snake, current);
+            updateDirection(downPoint, Direction.Down, food, open, closed, snake, current, garden);
             Point leftPoint = new Point(location.x - 1, location.y);
-            updateDirection(leftPoint, Direction.Left, food, open, closed, snake, current);
+            updateDirection(leftPoint, Direction.Left, food, open, closed, snake, current, garden);
             Point rightPoint = new Point(location.x + 1, location.y);
-            updateDirection(rightPoint, Direction.Right, food, open, closed, snake, current);
+            updateDirection(rightPoint, Direction.Right, food, open, closed, snake, current, garden);
         }
     }
 
-    private void updateDirection(Point point, Direction direction, Food food, List<Node> open, List<Node> closed, Snake snake, Node current) {
-        Node directionNode = new Node(point, food);
-        if (open.contains(directionNode)) {
-            directionNode = open.get(open.indexOf(directionNode));
-        }
-        //if the neighbor is not traversable or neighbor is in closed
-        if (snake.getSegments().contains(directionNode.getLocation()) || closed.contains(directionNode)) {
-            return;
-        }
+    private void updateDirection(Point point, Direction direction, Food food, List<Node> open, List<Node> closed, Snake snake, Node current, Garden garden) {
 
-        //set parent of neighbour to current
-        directionNode.setParent(current, direction);
-        //if neighbour is not in open
-        if (!open.contains(directionNode)) {
-            //add neighbour to open
-            open.add(directionNode);
+        Node directionNode = new Node(point, food);
+        if (validate(directionNode, garden.getWidth(), garden.getHeight())) {
+            if (open.contains(directionNode)) {
+                directionNode = open.get(open.indexOf(directionNode));
+            }
+            //if the neighbor is not traversable or neighbor is in closed
+            if (snake.getSegments().contains(directionNode.getLocation()) || closed.contains(directionNode)) {
+                return;
+            }
+
+            //set parent of neighbour to current
+            directionNode.setParent(current, direction);
+            //if neighbour is not in open
+            if (!open.contains(directionNode)) {
+                //add neighbour to open
+                open.add(directionNode);
+            }
         }
+    }
+
+    private boolean validate(Node node, int width, int height) {
+        return node.getLocation().x != width
+                && node.getLocation().y != height
+                && node.getLocation().x != -1
+                && node.getLocation().y != -1;
     }
 
     private Node getLowestCost(List<Node> open) {

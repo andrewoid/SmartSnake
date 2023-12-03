@@ -4,8 +4,10 @@ import smartsnake.Food;
 import smartsnake.Garden;
 import smartsnake.Snake;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JComponent;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Point;
 import java.util.List;
 
 /**
@@ -36,11 +38,9 @@ public class SnakeComponent extends JComponent {
         Snake snake = garden.getSnake();
         Food food = garden.getFood();
 
-        if (garden.tick()) {
-            drawGarden(g, garden);
-            drawFood(g, food);
-            drawSnake(g, snake);
-        }
+        drawGarden(g, garden);
+        drawFood(g, food);
+        drawSnake(g, snake);
     }
 
     public void drawGarden(Graphics g, Garden garden) {

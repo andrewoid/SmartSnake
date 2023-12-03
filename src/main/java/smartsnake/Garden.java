@@ -107,4 +107,12 @@ public class Garden {
     public int getHeight() {
         return height;
     }
+
+    /**
+     * @return true if the Point is inside the Garden, otherwise false.
+     */
+    public boolean contains(Point location) {
+        return location.x > 0 && location.y > 0 &&
+                location.x < width && location.y < height;
+    }
 }

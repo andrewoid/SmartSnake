@@ -76,10 +76,7 @@ public class Garden {
             return false;
         } else if (snake.intersectsItself()) {
             return false;
-        } else if (snake.getHeadLocation().x == width
-                || snake.getHeadLocation().y == height
-                || snake.getHeadLocation().x == -1
-                || snake.getHeadLocation().y == -1) {
+        } else if (!contains(snake.getHeadLocation())) {
             return false;
         } else {
             if (snake.intersectsHead(food)) {
@@ -112,7 +109,9 @@ public class Garden {
      * @return true if the Point is inside the Garden, otherwise false.
      */
     public boolean contains(Point location) {
-        return location.x > 0 && location.y > 0 &&
-                location.x < width && location.y < height;
+        return location.x > 0
+                && location.y > 0
+                && location.x < width
+                && location.y < height;
     }
 }

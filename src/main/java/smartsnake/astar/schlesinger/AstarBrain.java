@@ -12,11 +12,6 @@ import java.util.Set;
 
 public class AstarBrain implements Brain {
 
-    //setting the open and close-set
-    private final Set<Node> open = new HashSet<>();
-    private final Set<Point> closed = new HashSet<>();
-    //Creating the current Node
-
 
     @Override
     public Direction move(Snake snake, Food food, Garden garden) {
@@ -36,27 +31,26 @@ public class AstarBrain implements Brain {
         Point right = new Point(startNodeLoc.x + 1, startNodeLoc.y);
         Point left = new Point(startNodeLoc.x - 1, startNodeLoc.y);
 
+        //setting the open and close-set
+        Set<Node> open = new HashSet<>();
+        Set<Point> closed = new HashSet<>();
+
         //adding the startNodeLoc to close
         open.add(startNode);
         closed.addAll(snake.getSegments());
-
 
         //turning the neighbor points into nodes
         Node topNode = new Node(top, food);
         Node bottomNode = new Node(bottom, food);
         Node rightNode = new Node(right, food);
         Node leftNode = new Node(left, food);
-
         //Adding the current node to open
         open.add(startNode);
 
-
         while (!open.isEmpty()) {
-
             //iterating through open to find the lowest f cost
             for (Node node : open) {
-                if (node.getCost() < current.getCost()) {
-                    closed.remove(node.getLocation());
+                if (node.getCost() < current.getCost() || node.getCost() == current.getCost()) {
                     current = node;
                 }
             }

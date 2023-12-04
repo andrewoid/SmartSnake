@@ -66,7 +66,9 @@ public class Snake {
     }
 
     public void setDirection(Direction direction) {
-        this.direction = direction;
+        if (direction != null) {
+            this.direction = direction;
+        }
     }
 
     public Direction getDirection() {

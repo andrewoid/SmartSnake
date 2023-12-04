@@ -4,6 +4,7 @@ import smartsnake.*;
 import smartsnake.astar.Node;
 
 import java.awt.*;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,7 +19,7 @@ public class AstarBrain implements Brain {
         Point currentNodeLoc = snake.getHeadLocation();
 
         //Current node
-        Node currentNode = new Node(currentNodeLoc, food.getLocation());
+        Node startNode = new Node(currentNodeLoc, food.getLocation());
 
         //setting the top, bottom, right, left points
         Point top = new Point(currentNodeLoc.x, currentNodeLoc.y + 1);
@@ -30,59 +31,59 @@ public class AstarBrain implements Brain {
         Set<Node> open = new HashSet<>();
         Set<Point> closed = new HashSet<>();
 
+
         //adding the currentNodeLoc to close
         closed.add(currentNodeLoc);
         closed.addAll(snake.getSegments());
 
+
         //turning the neighbor points into nodes
-        Node topNode = new Node(top, food.getLocation());
-        Node bottomNode = new Node(bottom, food.getLocation());
-        Node rightNode = new Node(right, food.getLocation());
-        Node leftNode = new Node(left, food.getLocation());
+        Node topNode = new Node(top, food);
+        Node bottomNode = new Node(bottom, food);
+        Node rightNode = new Node(right, food);
+        Node leftNode = new Node(left, food);
 
         //Adding the current node to open
-        open.add(currentNode);
+        open.add(startNode);
+
 
         while (!open.isEmpty()) {
-            open.remove(currentNode);
+
+            Node current = new Node(snake.getHeadLocation(), food);
+            Point currentLoc = current.getLocation();
+            open.remove(current);
             closed.add(currentNodeLoc);
             //if the snake head has reached the food
-            if (currentNodeLoc.equals(food.getLocation())) {
-                currentNode.getPath();
+            if (currentLoc.equals(food.getLocation())) {
+                closed.add(currentLoc);
+                return current.getDirectionFromStart();
             }
             //what is being traversed
             for (Node neighbor : open) {
                 if (closed.contains(neighbor.getLocation())) {
                     continue;
                 }
-                if (neighbor.getCost() < currentNode.getCost() || !(open.contains(neighbor))) {
+                if (neighbor.getCost() < current.getCost() || !(open.contains(neighbor))) {
+                    current = neighbor;
                     open.add(neighbor);
                     if (neighbor.equals(topNode)) {
-                        neighbor.setParent(currentNode, Direction.Down);
+                        neighbor.setParent(current, Direction.Down);
+                        closed.add(top);
                     }
                     if (neighbor.equals(bottomNode)) {
-                        neighbor.setParent(currentNode, Direction.Up);
+                        neighbor.setParent(current, Direction.Up);
+                        closed.add(bottom);
                     }
                     if (neighbor.equals(rightNode)) {
-                        neighbor.setParent(currentNode, Direction.Left);
+                        neighbor.setParent(current, Direction.Left);
+                        closed.add(right);
                     }
                     if (neighbor.equals(leftNode)) {
-                        neighbor.setParent(currentNode, Direction.Right);
+                        neighbor.setParent(current, Direction.Right);
+                        closed.add(left);
                     }
 
                 }
-            }
-            if (currentNode.getParentDirection() == Direction.Down) {
-                return Direction.Up;
-            }
-            if (currentNode.getParentDirection() == Direction.Up) {
-                return Direction.Down;
-            }
-            if (currentNode.getParentDirection() == Direction.Left) {
-                return Direction.Right;
-            }
-            if (currentNode.getParentDirection() == Direction.Right) {
-                return Direction.Left;
             }
         }
         return null;

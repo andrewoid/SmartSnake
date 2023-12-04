@@ -96,7 +96,7 @@ public class AstarBrain implements Brain
                                     List<Node> openNodes, List<Node> closedNodes) {
         if (!closedNodes.contains(neighbor))
         {
-            if(!openNodes.contains(neighbor))
+            if (!openNodes.contains(neighbor))
             {
                 neighbor.setParent(current, direction);
                 openNodes.add(neighbor);

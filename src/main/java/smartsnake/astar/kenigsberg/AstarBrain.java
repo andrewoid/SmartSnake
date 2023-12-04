@@ -49,8 +49,7 @@ public class AstarBrain implements Brain {
 
         Node directionNode = new Node(point, food);
         if (!closedNodes.contains(directionNode)) {
-            int index = openNodes.indexOf(directionNode);
-            if (index == -1) {
+            if (!openNodes.contains(directionNode)) {
                 openNodes.add(directionNode);
             }
             openNodes.get(openNodes.indexOf(directionNode)).setParent(current, direction);

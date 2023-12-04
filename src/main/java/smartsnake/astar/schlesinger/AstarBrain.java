@@ -20,7 +20,7 @@ public class AstarBrain implements Brain {
         //Current node
         Node currentNode = new Node(currentNodeLoc, food.getLocation());
 
-        //setting the top, bottom, right, left nodes
+        //setting the top, bottom, right, left points
         Point top = new Point(currentNodeLoc.x, currentNodeLoc.y + 1);
         Point bottom = new Point(currentNodeLoc.x, currentNodeLoc.y - 1);
         Point right = new Point(currentNodeLoc.x + 1 , currentNodeLoc.y);
@@ -30,7 +30,7 @@ public class AstarBrain implements Brain {
         Set<Node> open = new HashSet<>();
         Set<Point> closed = new HashSet<>();
 
-        //adding the currentNodeLoc to close, and neighbors to open
+        //adding the currentNodeLoc to close
         closed.add(currentNodeLoc);
         closed.addAll(snake.getSegments());
 
@@ -43,41 +43,48 @@ public class AstarBrain implements Brain {
         //Adding the current node to open
         open.add(currentNode);
 
-        //if the snake head has reached the food
-        if (currentNodeLoc.equals(food.getLocation())){
-            return null;
-        }
+        while(!open.isEmpty()) {
+            open.remove(currentNode);
+            closed.add(currentNodeLoc);
+            //if the snake head has reached the food
+            if (currentNodeLoc.equals(food.getLocation())) {
+                currentNode.getPath();
+            }
+            //what is being traversed
+            for(Node neighbor: open){
+                if(closed.contains(neighbor.getLocation())){
+                    continue;
+                }
+                if(neighbor.getCost() < currentNode.getCost() || !(open.contains(neighbor))){
+                    open.add(neighbor);
+                    if(neighbor.equals(topNode)){
+                        neighbor.setParent(currentNode, Direction.Down);
+                    }
+                    if(neighbor.equals(bottomNode)){
+                        neighbor.setParent(currentNode, Direction.Up);
+                    }
+                    if(neighbor.equals(rightNode)){
+                        neighbor.setParent(currentNode, Direction.Left);
+                    }
+                    if(neighbor.equals(leftNode)){
+                        neighbor.setParent(currentNode, Direction.Right);
+                    }
 
-        if (topNode.getCost() < currentNode.getCost()){
-            if(closed.contains(topNode.getLocation())){
-                top.move(top.x, top.y + 1);
+                }
             }
-            closed.add(topNode.getLocation());
-            topNode.setParent(currentNode, Direction.Down);
-            return Direction.Up;
-        }else if(bottomNode.getCost() < currentNode.getCost()){
-            if(closed.contains(bottomNode.getLocation())){
-                bottom.move(top.x, top.y - 1);
+            if(currentNode.getParentDirection() == Direction.Down){
+                return Direction.Up;
             }
-            closed.add(bottomNode.getLocation());
-            topNode.setParent(currentNode, Direction.Up);
-            return Direction.Down;
-        }else if (leftNode.getCost() < currentNode.getCost()){
-            if(closed.contains(leftNode.getLocation())){
-                top.move(top.x - 1, top.y);
+            if(currentNode.getParentDirection() == Direction.Up){
+                return Direction.Down;
             }
-            closed.add(leftNode.getLocation());
-            topNode.setParent(currentNode, Direction.Right);
-            return Direction.Left;
-        }else if (rightNode.getCost() < currentNode.getCost()){
-            if(closed.contains(rightNode.getLocation())){
-                top.move(top.x + 1, top.y);
+            if(currentNode.getParentDirection() == Direction.Left){
+                return Direction.Right;
             }
-            closed.add(rightNode.getLocation());
-            topNode.setParent(currentNode, Direction.Left);
-            return Direction.Right;
+            if(currentNode.getParentDirection() == Direction.Right){
+                return Direction.Left;
+            }
         }
-
         return null;
     }
 }

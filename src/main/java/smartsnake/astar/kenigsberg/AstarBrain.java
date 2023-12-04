@@ -40,7 +40,8 @@ public class AstarBrain implements Brain {
         return null;
     }
 
-    public void updateNeighbors(Node current, Direction direction, ArrayList<Node> openNodes, ArrayList<Node> closedNodes, Food food) {
+    public void updateNeighbors(Node current, Direction direction,
+                                ArrayList<Node> openNodes, ArrayList<Node> closedNodes, Food food) {
         Point currentLocation = current.getLocation();
         Node directionNode = current;
 

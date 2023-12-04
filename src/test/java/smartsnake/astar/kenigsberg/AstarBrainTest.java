@@ -30,7 +30,7 @@ class AstarBrainTest {
     }
 
     @Test
-    public void updateNeigbors()
+    public void updateNeighbors()
     {
         // given
         Node current = new Node(new Point(14, 5), new Point(15, 5));
@@ -44,7 +44,7 @@ class AstarBrainTest {
         brain.updateNeighbors(current, Direction.Right, openNodes, closedNodes, food);
 
         // then
-        assertEquals(current, openNodes.get(openNodes.size()-1).getParent());
+        assertEquals(current, openNodes.get(openNodes.size() - 1).getParent());
     }
 
     @Test

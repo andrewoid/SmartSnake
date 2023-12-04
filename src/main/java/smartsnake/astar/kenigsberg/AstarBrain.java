@@ -32,11 +32,14 @@ public class AstarBrain implements Brain {
                 return current.getDirectionFromStart();
             }
 
-            updateNeighbors(current, new Point(currentLocation.x + 1, currentLocation.y), Direction.Right, openNodes, closedNodes, food);
-            updateNeighbors(current, new Point(currentLocation.x, currentLocation.y - 1), Direction.Up, openNodes, closedNodes, food);
+            updateNeighbors(current, new Point(currentLocation.x + 1, currentLocation.y),
+                    Direction.Right, openNodes, closedNodes, food);
+            updateNeighbors(current, new Point(currentLocation.x, currentLocation.y - 1),
+                    Direction.Up, openNodes, closedNodes, food);
             updateNeighbors(current, new Point(current.getLocation().x - 1, current.getLocation().y),
                     Direction.Left, openNodes, closedNodes, food);
-            updateNeighbors(current, new Point(currentLocation.x, currentLocation.y + 1), Direction.Down, openNodes, closedNodes, food);
+            updateNeighbors(current, new Point(currentLocation.x, currentLocation.y + 1),
+                    Direction.Down, openNodes, closedNodes, food);
         }
         return null;
     }

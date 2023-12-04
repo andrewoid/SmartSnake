@@ -16,24 +16,24 @@ public class AstarBrain implements Brain {
     public Direction move(Snake snake, Food food, Garden garden) {
 
         //Instantiating all variables being used
-        Point currentNodeLoc = snake.getHeadLocation();
+        Point startNodeLoc = snake.getHeadLocation();
 
-        //Current node
-        Node startNode = new Node(currentNodeLoc, food.getLocation());
+        //Start node
+        Node startNode = new Node(startNodeLoc, food.getLocation());
 
         //setting the top, bottom, right, left points
-        Point top = new Point(currentNodeLoc.x, currentNodeLoc.y + 1);
-        Point bottom = new Point(currentNodeLoc.x, currentNodeLoc.y - 1);
-        Point right = new Point(currentNodeLoc.x + 1, currentNodeLoc.y);
-        Point left = new Point(currentNodeLoc.x - 1, currentNodeLoc.y);
+        Point top = new Point(startNodeLoc.x, startNodeLoc.y + 1);
+        Point bottom = new Point(startNodeLoc.x, startNodeLoc.y - 1);
+        Point right = new Point(startNodeLoc.x + 1, startNodeLoc.y);
+        Point left = new Point(startNodeLoc.x - 1, startNodeLoc.y);
 
         //setting the open and close-set
         Set<Node> open = new HashSet<>();
         Set<Point> closed = new HashSet<>();
 
 
-        //adding the currentNodeLoc to close
-        closed.add(currentNodeLoc);
+        //adding the startNodeLoc to close
+        open.add(startNode);
         closed.addAll(snake.getSegments());
 
 
@@ -48,14 +48,18 @@ public class AstarBrain implements Brain {
 
 
         while (!open.isEmpty()) {
-
             Node current = new Node(snake.getHeadLocation(), food);
-            Point currentLoc = current.getLocation();
-            open.remove(current);
-            closed.add(currentNodeLoc);
+            for (Node nodes : open) {
+                if (nodes.getCost() < current.getCost()) {
+                    current = nodes;
+                }
+            }
+            closed.add(current.getLocation());
+            open.remove(startNode);
+            closed.add(startNode.getLocation());
             //if the snake head has reached the food
-            if (currentLoc.equals(food.getLocation())) {
-                closed.add(currentLoc);
+            if (current.getLocation().equals(food.getLocation())) {
+                //closed.add(current.getLocation());
                 return current.getDirectionFromStart();
             }
             //what is being traversed
@@ -63,24 +67,24 @@ public class AstarBrain implements Brain {
                 if (closed.contains(neighbor.getLocation())) {
                     continue;
                 }
-                if (neighbor.getCost() < current.getCost() || !(open.contains(neighbor))) {
-                    current = neighbor;
+                if (neighbor.getFromStart() < current.getFromStart() || !(open.contains(neighbor))) {
+                    //current = neighbor;
                     open.add(neighbor);
                     if (neighbor.equals(topNode)) {
                         neighbor.setParent(current, Direction.Down);
-                        closed.add(top);
+                        //closed.add(top);
                     }
                     if (neighbor.equals(bottomNode)) {
                         neighbor.setParent(current, Direction.Up);
-                        closed.add(bottom);
+                        //closed.add(bottom);
                     }
                     if (neighbor.equals(rightNode)) {
                         neighbor.setParent(current, Direction.Left);
-                        closed.add(right);
+                        //closed.add(right);
                     }
                     if (neighbor.equals(leftNode)) {
                         neighbor.setParent(current, Direction.Right);
-                        closed.add(left);
+                        //closed.add(left);
                     }
 
                 }

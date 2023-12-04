@@ -18,7 +18,6 @@ public class AstarBrain implements Brain {
     //Creating the current Node
 
 
-
     @Override
     public Direction move(Snake snake, Food food, Garden garden) {
 
@@ -56,7 +55,7 @@ public class AstarBrain implements Brain {
 
             //iterating through open to find the lowest f cost
             for (Node node : open) {
-                if(node.getCost() < current.getCost()){
+                if (node.getCost() < current.getCost()) {
                     closed.remove(node.getLocation());
                     current = node;
                 }

@@ -75,9 +75,11 @@ public class AstarBrain implements Brain {
             }
 
             for (Node neighbor : neighborsOfCurrent) {
-                if (!closedNodes.contains(neighbor) && !openNodes.contains(neighbor)) {
-                    neighbor.setParent(current, neighbor.getParentDirection());
-                    openNodes.add(neighbor);
+                if (!closedNodes.contains(neighbor)) {
+                    if (neighbor.setParent(current, neighbor.getParentDirection()) || !openNodes.contains(neighbor)) {
+                        neighbor.setParent(current, neighbor.getParentDirection());
+                        openNodes.add(neighbor);
+                    }
                 }
             }
         }

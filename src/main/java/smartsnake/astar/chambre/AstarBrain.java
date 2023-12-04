@@ -56,7 +56,14 @@ public class AstarBrain implements Brain {
         }
     }
 
-    private void updateDirection(Point point, Direction direction, Food food, List<Node> open, List<Node> closed, Snake snake, Node current, Garden garden) {
+    private void updateDirection(Point point,
+                                 Direction direction,
+                                 Food food,
+                                 List<Node> open,
+                                 List<Node> closed,
+                                 Snake snake,
+                                 Node current,
+                                 Garden garden) {
 
         Node directionNode = new Node(point, food);
         if (validate(directionNode, garden.getWidth(), garden.getHeight())) {

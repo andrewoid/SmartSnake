@@ -9,11 +9,6 @@ import java.util.List;
 
 public class AstarBrain implements Brain {
 
-    /**
-     * Goal: Determine what direction the snake should move to
-     * Implement Astar
-     * Code given in garden uses the brain to get the location it should move in
-     */
     @Override
     public Direction move(Snake snake, Food food, Garden garden) {
 
@@ -23,11 +18,11 @@ public class AstarBrain implements Brain {
         Node startNode = new Node(snake.getHeadLocation(), food.getLocation());
         openNodes.add(startNode);
 
-        setSnakeToClosed(snake, food, closedNodes);
+        addSnakeToClosed(snake, food, closedNodes);
 
         while (!openNodes.isEmpty()) {
             Node current = openNodes.get(0);
-            current = setLowestCost(openNodes, current);
+            current = getLowestCost(openNodes);
 
             openNodes.remove(current);
             closedNodes.add(current);
@@ -80,30 +75,26 @@ public class AstarBrain implements Brain {
             }
 
             for (Node neighbor : neighborsOfCurrent) {
-                if (!closedNodes.contains(neighbor)) {
-                    if (!openNodes.contains(neighbor)) {
-                        neighbor.setParent(current, neighbor.getParentDirection());
-                        openNodes.add(neighbor);
-
-                    }
+                if (!closedNodes.contains(neighbor) && !openNodes.contains(neighbor)) {
+                    neighbor.setParent(current, neighbor.getParentDirection());
+                    openNodes.add(neighbor);
                 }
             }
         }
         return null;
     }
 
-    private static Node setLowestCost(ArrayList<Node> openNodes, Node current) {
-        double lowestfcost = openNodes.get(0).getCost();
+    public Node getLowestCost(ArrayList<Node> openNodes) {
+        Node lowestfcostNode = openNodes.get(0);
         for (Node open : openNodes) {
-            if (open.getCost() < lowestfcost) {
-                lowestfcost = open.getCost();
-                current = open;
+            if (open.getCost() < lowestfcostNode.getCost()) {
+                lowestfcostNode = open;
             }
         }
-        return current;
+        return lowestfcostNode;
     }
 
-    private static void setSnakeToClosed(Snake snake, Food food, ArrayList<Node> closedNodes) {
+    public void addSnakeToClosed(Snake snake, Food food, ArrayList<Node> closedNodes) {
         List<Point> snakeSegments = snake.getSegments();
         for (int i = 1; i < snakeSegments.size(); i++) {
             closedNodes.add(new Node(snakeSegments.get(i), food));

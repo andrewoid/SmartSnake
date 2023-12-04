@@ -21,8 +21,7 @@ public class AstarBrain implements Brain {
         addSnakeToClosed(snake, food, closedNodes);
 
         while (!openNodes.isEmpty()) {
-            Node current = openNodes.get(0);
-            current = getLowestCost(openNodes);
+            Node current = getLowestCost(openNodes);
 
             openNodes.remove(current);
             closedNodes.add(current);
@@ -32,56 +31,48 @@ public class AstarBrain implements Brain {
                 return current.getDirectionFromStart();
             }
 
-            ArrayList<Node> neighborsOfCurrent = new ArrayList<>();
-
-            int indexRight = openNodes.indexOf(new Node(new Point(
-                    currentLocation.x + 1, currentLocation.y), food));
-            if (indexRight == -1) {
-                Node rightNode = new Node(new Point(currentLocation.x + 1, currentLocation.y), food);
-                rightNode.setParent(current, Direction.Right);
-                neighborsOfCurrent.add(rightNode);
-            } else {
-                neighborsOfCurrent.add(openNodes.get(indexRight));
-            }
-
-            int indexAbove = openNodes.indexOf(new Node(new Point(
-                    currentLocation.x, currentLocation.y - 1), food));
-            if (indexAbove == -1) {
-                Node aboveNode = new Node(new Point(currentLocation.x, currentLocation.y - 1), food);
-                aboveNode.setParent(current, Direction.Up);
-                neighborsOfCurrent.add(aboveNode);
-            } else {
-                neighborsOfCurrent.add(openNodes.get(indexAbove));
-            }
-
-            int indexLeft = openNodes.indexOf(new Node(new Point(
-                    current.getLocation().x - 1, current.getLocation().y), food));
-            if (indexLeft == -1) {
-                Node leftNode = new Node(new Point(current.getLocation().x - 1, current.getLocation().y), food);
-                leftNode.setParent(current, Direction.Left);
-                neighborsOfCurrent.add(leftNode);
-            } else {
-                neighborsOfCurrent.add(openNodes.get(indexLeft));
-            }
-
-            int indexBelow = openNodes.indexOf(new Node(new Point(
-                    currentLocation.x, currentLocation.y + 1), food));
-            if (indexBelow == -1) {
-                Node belowNode = new Node(new Point(currentLocation.x, currentLocation.y + 1), food);
-                belowNode.setParent(current, Direction.Down);
-                neighborsOfCurrent.add(belowNode);
-            } else {
-                neighborsOfCurrent.add(openNodes.get(indexBelow));
-            }
-
-            for (Node neighbor : neighborsOfCurrent) {
-                if (!closedNodes.contains(neighbor)) {
-                    if (neighbor.setParent(current, neighbor.getParentDirection()) || !openNodes.contains(neighbor)) {
-                        neighbor.setParent(current, neighbor.getParentDirection());
-                        openNodes.add(neighbor);
+            Node rightNode = new Node(new Point(currentLocation.x + 1, currentLocation.y), food);
+            if (!closedNodes.contains(rightNode)) {
+                if (rightNode.setParent(current, Direction.Right) || !openNodes.contains(rightNode)) {
+                    {
+                        rightNode.setParent(current, Direction.Right);
+                        if (!openNodes.contains(rightNode)) {
+                            openNodes.add(rightNode);
+                        }
                     }
                 }
             }
+
+            Node aboveNode = new Node(new Point(currentLocation.x, currentLocation.y - 1), food);
+            if (!closedNodes.contains(aboveNode)) {
+                if (rightNode.setParent(current, Direction.Up) || !openNodes.contains(aboveNode)) {
+                    aboveNode.setParent(current, Direction.Up);
+                    if (!openNodes.contains(aboveNode)) {
+                        openNodes.add(aboveNode);
+                    }
+                }
+            }
+
+            Node leftNode = new Node(new Point(current.getLocation().x - 1, current.getLocation().y), food);
+            if (!closedNodes.contains(leftNode)) {
+                if (rightNode.setParent(current, Direction.Left) || !openNodes.contains(leftNode)) {
+                    leftNode.setParent(current, Direction.Left);
+                    if (!openNodes.contains(leftNode)) {
+                        openNodes.add(leftNode);
+                    }
+                }
+            }
+
+            Node belowNode = new Node(new Point(currentLocation.x, currentLocation.y + 1), food);
+            if (!closedNodes.contains(belowNode)) {
+                if (rightNode.setParent(current, Direction.Down) || !openNodes.contains(belowNode)) {
+                    belowNode.setParent(current, Direction.Down);
+                    if (!openNodes.contains(belowNode)) {
+                        openNodes.add(belowNode);
+                    }
+                }
+            }
+
         }
         return null;
     }

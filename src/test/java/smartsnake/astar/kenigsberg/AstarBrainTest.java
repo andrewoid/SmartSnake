@@ -21,11 +21,28 @@ class AstarBrainTest {
         Food food = new Food(new Point(15, 5));
         Garden garden = new Garden(40, 30);
         AstarBrain brain = new AstarBrain();
+
         // when
         Direction direction = brain.move(snake, food, garden);
 
         // then
         assertEquals(Direction.Right, direction);
+    }
+
+    @Test
+    public void setParentInBrain()
+    {
+        // given
+        Node current = new Node(new Point(14, 5), new Point(15, 5));
+        Food food = new Food(new Point(15, 5));
+        Node currentNode = new Node(new Point(current.getLocation().x, current.getLocation().y + 1), food);
+        AstarBrain brain = new AstarBrain();
+
+        // when
+        brain.setParentInBrain(currentNode, current, Direction.Down);
+
+        // then
+        assertEquals(current, currentNode.getParent());
     }
 
     @Test

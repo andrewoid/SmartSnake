@@ -30,19 +30,21 @@ class AstarBrainTest {
     }
 
     @Test
-    public void setParentInBrain()
+    public void updateNeigbors()
     {
         // given
         Node current = new Node(new Point(14, 5), new Point(15, 5));
-        Food food = new Food(new Point(15, 5));
-        Node currentNode = new Node(new Point(current.getLocation().x, current.getLocation().y + 1), food);
+        ArrayList<Node> openNodes = new ArrayList<>();
+        openNodes.add(new Node(new Point(15, 5), new Point(15, 5)));
+        ArrayList<Node> closedNodes = new ArrayList<>();
+        Food food = new Food(new Point(18, 5));
         AstarBrain brain = new AstarBrain();
 
         // when
-        brain.setParentInBrain(currentNode, current, Direction.Down);
+        brain.updateNeighbors(current, Direction.Right, openNodes, closedNodes, food);
 
         // then
-        assertEquals(current, currentNode.getParent());
+        assertEquals(current, openNodes.get(openNodes.size()-1).getParent());
     }
 
     @Test

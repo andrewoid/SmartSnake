@@ -32,32 +32,19 @@ public class AstarBrain implements Brain {
                 return current.getDirectionFromStart();
             }
 
-            updateNeighbors(current, Direction.Right, openNodes, closedNodes, food);
-            updateNeighbors(current, Direction.Up, openNodes, closedNodes, food);
-            updateNeighbors(current, Direction.Left, openNodes, closedNodes, food);
-            updateNeighbors(current, Direction.Down, openNodes, closedNodes, food);
+            updateNeighbors(current, new Point(currentLocation.x + 1, currentLocation.y), Direction.Right, openNodes, closedNodes, food);
+            updateNeighbors(current, new Point(currentLocation.x, currentLocation.y - 1), Direction.Up, openNodes, closedNodes, food);
+            updateNeighbors(current, new Point(current.getLocation().x - 1, current.getLocation().y),
+                    Direction.Left, openNodes, closedNodes, food);
+            updateNeighbors(current, new Point(currentLocation.x, currentLocation.y + 1), Direction.Down, openNodes, closedNodes, food);
         }
         return null;
     }
 
-    public void updateNeighbors(Node current, Direction direction,
+    public void updateNeighbors(Node current, Point point, Direction direction,
                                 ArrayList<Node> openNodes, ArrayList<Node> closedNodes, Food food) {
-        Point currentLocation = current.getLocation();
-        Node directionNode = current;
 
-        if (direction == Direction.Right) {
-            directionNode = new Node(new Point(currentLocation.x + 1, currentLocation.y), food);
-        }
-        if (direction == Direction.Up) {
-            directionNode = new Node(new Point(currentLocation.x, currentLocation.y - 1), food);
-        }
-        if (direction == Direction.Left) {
-            directionNode = new Node(new Point(current.getLocation().x - 1, current.getLocation().y), food);
-        }
-        if (direction == Direction.Down) {
-            directionNode = new Node(new Point(currentLocation.x, currentLocation.y + 1), food);
-        }
-
+        Node directionNode = new Node(point, food);
         if (!closedNodes.contains(directionNode)) {
             int index = openNodes.indexOf(directionNode);
             if (index != -1) {

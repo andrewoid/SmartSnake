@@ -43,17 +43,17 @@ class GardenTest {
     void tick() {
         //given
         Snake snake = mock();
-        Point point = new Point(0, 0);
+        Point point = new Point(15, 15);
         Brain brain = mock();
         doReturn(brain).when(snake).getBrain();
         doReturn(Direction.Up).when(brain).move(any(), any(), any());
+        doReturn(point).when(snake).getHeadLocation();
+        Garden garden = new Garden(40, 30, snake);
 
         //when
-        Garden garden = new Garden(40, 30, snake);
-        doReturn(point).when(snake).getHeadLocation();
+        assertTrue(garden.tick());
 
         //then
-        assertTrue(garden.tick());
         verify(snake).tick(anyBoolean());
         verify(snake).setDirection(Direction.Up);
         assertEquals(1, garden.getTurns());

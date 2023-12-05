@@ -16,7 +16,7 @@ public class AstarBrain implements Brain {
         ArrayList<Node> openNodes = new ArrayList<>();
         ArrayList<Node> closedNodes = new ArrayList<>();
 
-        Node startNode = new Node(snake.getHeadLocation(), food.getLocation());
+        Node startNode = new Node(snake.getHeadLocation(), food);
         openNodes.add(startNode);
 
         addSnakeToClosed(snake, food, closedNodes);
@@ -49,10 +49,13 @@ public class AstarBrain implements Brain {
 
         Node directionNode = new Node(point, food);
         if (!closedNodes.contains(directionNode)) {
-            if (!openNodes.contains(directionNode)) {
+            int index = openNodes.indexOf(directionNode);
+            if (index == -1) {
                 openNodes.add(directionNode);
+            } else {
+                directionNode = openNodes.get(index);
             }
-            openNodes.get(openNodes.indexOf(directionNode)).setParent(current, direction);
+            directionNode.setParent(current, direction);
         }
     }
 

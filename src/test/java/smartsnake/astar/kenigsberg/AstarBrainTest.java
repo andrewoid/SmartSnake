@@ -14,11 +14,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class AstarBrainTest {
 
+    private final Point point = new Point(15, 5);
+
     @Test
     public void move() {
         // given
         Snake snake = new Snake();
-        Food food = new Food(new Point(15, 5));
+        Food food = new Food(point);
         Garden garden = new Garden(40, 30);
         AstarBrain brain = new AstarBrain();
 
@@ -32,15 +34,15 @@ class AstarBrainTest {
     @Test
     public void updateNeighbors() {
         // given
-        Node current = new Node(new Point(14, 5), new Point(15, 5));
+        Node current = new Node(new Point(14, 5), point);
         ArrayList<Node> openNodes = new ArrayList<>();
-        openNodes.add(new Node(new Point(15, 5), new Point(15, 5)));
+        openNodes.add(new Node(point, point));
         ArrayList<Node> closedNodes = new ArrayList<>();
         Food food = new Food(new Point(18, 5));
         AstarBrain brain = new AstarBrain();
 
         // when
-        brain.updateNeighbors(current, new Point(15, 5), Direction.Right, openNodes, closedNodes, food);
+        brain.updateNeighbors(current, point, Direction.Right, openNodes, closedNodes, food);
 
         // then
         assertEquals(current, openNodes.get(openNodes.size() - 1).getParent());
@@ -64,7 +66,7 @@ class AstarBrainTest {
     public void addSnakeToClosed() {
         // given
         Snake snake = new Snake();
-        Food food = new Food(new Point(15, 5));
+        Food food = new Food(point);
         ArrayList<Node> closedNodes = new ArrayList<>();
         AstarBrain brain = new AstarBrain();
 

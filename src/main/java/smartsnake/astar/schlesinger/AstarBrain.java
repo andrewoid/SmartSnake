@@ -5,11 +5,6 @@ import smartsnake.astar.Node;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
-//import static java.util.stream.Nodes.node;
 
 public class AstarBrain implements Brain {
 

@@ -56,8 +56,8 @@ public class AstarBrain implements Brain {
             //this is the current location of the snakes head, which keeps moving based on lowest cost
             Point currentLocation = current.getLocation();
             //setting the top, bottom, right, left points
-            Point top = new Point(currentLocation.x, currentLocation.y + 1);
-            Point bottom = new Point(currentLocation.x, currentLocation.y - 1);
+            Point top = new Point(currentLocation.x, currentLocation.y - 1);
+            Point bottom = new Point(currentLocation.x, currentLocation.y + 1);
             Point right = new Point(currentLocation.x + 1, currentLocation.y);
             Point left = new Point(currentLocation.x - 1, currentLocation.y);
 

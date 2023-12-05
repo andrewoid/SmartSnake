@@ -69,12 +69,9 @@ public class AstarBrain implements Brain
             {
                 neighbor.setParent(current, direction);
                 openNodes.add(neighbor);
-            }
-        } else
-        {
-            openNodes.add(neighbor);
-            if (openNodes.get(openNodes.indexOf(neighbor)).getCost() > current.getCost() + 1)
+            }else
             {
+                //openNodes.add(neighbor);
                 openNodes.get(openNodes.indexOf(neighbor)).setParent(current, direction);
             }
         }

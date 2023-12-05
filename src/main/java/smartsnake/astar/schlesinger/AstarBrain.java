@@ -24,19 +24,21 @@ public class AstarBrain implements Brain {
         Node startNode = new Node(startNodeLoc, food);
 
 
-        //setting the open and close-set
+        //setting the open and close array lists, and the ones used to hold the neighbors
         ArrayList<Node> open = new ArrayList<>();
         ArrayList<Point> closed = new ArrayList<>();
         ArrayList<Node> neighbors = new ArrayList<>();
 
+        //adding the start node to open
         open.add(startNode);
+        //adding everything besides for the snakes head to the closed list -  they are barriers
         closed.addAll(snake.getSegments());
         closed.remove(snake.getHeadLocation());
 
-        //turning the neighbor points into nodes
-
-
+        //Starting the loop while something is contained in open
         while (!open.isEmpty()) {
+            //Setting it to a random point just for the beginning. it will be
+            //replaced by the lowest cost either way.
             Node lowestCost = open.get(0);
             //iterating through open to find the lowest f cost
             for (Node node : open) {
@@ -44,8 +46,11 @@ public class AstarBrain implements Brain {
                     lowestCost = node;
                 }
             }
+            //setting current to be to the node with the lowest f cost
             Node current = lowestCost;
+            //since it is the lowest, remove from open and:
             open.remove(current);
+            //add it to closed
             closed.add(current.getLocation());
 
             //if the snake head has reached the food
@@ -53,6 +58,7 @@ public class AstarBrain implements Brain {
                 return current.getDirectionFromStart();
             }
 
+            //this is the current location of the snakes head, which keeps moving based on lowest cost
             Point currentLocation = current.getLocation();
             //setting the top, bottom, right, left points
             Point top = new Point(currentLocation.x, currentLocation.y + 1);
@@ -60,16 +66,17 @@ public class AstarBrain implements Brain {
             Point right = new Point(currentLocation.x + 1, currentLocation.y);
             Point left = new Point(currentLocation.x - 1, currentLocation.y);
 
+            //turning them into nodes
             Node topNode = new Node(top, food);
             Node bottomNode = new Node(bottom, food);
             Node rightNode = new Node(right, food);
             Node leftNode = new Node(left, food);
 
+            //Adding the neighbors to the neighbors array list to be transversed.
             neighbors.add(topNode);
             neighbors.add(bottomNode);
             neighbors.add(rightNode);
             neighbors.add(leftNode);
-
 
             //what is being traversed
             for (Node neighbor : neighbors) {
@@ -84,13 +91,13 @@ public class AstarBrain implements Brain {
                         open.get(open.indexOf(neighbor)).setParent(current, Direction.Up);
                     }
                     if (neighbor.equals(bottomNode)) {
-                        open.get(open.indexOf(neighbor)).setParent(current, Direction.Up);
+                        open.get(open.indexOf(neighbor)).setParent(current, Direction.Down);
                     }
                     if (neighbor.equals(rightNode)) {
-                        open.get(open.indexOf(neighbor)).setParent(current, Direction.Up);
+                        open.get(open.indexOf(neighbor)).setParent(current, Direction.Right);
                     }
                     if (neighbor.equals(leftNode)) {
-                        open.get(open.indexOf(neighbor)).setParent(current, Direction.Up);
+                        open.get(open.indexOf(neighbor)).setParent(current, Direction.Left);
                     }
 
                 } else {

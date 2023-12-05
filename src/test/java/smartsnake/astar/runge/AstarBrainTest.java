@@ -16,12 +16,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AstarBrainTest
 {
     @Test
-    public void move()
-    {
+    public void move() {
         //given
         Garden garden = new Garden(20, 15);
         Snake snake = new Snake();
-        Food food = new Food(new Point(10,10));
+        Food food = new Food(new Point(10, 10));
         AstarBrain brain = new AstarBrain();
 
         //when
@@ -34,14 +33,13 @@ public class AstarBrainTest
     }
 
     @Test
-    public void getLowestCost()
-    {
+    public void getLowestCost() {
         //given
         AstarBrain brain = new AstarBrain();
         List<Node> openNodes = new ArrayList<>();
-        Food food = new Food(new Point(15,5));
-        openNodes.add(new Node(new Point(10,5), food));
-        openNodes.add(new Node(new Point(14,5), food));
+        Food food = new Food(new Point(15, 5));
+        openNodes.add(new Node(new Point(10, 5), food));
+        openNodes.add(new Node(new Point(14, 5), food));
 
         //when
         Node lowest = brain.getLowestCost(openNodes);
@@ -51,11 +49,10 @@ public class AstarBrainTest
     }
 
     @Test
-    public void updateNeighborhood()
-    {
+    public void updateNeighborhood() {
         //given
         AstarBrain brain = new AstarBrain();
-        Food food = new Food(new Point(20,5));
+        Food food = new Food(new Point(20, 5));
         Node current = new Node(new Point(14, 5), food);
         List<Node> openNodes = new ArrayList<>();
         List<Node> closedNodes = new ArrayList<>();

@@ -81,38 +81,39 @@ public class AstarBrain implements Brain {
                 if (open.contains(neighbor)) {
 
                     if (neighbor.equals(topNode)) {
-                        open.get(open.indexOf(neighbor)).setParent(current, Direction.Down);
+                        neighbor.setParent(current, Direction.Up);
                     }
                     if (neighbor.equals(bottomNode)) {
-                        open.get(open.indexOf(neighbor)).setParent(current, Direction.Up);
+                        neighbor.setParent(current, Direction.Down);
                     }
                     if (neighbor.equals(rightNode)) {
-                        open.get(open.indexOf(neighbor)).setParent(current, Direction.Left);
+                        neighbor.setParent(current, Direction.Right);
                     }
                     if (neighbor.equals(leftNode)) {
-                        open.get(open.indexOf(neighbor)).setParent(current, Direction.Right);
+                        neighbor.setParent(current, Direction.Left);
                     }
 
                 } else {
 
                     if (neighbor.equals(topNode)) {
-                        neighbor.setParent(current, Direction.Down);
-                        open.add(neighbor);
-                    }
-                    if (neighbor.equals(bottomNode)) {
                         neighbor.setParent(current, Direction.Up);
                         open.add(neighbor);
                     }
+                    if (neighbor.equals(bottomNode)) {
+                        neighbor.setParent(current, Direction.Down);
+                        open.add(neighbor);
+                    }
                     if (neighbor.equals(rightNode)) {
-                        neighbor.setParent(current, Direction.Left);
+                        neighbor.setParent(current, Direction.Right);
                         open.add(neighbor);
                     }
                     if (neighbor.equals(leftNode)) {
-                        neighbor.setParent(current, Direction.Right);
+                        neighbor.setParent(current, Direction.Left);
                         open.add(neighbor);
                     }
                 }
             }
+            neighbors.clear();
         }
         return null;
     }

@@ -60,18 +60,19 @@ public class AstarBrain implements Brain
         return lowestCost;
     }
 
+
     public void updateNeighborhood(Node current, Node neighbor, Direction direction,
                                    List<Node> openNodes, List<Node> closedNodes) {
         if (!closedNodes.contains(neighbor))
         {
             if (!openNodes.contains(neighbor))
             {
+                neighbor.setParent(current, direction);
                 openNodes.add(neighbor);
             } else
             {
                 openNodes.get(openNodes.indexOf(neighbor)).setParent(current, direction);
             }
-            neighbor.setParent(current, direction);
         }
     }
 }

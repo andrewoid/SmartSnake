@@ -39,11 +39,12 @@ public class NeuralNetworkDataFactory {
         Snake snake = garden.getSnake();
         Point snakeLocation = snake.getHeadLocation();
         List<Point> segments = snake.getSegments();
-        Food food = garden.getFood();
         input[0] = isOpenSquare(garden, segments, snakeLocation.x + 1, snakeLocation.y);
         input[1] = isOpenSquare(garden, segments, snakeLocation.x - 1, snakeLocation.y);
         input[2] = isOpenSquare(garden, segments, snakeLocation.x, snakeLocation.y + 1);
         input[3] = isOpenSquare(garden, segments, snakeLocation.x, snakeLocation.y - 1);
+        
+        Food food = garden.getFood();
         // This is the angle from the Snake head to the Food.
         input[4] = Math.atan2(snakeLocation.getY() - food.getY(),
                 snakeLocation.getX() - food.getX());

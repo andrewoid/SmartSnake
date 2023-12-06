@@ -72,18 +72,6 @@ public class Garden {
         tickCounter++;
 
         if (snake.starved()) {
-<<<<<<< HEAD
-            System.out.println("starved");
-            return false;
-        } else if (snake.intersectsItself()) {
-            System.out.println("intersected self");
-            return false;
-        } else if (snake.getHeadLocation().x == width
-                || snake.getHeadLocation().y == height
-                || snake.getHeadLocation().x == -1
-                || snake.getHeadLocation().y == -1) {
-            System.out.println("hit wall");
-=======
             logger.info("snake starved");
             return false;
         } else if (snake.intersectsItself()) {
@@ -91,7 +79,6 @@ public class Garden {
             return false;
         } else if (!contains(snake.getHeadLocation())) {
             logger.info("snake intersects garden wall");
->>>>>>> 1363824d02e27d75781ab095722bfe58ce074d14
             return false;
         } else {
             boolean shouldGrow = snake.intersectsHead(food);

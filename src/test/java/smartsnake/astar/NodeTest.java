@@ -1,8 +1,7 @@
-package smartsnake.astar.chambre;
+package smartsnake.astar;
 
 import org.junit.jupiter.api.Test;
 import smartsnake.Direction;
-import smartsnake.astar.Node;
 
 import java.awt.*;
 import java.util.List;

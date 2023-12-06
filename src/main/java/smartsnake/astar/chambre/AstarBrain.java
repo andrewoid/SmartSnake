@@ -92,7 +92,7 @@ public class AstarBrain implements Brain {
                 && node.getLocation().y != -1;
     }
 
-    private Node getLowestCost(List<Node> open) {
+    public Node getLowestCost(List<Node> open) {
         int lowestCostIndex = 0;
         Node lowestCost = open.get(lowestCostIndex);
 

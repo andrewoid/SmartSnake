@@ -86,7 +86,7 @@ public class NeuralNetworkDataFactory {
     /**
      * Sets the values in output corresponding to this Direction.
      */
-    public void toOutput(Direction direction, double[] output) {
+    public void fillOutput(Direction direction, double[] output) {
         Arrays.fill(output, 0);
         output[direction.ordinal()] = 1;
     }

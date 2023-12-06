@@ -1,7 +1,7 @@
 ## Smart Snake Game
 
-We will be writing a Snake game and then "solving it" using **A*** and then **Genetic Algorithms** and **Neural
-Networks**.
+We will be writing a Snake game and then "solving it" using **A*** and then **Neural
+Networks** with **Reinforcement Learning**.
 
 #### Classes to use
 
@@ -21,4 +21,6 @@ Networks**.
 
 [Neural Networks Learns to Play Snake](https://www.youtube.com/watch?v=zIkBYwdkuTk)
 
+[Basic Neural Network Library](https://github.com/kim-marcel/basic_neural_network)
 
+[Teaching an AI to Play the Snake Game Using Reinforcement Learning!](https://medium.com/@nancy.q.zhou/teaching-an-ai-to-play-the-snake-game-using-reinforcement-learning-6d2a6e8f3b1c)

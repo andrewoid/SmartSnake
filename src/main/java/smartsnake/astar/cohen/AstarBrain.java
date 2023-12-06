@@ -21,13 +21,13 @@ public class AstarBrain implements Brain
 
         closeSnakeNodes(snake, food, closed);
 
-        while(!open.isEmpty())
+        while (!open.isEmpty())
         {
             Node current = getLowestCostNode(open);
             open.remove(current);
             closed.add(current);
 
-            if(current.getLocation().equals(food))
+            if (current.getLocation().equals(food))
             {
                 return current.getDirectionFromStart();
             }
@@ -40,13 +40,13 @@ public class AstarBrain implements Brain
             List<Node> neighbors = new ArrayList<>(List.of(left, right, up, down));
             List<String> directions = new ArrayList<>(List.of("Left", "Right", "Up", "Down"));
 
-            for(Node neighbor: neighbors)
+            for (Node neighbor : neighbors)
             {
-                if(!closed.contains(neighbor))
+                if (!closed.contains(neighbor))
                 {
-                    if(!open.contains(neighbor)) //neighbor.getFromEnd() < current.getFromEnd() ||
+                    if (!open.contains(neighbor)) //neighbor.getFromEnd() < current.getFromEnd() ||
                     {
-                        if(!open.contains(neighbor))
+                        if (!open.contains(neighbor))
                         {
                             open.add(neighbor);
                         }
@@ -58,8 +58,6 @@ public class AstarBrain implements Brain
                     }
                 }
             }
-
-            System.out.println(current.getDirectionFromStart());
         }
         return null;
     }
@@ -71,9 +69,9 @@ public class AstarBrain implements Brain
     }
 
     @VisibleForTesting
-    public void closeSnakeNodes(Snake snake, Food food, List<Node>closed)
+    public void closeSnakeNodes(Snake snake, Food food, List<Node> closed)
     {
-        List<Point>snakePoints = snake.getSegments();
+        List<Point> snakePoints = snake.getSegments();
         for (int i = 1; i < snakePoints.size(); i++)
         {
             closed.add(new Node(snakePoints.get(i).getLocation(), food.getLocation()));
@@ -89,7 +87,7 @@ public class AstarBrain implements Brain
         for (int i = 0; i < open.size(); i++)
         {
             Node point = open.get(i);
-            if(point.getCost() < lowest.getCost())
+            if (point.getCost() < lowest.getCost())
             {
                 minCostIndex = i;
                 lowest = open.get(minCostIndex);

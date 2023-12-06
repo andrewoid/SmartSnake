@@ -20,6 +20,7 @@ class AstarBrainTest
     Food food = new Food(point);
     Garden garden = new Garden(40, 30);
     AstarBrain brain = new AstarBrain();
+
     @Test
     public void move()
     {
@@ -50,7 +51,7 @@ class AstarBrainTest
         //Then
         for (int i = 1; i < snake.getSegments().size(); i++)
         {
-            assertEquals(snake.getSegments().get(i).getLocation(), closed.get(i-1).getLocation());
+            assertEquals(snake.getSegments().get(i).getLocation(), closed.get(i - 1).getLocation());
         }
     }
 
@@ -59,7 +60,7 @@ class AstarBrainTest
     {
         //Given
         List<Node> open = new ArrayList<>(List.of(new Node(new Point(12, 5), food),
-                                                  new Node(new Point(15, 5), food)));
+                new Node(new Point(15, 5), food)));
 
         //When
         Node lowestCost = brain.getLowestCostNode(open);

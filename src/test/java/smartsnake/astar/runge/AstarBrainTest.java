@@ -27,9 +27,7 @@ public class AstarBrainTest
         Direction direction = brain.move(snake, food, garden);
 
         //then
-        assertEquals(Direction.Right, direction);
-
-
+        assertEquals(Direction.Down, direction);
     }
 
     @Test

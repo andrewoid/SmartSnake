@@ -29,21 +29,20 @@ public class AstarBrain implements Brain
             openNodes.remove(current);
             closedNodes.add(current);
 
-            if (current.getLocation().equals(food))
-            {
-                return current.getDirectionFromStart();
-            }
-
-            Node up = new Node(new Point(current.getLocation().x, current.getLocation().y + 1), food);
-            Node down = new Node(new Point(current.getLocation().x, current.getLocation().y - 1), food);
+            Node up = new Node(new Point(current.getLocation().x, current.getLocation().y - 1), food);
+            Node down = new Node(new Point(current.getLocation().x, current.getLocation().y + 1), food);
             Node right = new Node(new Point(current.getLocation().x + 1, current.getLocation().y), food);
             Node left = new Node(new Point(current.getLocation().x - 1, current.getLocation().y), food);
-            //Node[] neighborhood = {up, down, right, left};
 
             updateNeighborhood(current, up, Direction.Up, openNodes, closedNodes);
             updateNeighborhood(current, down, Direction.Down, openNodes, closedNodes);
             updateNeighborhood(current, right, Direction.Right, openNodes, closedNodes);
             updateNeighborhood(current, left, Direction.Left, openNodes, closedNodes);
+
+            if (current.getLocation().equals(food))
+            {
+                return current.getDirectionFromStart();
+            }
 
         }
         return null;
@@ -67,13 +66,12 @@ public class AstarBrain implements Brain
         {
             if (!openNodes.contains(neighbor))
             {
-                neighbor.setParent(current, direction);
                 openNodes.add(neighbor);
-            }else
+            } else
             {
-                //openNodes.add(neighbor);
                 openNodes.get(openNodes.indexOf(neighbor)).setParent(current, direction);
             }
+            neighbor.setParent(current, direction);
         }
     }
 }

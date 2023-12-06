@@ -27,15 +27,15 @@ public class AstarBrain implements Brain
             open.remove(current);
             closed.add(current);
 
-            if(current.getLocation() == food.getLocation())
+            if(current.getLocation().equals(food))
             {
                 return current.getDirectionFromStart();
             }
 
-            Node right = new Node(new Point(current.getLocation().x + 1, current.getLocation().y), food.getLocation());
-            Node left = new Node(new Point(current.getLocation().x - 1, current.getLocation().y), food.getLocation());
-            Node up = new Node(new Point(current.getLocation().x, current.getLocation().y - 1), food.getLocation());
-            Node down = new Node(new Point(current.getLocation().x, current.getLocation().y + 1), food.getLocation());
+            Node right = new Node(new Point(current.getLocation().x + 1, current.getLocation().y), food);
+            Node left = new Node(new Point(current.getLocation().x - 1, current.getLocation().y), food);
+            Node up = new Node(new Point(current.getLocation().x, current.getLocation().y - 1), food);
+            Node down = new Node(new Point(current.getLocation().x, current.getLocation().y + 1), food);
 
             List<Node> neighbors = new ArrayList<>(List.of(left, right, up, down));
             List<String> directions = new ArrayList<>(List.of("Left", "Right", "Up", "Down"));
@@ -58,6 +58,8 @@ public class AstarBrain implements Brain
                     }
                 }
             }
+
+            System.out.println(current.getDirectionFromStart());
         }
         return null;
     }

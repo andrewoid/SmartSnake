@@ -33,7 +33,6 @@ public class AstarBrain implements Brain
             Node down = new Node(new Point(current.getLocation().x, current.getLocation().y + 1), food);
             Node right = new Node(new Point(current.getLocation().x + 1, current.getLocation().y), food);
             Node left = new Node(new Point(current.getLocation().x - 1, current.getLocation().y), food);
-
             updateNeighborhood(current, up, Direction.Up, openNodes, closedNodes);
             updateNeighborhood(current, down, Direction.Down, openNodes, closedNodes);
             updateNeighborhood(current, right, Direction.Right, openNodes, closedNodes);

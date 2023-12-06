@@ -1,6 +1,7 @@
-package smartsnake.astar;
+package smartsnake.astar.chambre;
 
 import org.junit.jupiter.api.Test;
+import smartsnake.astar.DistanceFormula;
 
 import java.awt.*;
 

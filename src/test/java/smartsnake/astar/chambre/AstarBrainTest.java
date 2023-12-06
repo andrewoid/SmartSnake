@@ -1,6 +1,5 @@
 package smartsnake.astar.chambre;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import smartsnake.Direction;
 import smartsnake.Food;
@@ -14,22 +13,14 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AstarBrainTest {
-    private AstarBrain brain;
-    private Food food;
-    private Garden garden;
-    private Snake snake;
-
-    @BeforeEach
-    public void setUp() {
-        snake = new Snake();
-        garden = new Garden(30, 50);
-        food = new Food();
-        brain = new AstarBrain();
-    }
 
     @Test
     void move() {
         //given
+        Snake snake = new Snake();
+        Garden garden = new Garden(30, 50);
+        Food food = new Food();
+        AstarBrain brain = new AstarBrain();
 
         //when
         Direction direction = brain.move(snake, food, garden);
@@ -42,6 +33,7 @@ class AstarBrainTest {
     @Test
     void getLowestCost() {
         // given
+        AstarBrain brain = new AstarBrain();
         ArrayList<Node> openNodes = new ArrayList<>();
         openNodes.add(new Node(new Point(9, 4), new Point(20, 10)));
         openNodes.add(new Node(new Point(13, 4), new Point(20, 10)));
@@ -56,8 +48,11 @@ class AstarBrainTest {
     @Test
     void updateDirection() {
         //given
+        Snake snake = new Snake();
+        Garden garden = new Garden(30, 50);
+        AstarBrain brain = new AstarBrain();
         Point point = new Point(5, 5);
-        food = new Food(point);
+        Food food = new Food(point);
         ArrayList<Node> openNodes = new ArrayList<>();
         ArrayList<Node> closedNodes = new ArrayList<>();
         Node current = new Node(new Point(4, 5), food);

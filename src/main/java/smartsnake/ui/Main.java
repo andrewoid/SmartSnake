@@ -1,5 +1,7 @@
 package smartsnake.ui;
 
+import smartsnake.Brain;
+import smartsnake.BrainFactory;
 import smartsnake.Garden;
 import smartsnake.Snake;
 
@@ -11,6 +13,9 @@ public class Main {
         SnakeComponent component = new SnakeComponent(garden);
         SnakeFrame frame = new SnakeFrame(component);
         Snake snake = garden.getSnake();
+        BrainFactory brainFactory = new BrainFactory();
+        Brain brain = brainFactory.newInstance();
+        snake.setBrain(brain);
         KeyListener keyListener = new SnakeKeyAdapter(snake);
         frame.addKeyListener(keyListener);
         frame.setFocusable(true);

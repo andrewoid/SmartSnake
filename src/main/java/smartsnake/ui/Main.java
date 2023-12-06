@@ -4,6 +4,7 @@ import smartsnake.Brain;
 import smartsnake.BrainFactory;
 import smartsnake.Garden;
 import smartsnake.Snake;
+import smartsnake.astar.runge.AstarBrain;
 
 import java.awt.event.KeyListener;
 

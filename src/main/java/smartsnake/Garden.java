@@ -3,11 +3,14 @@ package smartsnake;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.logging.Logger;
 
 /**
  * Garden class that manages objects of Snake and handles the rules of the game.
  */
 public class Garden {
+
+    private static final Logger logger = Logger.getLogger(Garden.class.getName());
 
     private final int width;
     private final int height;
@@ -68,11 +71,8 @@ public class Garden {
     public boolean tick() {
         tickCounter++;
 
-        Brain brain = snake.getBrain();
-        Direction newDirection = brain.move(snake, food, this);
-        snake.setDirection(newDirection);
-
         if (snake.starved()) {
+<<<<<<< HEAD
             System.out.println("starved");
             return false;
         } else if (snake.intersectsItself()) {
@@ -83,15 +83,30 @@ public class Garden {
                 || snake.getHeadLocation().x == -1
                 || snake.getHeadLocation().y == -1) {
             System.out.println("hit wall");
+=======
+            logger.info("snake starved");
+            return false;
+        } else if (snake.intersectsItself()) {
+            logger.info("snake intersects self");
+            return false;
+        } else if (!contains(snake.getHeadLocation())) {
+            logger.info("snake intersects garden wall");
+>>>>>>> 1363824d02e27d75781ab095722bfe58ce074d14
             return false;
         } else {
-            if (snake.intersectsHead(food)) {
-                snake.tick(true);
+            boolean shouldGrow = snake.intersectsHead(food);
+
+            if (shouldGrow) {
                 createFood();
-            } else {
-                snake.tick(false);
             }
+
+            Brain brain = snake.getBrain();
+            Direction newDirection = brain.move(snake, food, this);
+            snake.setDirection(newDirection);
+
+            snake.tick(shouldGrow);
         }
+
         return true;
     }
 
@@ -109,5 +124,15 @@ public class Garden {
 
     public int getHeight() {
         return height;
+    }
+
+    /**
+     * @return true if the Point is inside the Garden, otherwise false.
+     */
+    public boolean contains(Point location) {
+        return location.x >= 0
+                && location.y >= 0
+                && location.x < width
+                && location.y < height;
     }
 }

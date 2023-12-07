@@ -23,7 +23,7 @@ public class AstarBrain implements Brain {
             closeNodes.add(node);
         }
 
-        while(true) {
+        while (true) {
             Node current = openNodes.get(0);
 
             for (Node node : openNodes) {
@@ -50,12 +50,12 @@ public class AstarBrain implements Brain {
             neighbors.add(right);
             neighbors.add(left);
 
-            for (int i = 0; i<neighbors.size(); i++) {
-                if(closeNodes.contains(neighbors.get(i))){
+            for (int i = 0; i < neighbors.size(); i++) {
+                if (closeNodes.contains(neighbors.get(i))) {
                     continue;
-                }else{
+                } else {
                     Direction direction = null;
-                    switch(i) {
+                    switch (i) {
                         case 0:
                             direction = Direction.Up;
                             break;
@@ -71,7 +71,7 @@ public class AstarBrain implements Brain {
                         default:
                             continue;
                     }
-                    if(!openNodes.contains(neighbors.get(i)))
+                    if (!openNodes.contains(neighbors.get(i)))
                     {
                         openNodes.add(neighbors.get(i));
                         neighbors.get(i).setParent(current, direction);

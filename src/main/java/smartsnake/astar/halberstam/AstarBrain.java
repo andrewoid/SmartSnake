@@ -17,7 +17,7 @@ public class AstarBrain implements Brain {
         openNodes.add(start);
 
         //start at 1 so I skip the head
-        for(int i=1; i<snake.getSegments().size(); i++)
+        for (int i = 1; i < snake.getSegments().size(); i++)
         {
             Node node = new Node(snake.getSegments().get(1), food);
             closeNodes.add(node);
@@ -71,10 +71,11 @@ public class AstarBrain implements Brain {
                         default:
                             continue;
                     }
-                    if(!openNodes.contains(neighbors.get(i))){
+                    if(!openNodes.contains(neighbors.get(i)))
+                    {
                         openNodes.add(neighbors.get(i));
                         neighbors.get(i).setParent(current, direction);
-                    }else{
+                    } else {
                         openNodes.get(openNodes.indexOf(neighbors.get(i))).setParent(current, direction);
                     }
                 }

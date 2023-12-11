@@ -1,8 +1,15 @@
 package smartsnake.neuralnetwork.kenigsberg;
 
+import basicneuralnetwork.NeuralNetwork;
 import smartsnake.*;
+import smartsnake.neuralnetwork.NeuralNetworkDataFactory;
+
+import java.io.IOException;
 
 public class NeuralNetworkBrain implements Brain {
+
+    private NeuralNetwork neuralNetwork;
+    private NeuralNetworkDataFactory dataFactory = new NeuralNetworkDataFactory();
 
     /**
      * 1. Load your NN
@@ -11,8 +18,14 @@ public class NeuralNetworkBrain implements Brain {
      *  *** 3 lines of code!! ***
      */
 
+    public NeuralNetworkBrain() throws IOException {
+        neuralNetwork = NeuralNetwork.readFromFile();
+    }
+
     @Override
     public Direction move(Snake snake, Food food, Garden garden) {
-        return null;
+
+        double[] directions = neuralNetwork.guess(new double[]{neuralNetwork.getInputNodes()});
+        return dataFactory.toDirection(directions);
     }
 }

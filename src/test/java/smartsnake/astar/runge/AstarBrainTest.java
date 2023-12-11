@@ -13,6 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
 public class AstarBrainTest
@@ -21,15 +22,17 @@ public class AstarBrainTest
     public void move() {
         //given
         Garden garden = mock();
-        Snake snake = new Snake();
+        Snake snake = mock();
         Food food = new Food(15, 5);
         AstarBrain brain = new AstarBrain();
+        Point snakePosition = new Point(10,10);
+        doReturn(snakePosition).when(snake).getHeadLocation();
 
         //when
         Direction direction = brain.move(snake, food, garden);
 
         //then
-        assertNotNull(direction);
+        assertEquals(direction, Direction.Up);
     }
 
     @Test

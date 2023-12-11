@@ -12,15 +12,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 public class AstarBrainTest
 {
     @Test
     public void move() {
         //given
-        Garden garden = new Garden(20, 15);
-        Snake snake = new Snake();
-        Food food = new Food(new Point(10, 10));
+        Garden garden = mock();
+        Snake snake = mock();
+        Food food = mock();
         AstarBrain brain = new AstarBrain();
 
         //when

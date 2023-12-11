@@ -9,46 +9,29 @@ import smartsnake.astar.Node;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
 class AstarBrainTest {
-    private final Garden garden = mock();
-    private final Food food = mock();
-    private final Snake snake = mock();
-    private final Point point = new Point(15, 15);
-    List<Point> segments = new ArrayList<>(List.of(
-            new Point(16, 15),
-            new Point(17, 15),
-            new Point(18, 15)
-    ));
 
     @Test
     void move() {
         // Given
-        //set up the mock snake with a head and segments
-        doReturn(point).when(snake).getHeadLocation();
-        doReturn(segments).when(snake).getSegments();
-
-        //this line of code needs to be mocked
-        //Garden garden = new Garden(30, 50);
-
-        doReturn(food).when(garden).getFood();
-        doReturn(snake).when(garden).getSnake();
-        doReturn(30).when(garden).getWidth();
-        doReturn(50).when(garden).getHeight();
-
+        Garden garden = new Garden(30, 40);
+        Snake snake = mock();
+        Food food = new Food(15, 5);
         AstarBrain brain = new AstarBrain();
+        Point point = new Point(10, 10);
+        doReturn(point).when(snake).getHeadLocation();
 
 
         //When
         Direction direction = brain.move(snake, food, garden);
 
         // Then
-        assertEquals(Direction.Up, direction);
+        assertEquals(direction, Direction.Up);
     }
 
     @Test
@@ -69,13 +52,18 @@ class AstarBrainTest {
     @Test
     void updateDirection() {
         //given
+        Point point = new Point(4, 5);
+        Snake snake = mock();
+        Garden garden = mock();
         doReturn(point).when(snake).getHeadLocation();
-        Garden garden = new Garden(30, 50);
-        AstarBrain brain = new AstarBrain();
-        Food food = mock();
+        Food food = new Food(5, 15);
+
         ArrayList<Node> openNodes = new ArrayList<>();
         ArrayList<Node> closedNodes = new ArrayList<>();
         Node current = new Node(new Point(4, 5), food);
+        openNodes.add(current);
+
+        AstarBrain brain = new AstarBrain();
 
         //when
         brain.updateDirection(point, Direction.Up, food, openNodes, closedNodes, snake, current, garden);

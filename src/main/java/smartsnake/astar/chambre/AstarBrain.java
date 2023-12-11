@@ -11,9 +11,9 @@ public class AstarBrain implements Brain {
     @Override
     public Direction move(Snake snake, Food food, Garden garden) {
 
-        Node pointA = new Node(snake.getHeadLocation(), food);
         List<Node> open = new ArrayList<>();
         List<Node> closed = new ArrayList<>();
+        Node pointA = new Node(snake.getHeadLocation(), food);
         open.add(pointA);
 
         while (true) {

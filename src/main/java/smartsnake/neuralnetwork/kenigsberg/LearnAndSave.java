@@ -31,7 +31,8 @@ public class LearnAndSave {
         {
             Garden garden = new Garden(20, 15);
             Snake snake = garden.getSnake();
-            NeuralNetworkBrain brain = new NeuralNetworkBrain();
+            BrainFactory brainFactory = new BrainFactory();
+            Brain brain = brainFactory.newInstance();
             snake.setBrain(brain);
 
             while (garden.tick())

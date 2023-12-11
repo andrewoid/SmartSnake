@@ -25,7 +25,7 @@ public class AstarBrainTest
         Snake snake = mock();
         Food food = new Food(15, 5);
         AstarBrain brain = new AstarBrain();
-        Point snakePosition = new Point(10,10);
+        Point snakePosition = new Point(10,  10);
         doReturn(snakePosition).when(snake).getHeadLocation();
 
         //when

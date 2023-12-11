@@ -11,6 +11,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 class AstarBrainTest {
 
@@ -19,7 +20,7 @@ class AstarBrainTest {
         //given
         Snake snake = new Snake();
         Garden garden = new Garden(30, 50);
-        Food food = new Food();
+        Food food = mock();
         AstarBrain brain = new AstarBrain();
 
         //when
@@ -52,7 +53,7 @@ class AstarBrainTest {
         Garden garden = new Garden(30, 50);
         AstarBrain brain = new AstarBrain();
         Point point = new Point(5, 5);
-        Food food = new Food(point);
+        Food food = mock();
         ArrayList<Node> openNodes = new ArrayList<>();
         ArrayList<Node> closedNodes = new ArrayList<>();
         Node current = new Node(new Point(4, 5), food);

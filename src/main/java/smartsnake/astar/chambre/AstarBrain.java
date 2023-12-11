@@ -7,7 +7,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class AstarBrain implements Brain {
     @Override
     public Direction move(Snake snake, Food food, Garden garden) {
@@ -50,7 +49,7 @@ public class AstarBrain implements Brain {
                                 Garden garden) {
 
         Node directionNode = new Node(point, food);
-        if (validate(directionNode, garden.getWidth(), garden.getHeight())) {
+        if (garden.contains(directionNode.getLocation())) {
             if (open.contains(directionNode)) {
                 directionNode = open.get(open.indexOf(directionNode));
             }

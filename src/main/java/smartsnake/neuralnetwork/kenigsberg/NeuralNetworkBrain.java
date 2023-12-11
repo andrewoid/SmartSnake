@@ -25,7 +25,7 @@ public class NeuralNetworkBrain implements Brain {
     @Override
     public Direction move(Snake snake, Food food, Garden garden) {
 
-        double[] directions = neuralNetwork.guess(new double[]{neuralNetwork.getInputNodes()});
+        double[] directions = neuralNetwork.guess(dataFactory.toInput(garden));
         return dataFactory.toDirection(directions);
     }
 }

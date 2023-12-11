@@ -17,7 +17,6 @@ public class AstarBrain implements Brain {
         open.add(pointA);
 
         while (true) {
-
             Node current = getLowestCost(open);
             open.remove(current);
             closed.add(current);
@@ -64,8 +63,7 @@ public class AstarBrain implements Brain {
     }
 
     public Node getLowestCost(List<Node> open) {
-        int lowestCostIndex = 0;
-        Node lowestCost = open.get(lowestCostIndex);
+        Node lowestCost = open.get(0);
 
         for (Node point : open) {
             if (point.getCost() < lowestCost.getCost()) {

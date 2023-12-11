@@ -5,6 +5,7 @@ import smartsnake.Brain;
 import smartsnake.BrainFactory;
 import smartsnake.Garden;
 import smartsnake.Snake;
+import smartsnake.astar.kenigsberg.AstarBrain;
 import smartsnake.neuralnetwork.NeuralNetworkDataFactory;
 
 import java.io.IOException;
@@ -27,18 +28,17 @@ public class LearnAndSave {
         // Neural network with 5 inputs, 256 hidden nodes and 4 output
         NeuralNetwork neuralNetwork = new NeuralNetwork(5, 256, 4);
 
+        NeuralNetworkDataFactory networkDataFactory = new NeuralNetworkDataFactory();
+
         for (int i = 0; i < 50_000; i++)
         {
             Garden garden = new Garden(20, 15);
             Snake snake = garden.getSnake();
-            BrainFactory brainFactory = new BrainFactory();
-            Brain brain = brainFactory.newInstance();
+            AstarBrain brain = new AstarBrain();
             snake.setBrain(brain);
 
             while (garden.tick())
             {
-                NeuralNetworkDataFactory networkDataFactory = new NeuralNetworkDataFactory();
-
                 neuralNetwork.train(networkDataFactory.toInput(garden),
                         networkDataFactory.toOutput(snake.getDirection()));
             }

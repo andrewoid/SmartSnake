@@ -63,13 +63,6 @@ public class AstarBrain implements Brain {
         }
     }
 
-    private boolean validate(Node node, int width, int height) {
-        return node.getLocation().x != width
-                && node.getLocation().y != height
-                && node.getLocation().x != -1
-                && node.getLocation().y != -1;
-    }
-
     public Node getLowestCost(List<Node> open) {
         int lowestCostIndex = 0;
         Node lowestCost = open.get(lowestCostIndex);

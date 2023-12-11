@@ -74,11 +74,9 @@ public class AstarBrain implements Brain {
         int lowestCostIndex = 0;
         Node lowestCost = open.get(lowestCostIndex);
 
-        for (int i = 0; i < open.size(); i++) {
-            Node point = open.get(i);
+        for (Node point : open) {
             if (point.getCost() < lowestCost.getCost()) {
-                lowestCostIndex = i;
-                lowestCost = open.get(lowestCostIndex);
+                lowestCost = point;
             }
         }
         return lowestCost;

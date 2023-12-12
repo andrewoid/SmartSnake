@@ -71,12 +71,14 @@ public class AstarBrain implements Brain {
                         default:
                             continue;
                     }
-                    if (!openNodes.contains(neighbors.get(i)))
+
+                    Node neighbor = neighbors.get(i);
+                    if (!openNodes.contains(neighbor))
                     {
-                        openNodes.add(neighbors.get(i));
-                        neighbors.get(i).setParent(current, direction);
+                        openNodes.add(neighbor);
+                        neighbor.setParent(current, direction);
                     } else {
-                        openNodes.get(openNodes.indexOf(neighbors.get(i))).setParent(current, direction);
+                        openNodes.get(openNodes.indexOf(neighbor)).setParent(current, direction);
                     }
                 }
 

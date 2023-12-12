@@ -25,21 +25,16 @@ public class LearnAndSave
             snake.setBrain(brain);
 
             //while snake can move
-            while (true)
+            do
             {
-
                 //for every move, train the NN with the state of the garden,
                 //and the move that your AstarBrain decides to make
                 neuralNetwork.train(neuralNetworkDataFactory.toInput(garden),
                         neuralNetworkDataFactory.toOutput(snake.getDirection()));
-                if (!garden.tick())
-                {
-                    break;
-                }
-                //save the NN, found in NN class
-                //neuralNetwork.writeToFile();
-                neuralNetwork.writeToFile();
-            }
+            } while (garden.tick());
         }
+        //save the NN, found in NN class
+        //neuralNetwork.writeToFile();
+        neuralNetwork.writeToFile();
     }
 }

@@ -14,6 +14,8 @@ public class NeuralNetworkBrain implements Brain
     // call guess() on the NN and then
     // return the result as a Direction
     private final NeuralNetwork neuralNetwork;
+    private final NeuralNetworkDataFactory neuralNetworkDataFactory = new NeuralNetworkDataFactory();
+
 
     public NeuralNetworkBrain() throws IOException {
         neuralNetwork = NeuralNetwork.readFromFile();
@@ -21,7 +23,6 @@ public class NeuralNetworkBrain implements Brain
 
     @Override
     public Direction move(Snake snake, Food food, Garden garden) {
-        NeuralNetworkDataFactory neuralNetworkDataFactory = new NeuralNetworkDataFactory();
         double[] directions = neuralNetwork.guess(neuralNetworkDataFactory.toInput(garden));
         return neuralNetworkDataFactory.toDirection(directions);
     }

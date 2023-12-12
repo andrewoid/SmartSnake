@@ -54,10 +54,7 @@ public class AstarBrain implements Brain {
 
             for (int i = 0; i < neighbors.size(); i++) {
                 Node neighbor = neighbors.get(i);
-                if (!garden.contains(neighbor.getLocation())) {
-                    continue;
-                }
-                if (closeNodes.contains(neighbor)) {
+                if (closeNodes.contains(neighbor) || garden.contains(neighbor.getLocation())) {
                     continue;
                 } else {
                     Direction direction = null;

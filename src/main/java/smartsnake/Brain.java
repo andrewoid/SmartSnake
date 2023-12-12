@@ -7,6 +7,6 @@ import java.io.IOException;
  */
 public interface Brain {
 
-    Direction move(Snake snake, Food food, Garden garden) throws IOException;
+    Direction move(Snake snake, Food food, Garden garden);
 
 }

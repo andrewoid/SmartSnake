@@ -90,11 +90,9 @@ public class Garden {
 
             Brain brain = snake.getBrain();
             Direction newDirection = null;
-            try {
-                newDirection = brain.move(snake, food, this);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+
+            newDirection = brain.move(snake, food, this);
+
             snake.setDirection(newDirection);
 
             snake.tick(shouldGrow);

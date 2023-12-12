@@ -20,21 +20,23 @@ public class LearnAndSave {
         for (int i = 0; i < 50_000; i++) {
             //For every move, train the NN with the state of the Garden and the move that your AStarBrain decides to make.
             AstarBrain astarBrain = new AstarBrain();
-            Garden garden = new Garden(30, 40);
+            Garden garden = new Garden(20, 15);
             Snake snake = garden.getSnake();
             snake.setBrain(astarBrain);
 
-            neuralNetworkDataFactory.toInput(garden);
-            neuralNetworkDataFactory.toOutput(snake.getDirection());
-
-            while (garden.tick()) {
+            while (true) {
                 //train method needs two arrays
+                double[] gardenInput = neuralNetworkDataFactory.toInput(garden);
+                //call tick before training to save the state of the garden
+                boolean gardenTick = garden.tick();
                 neuralNetwork.train(
-                        neuralNetworkDataFactory.toInput(garden),
+                        gardenInput,
                         neuralNetworkDataFactory.toOutput(snake.getDirection()));
+                if (!gardenTick) {
+                    break;
+                }
             }
         }
-        //
         //     Save the NN
         neuralNetwork.writeToFile();
     }

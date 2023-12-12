@@ -16,7 +16,7 @@ public class AstarBrain implements Brain {
         Node pointA = new Node(snake.getHeadLocation(), food);
         open.add(pointA);
 
-        while (true) {
+        while (!open.isEmpty()) {
             Node current = getLowestCost(open);
             open.remove(current);
             closed.add(current);
@@ -36,6 +36,7 @@ public class AstarBrain implements Brain {
             Point rightPoint = new Point(location.x + 1, location.y);
             updateDirection(rightPoint, Direction.Right, food, open, closed, snake, current, garden);
         }
+        return null;
     }
 
     public void updateDirection(Point point,

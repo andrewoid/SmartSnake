@@ -24,6 +24,9 @@ public class LearnAndSave {
             Snake snake = garden.getSnake();
             snake.setBrain(astarBrain);
 
+            neuralNetworkDataFactory.toInput(garden);
+            neuralNetworkDataFactory.toOutput(snake.getDirection());
+
             while (garden.tick()) {
                 //train method needs two arrays
                 neuralNetwork.train(

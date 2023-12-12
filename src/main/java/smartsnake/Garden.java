@@ -1,7 +1,6 @@
 package smartsnake;
 
 import java.awt.*;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -89,10 +88,7 @@ public class Garden {
             }
 
             Brain brain = snake.getBrain();
-            Direction newDirection = null;
-
-            newDirection = brain.move(snake, food, this);
-
+            Direction newDirection = brain.move(snake, food, this);
             snake.setDirection(newDirection);
 
             snake.tick(shouldGrow);

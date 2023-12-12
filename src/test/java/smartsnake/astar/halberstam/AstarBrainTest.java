@@ -19,7 +19,7 @@ class AstarBrainTest {
     void move() {
         //given
         Snake snake = mock();
-        doReturn(new Point(10,5)).when(snake).getHeadLocation();
+        doReturn(new Point(10, 5)).when(snake).getHeadLocation();
 
         ArrayList<Point> segments = new ArrayList<>();
         segments.add(new Point(10, 5));

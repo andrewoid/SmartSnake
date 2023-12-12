@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 /**
  * Garden class that manages objects of Snake and handles the rules of the game.
  */
-public class Garden{
+public class Garden {
 
     private static final Logger logger = Logger.getLogger(Garden.class.getName());
 

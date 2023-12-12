@@ -23,5 +23,6 @@ public class NeuralNetworkBrain implements Brain
     public Direction move(Snake snake, Food food, Garden garden) {
         NeuralNetworkDataFactory neuralNetworkDataFactory = new NeuralNetworkDataFactory();
         double[] directions = neuralNetwork.guess(neuralNetworkDataFactory.toInput(garden));
-        return neuralNetworkDataFactory.toDirection(directions);    }
+        return neuralNetworkDataFactory.toDirection(directions);
+    }
 }

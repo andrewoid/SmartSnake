@@ -47,11 +47,9 @@ class GardenTest {
         Point point = new Point(15, 15);
         Brain brain = mock();
         doReturn(brain).when(snake).getBrain();
-        try {
-            doReturn(Direction.Up).when(brain).move(any(), any(), any());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+
+        doReturn(Direction.Up).when(brain).move(any(), any(), any());
+
         doReturn(point).when(snake).getHeadLocation();
         Garden garden = new Garden(40, 30, snake);
 

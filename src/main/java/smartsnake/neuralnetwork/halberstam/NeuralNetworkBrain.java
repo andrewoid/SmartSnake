@@ -11,9 +11,13 @@ public class NeuralNetworkBrain implements Brain {
     NeuralNetworkDataFactory dataFactory = new NeuralNetworkDataFactory();
 
     @Override
-    public Direction move(Snake snake, Food food, Garden garden) throws IOException {
+    public Direction move(Snake snake, Food food, Garden garden){
 
-        neuralNetwork = NeuralNetwork.readFromFile();
+        try {
+            neuralNetwork = NeuralNetwork.readFromFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         double[] directions = neuralNetwork.guess(dataFactory.toInput(garden));
         return dataFactory.toDirection(directions);
     }

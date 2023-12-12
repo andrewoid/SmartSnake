@@ -29,19 +29,32 @@ public class AstarBrain implements Brain
             openNodes.remove(current);
             closedNodes.add(current);
 
-            Node up = new Node(new Point(current.getLocation().x, current.getLocation().y - 1), food);
-            updateNeighborhood(current, up, Direction.Up, openNodes, closedNodes);
+            Point point = current.getLocation();
+            if(garden.contains(point))
+            {
+                Node up = new Node(new Point(point.x, point.y - 1), food);
+                updateNeighborhood(current, up, Direction.Up, openNodes, closedNodes);
+            }
 
-            Node down = new Node(new Point(current.getLocation().x, current.getLocation().y + 1), food);
-            updateNeighborhood(current, down, Direction.Down, openNodes, closedNodes);
+            if(garden.contains(point))
+            {
+                Node down = new Node(new Point(point.x, point.y + 1), food);
+                updateNeighborhood(current, down, Direction.Down, openNodes, closedNodes);
+            }
 
-            Node right = new Node(new Point(current.getLocation().x + 1, current.getLocation().y), food);
-            updateNeighborhood(current, right, Direction.Right, openNodes, closedNodes);
+            if(garden.contains(point))
+            {
+                Node right = new Node(new Point(point.x + 1, point.y), food);
+                updateNeighborhood(current, right, Direction.Right, openNodes, closedNodes);
+            }
 
-            Node left = new Node(new Point(current.getLocation().x - 1, current.getLocation().y), food);
-            updateNeighborhood(current, left, Direction.Left, openNodes, closedNodes);
+            if(garden.contains(point))
+            {
+                Node left = new Node(new Point(point.x - 1, point.y), food);
+                updateNeighborhood(current, left, Direction.Left, openNodes, closedNodes);
+            }
 
-            if (current.getLocation().equals(food))
+            if (point.equals(food))
             {
                 return current.getDirectionFromStart();
             }

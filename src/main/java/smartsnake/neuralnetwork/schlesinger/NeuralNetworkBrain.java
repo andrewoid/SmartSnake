@@ -3,17 +3,23 @@ package smartsnake.neuralnetwork.schlesinger;
 
 import basicneuralnetwork.NeuralNetwork;
 import smartsnake.*;
+import smartsnake.neuralnetwork.NeuralNetworkDataFactory;
 
 import java.io.IOException;
 
 public class NeuralNetworkBrain implements Brain {
-    public NeuralNetworkBrain() throws IOException {
-        NeuralNetwork nn = NeuralNetwork.readFromFile();
-    }
+    NeuralNetworkDataFactory dataFactory = new NeuralNetworkDataFactory();
 
     @Override
     public Direction move(Snake snake, Food food, Garden garden) {
-        return null;
+        NeuralNetwork nn = null;
+        try {
+            nn = NeuralNetwork.readFromFile("nn_data.json");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        double[] gardenArray = nn.guess(dataFactory.toInput(garden));
+        return dataFactory.toDirection(gardenArray);
     }
 
 

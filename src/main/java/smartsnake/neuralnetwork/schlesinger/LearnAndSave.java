@@ -15,17 +15,16 @@ public class LearnAndSave {
 
     public static void main(String[] args) throws IOException {
 
-        //NeuralNetworkBrain nnbrain = new NeuralNetworkBrain();
         NeuralNetwork nn = new NeuralNetwork(5, 256, 4);
         NeuralNetworkDataFactory dataFactory = new NeuralNetworkDataFactory();
         AstarBrain brain = new AstarBrain();
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 50000; i++) {
             Garden garden = new Garden(20, 15);
             while (garden.tick()) {
-                Direction direction = brain.move(garden.getSnake(), garden.getFood(), garden);
+                //Direction direction = brain.move(garden.getSnake(), garden.getFood(), garden);
                 double[] gardenArray = dataFactory.toInput(garden);
-                double[] directionArray = dataFactory.toOutput(direction);
+                double[] directionArray = dataFactory.toOutput(garden.getSnake().getDirection());
                 nn.train(gardenArray, directionArray);
             }
         }

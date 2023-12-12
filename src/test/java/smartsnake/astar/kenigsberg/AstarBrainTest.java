@@ -40,9 +40,10 @@ class AstarBrainTest {
         ArrayList<Node> closedNodes = new ArrayList<>();
         Food food = new Food(new Point(18, 5));
         AstarBrain brain = new AstarBrain();
+        Garden garden = new Garden(20, 15);
 
         // when
-        brain.updateNeighbors(current, point, Direction.Right, openNodes, closedNodes, food);
+        brain.updateNeighbors(current, point, Direction.Right, openNodes, closedNodes, food, garden);
 
         // then
         assertEquals(current, openNodes.get(openNodes.size() - 1).getParent());

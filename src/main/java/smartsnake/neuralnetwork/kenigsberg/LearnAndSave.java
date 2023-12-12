@@ -37,10 +37,12 @@ public class LearnAndSave {
             AstarBrain brain = new AstarBrain();
             snake.setBrain(brain);
 
-            while (garden.tick())
-            {
-                neuralNetwork.train(networkDataFactory.toInput(garden),
-                        networkDataFactory.toOutput(snake.getDirection()));
+            // 3 things happen in this loop:
+            // call toInput, call tick, train
+            while (!snake.intersects(garden.getFood())) {
+                double[] input = networkDataFactory.toInput(garden);
+                garden.tick();
+                neuralNetwork.train(input, networkDataFactory.toOutput(snake.getDirection()));
             }
         }
         neuralNetwork.writeToFile();

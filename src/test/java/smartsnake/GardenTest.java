@@ -3,6 +3,7 @@ package smartsnake;
 import org.junit.jupiter.api.Test;
 
 import java.awt.Point;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -46,7 +47,11 @@ class GardenTest {
         Point point = new Point(15, 15);
         Brain brain = mock();
         doReturn(brain).when(snake).getBrain();
-        doReturn(Direction.Up).when(brain).move(any(), any(), any());
+        try {
+            doReturn(Direction.Up).when(brain).move(any(), any(), any());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         doReturn(point).when(snake).getHeadLocation();
         Garden garden = new Garden(40, 30, snake);
 

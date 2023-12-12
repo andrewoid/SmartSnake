@@ -1,6 +1,7 @@
 package smartsnake;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Logger;
@@ -8,7 +9,7 @@ import java.util.logging.Logger;
 /**
  * Garden class that manages objects of Snake and handles the rules of the game.
  */
-public class Garden {
+public class Garden{
 
     private static final Logger logger = Logger.getLogger(Garden.class.getName());
 
@@ -88,7 +89,12 @@ public class Garden {
             }
 
             Brain brain = snake.getBrain();
-            Direction newDirection = brain.move(snake, food, this);
+            Direction newDirection = null;
+            try {
+                newDirection = brain.move(snake, food, this);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
             snake.setDirection(newDirection);
 
             snake.tick(shouldGrow);

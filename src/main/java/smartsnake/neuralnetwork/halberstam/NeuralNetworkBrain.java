@@ -11,7 +11,7 @@ public class NeuralNetworkBrain implements Brain {
     NeuralNetworkDataFactory dataFactory = new NeuralNetworkDataFactory();
 
     @Override
-    public Direction move(Snake snake, Food food, Garden garden){
+    public Direction move(Snake snake, Food food, Garden garden) {
 
         try {
             neuralNetwork = NeuralNetwork.readFromFile();

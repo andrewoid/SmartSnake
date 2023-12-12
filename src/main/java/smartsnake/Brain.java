@@ -1,6 +1,5 @@
 package smartsnake;
 
-import java.io.IOException;
 
 /**
  * An interface that decides which Direction the Snake should move in based on the Snake, Garden and Food.

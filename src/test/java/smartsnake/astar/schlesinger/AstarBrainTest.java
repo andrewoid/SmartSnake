@@ -7,9 +7,11 @@ import smartsnake.Food;
 import smartsnake.Garden;
 import smartsnake.Snake;
 
+import java.awt.*;
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 class AstarBrainTest {
 
@@ -18,14 +20,20 @@ class AstarBrainTest {
         //given
         Snake snake = mock();
         Garden garden = mock();
-        Food food = mock();
+        Food food = new Food(10, 6);
         AstarBrain brain = new AstarBrain();
+        doReturn(new Point(10, 5)).when(snake).getHeadLocation();
+        ArrayList<Point> snakeSegments = new ArrayList<>();
+        snakeSegments.add(new Point(10,5));
+        snakeSegments.add(new Point(10, 4));
+        snakeSegments.add(new Point(10, 3));
+        doReturn(snakeSegments).when(snake).getSegments();
 
         //when
         Direction direction = brain.move(snake, food, garden);
 
         //then
-        Mockito.doReturn(Direction.values()).when(direction);
+        assertEquals(Direction.Down, direction);
 
     }
 

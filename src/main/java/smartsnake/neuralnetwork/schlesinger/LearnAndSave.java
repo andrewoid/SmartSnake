@@ -22,9 +22,9 @@ public class LearnAndSave {
         for (int i = 0; i < 50000; i++) {
             Garden garden = new Garden(20, 15);
             while (garden.tick()) {
-                //Direction direction = brain.move(garden.getSnake(), garden.getFood(), garden);
+                Direction direction = brain.move(garden.getSnake(), garden.getFood(), garden);
                 double[] gardenArray = dataFactory.toInput(garden);
-                double[] directionArray = dataFactory.toOutput(garden.getSnake().getDirection());
+                double[] directionArray = dataFactory.toOutput(direction);
                 nn.train(gardenArray, directionArray);
             }
         }

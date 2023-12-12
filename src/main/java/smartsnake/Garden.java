@@ -1,6 +1,6 @@
 package smartsnake;
 
-import java.awt.Point;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Logger;

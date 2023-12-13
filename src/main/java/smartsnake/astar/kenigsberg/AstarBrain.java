@@ -33,22 +33,22 @@ public class AstarBrain implements Brain {
             }
 
             updateNeighbors(current, new Point(currentLocation.x + 1, currentLocation.y),
-                    Direction.Right, openNodes, closedNodes, food);
+                    Direction.Right, openNodes, closedNodes, food, garden);
             updateNeighbors(current, new Point(currentLocation.x, currentLocation.y - 1),
-                    Direction.Up, openNodes, closedNodes, food);
+                    Direction.Up, openNodes, closedNodes, food, garden);
             updateNeighbors(current, new Point(current.getLocation().x - 1, current.getLocation().y),
-                    Direction.Left, openNodes, closedNodes, food);
+                    Direction.Left, openNodes, closedNodes, food, garden);
             updateNeighbors(current, new Point(currentLocation.x, currentLocation.y + 1),
-                    Direction.Down, openNodes, closedNodes, food);
+                    Direction.Down, openNodes, closedNodes, food, garden);
         }
         return null;
     }
 
     public void updateNeighbors(Node current, Point point, Direction direction,
-                                ArrayList<Node> openNodes, ArrayList<Node> closedNodes, Food food) {
+                                ArrayList<Node> openNodes, ArrayList<Node> closedNodes, Food food, Garden garden) {
 
         Node directionNode = new Node(point, food);
-        if (!closedNodes.contains(directionNode)) {
+        if (!closedNodes.contains(directionNode) && garden.contains(point)) {
             int index = openNodes.indexOf(directionNode);
             if (index == -1) {
                 openNodes.add(directionNode);

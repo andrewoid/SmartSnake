@@ -25,7 +25,7 @@ public class AstarBrainTest
         Snake snake = mock();
         Food food = new Food(15, 5);
         AstarBrain brain = new AstarBrain();
-        Point snakePosition = new Point(10,  10);
+        Point snakePosition = new Point(10, 10);
         doReturn(snakePosition).when(snake).getHeadLocation();
 
         //when
@@ -66,7 +66,8 @@ public class AstarBrainTest
         Garden garden = new Garden(20, 20);
 
         //when
-        brain.updateNeighborhood(current, new Node(new Point(15, 5), food), Direction.Up, openNodes, closedNodes, garden);
+        brain.updateNeighborhood(current, new Node(new Point(15, 5), food),
+                Direction.Up, openNodes, closedNodes, garden);
 
         //then
         assertEquals(current, openNodes.get(openNodes.size() - 1).getParent());

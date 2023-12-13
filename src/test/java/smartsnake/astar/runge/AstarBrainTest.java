@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 
 public class AstarBrainTest
 {
@@ -19,15 +22,17 @@ public class AstarBrainTest
     public void move() {
         //given
         Garden garden = new Garden(20, 15);
-        Snake snake = new Snake();
-        Food food = new Food(new Point(10, 10));
+        Snake snake = mock();
+        Food food = new Food(15, 5);
         AstarBrain brain = new AstarBrain();
+        Point snakePosition = new Point(10, 10);
+        doReturn(snakePosition).when(snake).getHeadLocation();
 
         //when
         Direction direction = brain.move(snake, food, garden);
 
         //then
-        assertEquals(Direction.Down, direction);
+        assertEquals(direction, Direction.Up);
     }
 
     @Test
@@ -51,16 +56,18 @@ public class AstarBrainTest
         //given
         AstarBrain brain = new AstarBrain();
         Food food = new Food(new Point(20, 5));
-        Node current = new Node(new Point(14, 5), food);
+        Node current = new Node(new Point(10, 10), food);
         List<Node> openNodes = new ArrayList<>();
         List<Node> closedNodes = new ArrayList<>();
-        Node node1 = new Node(new Point(10, 5), food);
-        Node node2 = new Node(new Point(11, 5), food);
+        Node node1 = mock();
+        Node node2 = mock();
         openNodes.add(node1);
         openNodes.add(node2);
+        Garden garden = new Garden(20, 20);
 
         //when
-        brain.updateNeighborhood(current, new Node(new Point(15, 5), food), Direction.Up, openNodes, closedNodes);
+        brain.updateNeighborhood(current, new Node(new Point(15, 5), food),
+                Direction.Up, openNodes, closedNodes, garden);
 
         //then
         assertEquals(current, openNodes.get(openNodes.size() - 1).getParent());

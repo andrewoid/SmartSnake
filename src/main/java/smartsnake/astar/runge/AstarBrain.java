@@ -71,7 +71,8 @@ public class AstarBrain implements Brain
                                    List<Node> openNodes,
                                    List<Node> closedNodes,
                                    Garden garden) {
-        if (!closedNodes.contains(neighbor) || !garden.contains(current.getLocation()))
+
+        if (!closedNodes.contains(neighbor) && (garden.contains(current.getLocation())))
         {
             if (!openNodes.contains(neighbor))
             {
@@ -82,6 +83,5 @@ public class AstarBrain implements Brain
                 openNodes.get(openNodes.indexOf(neighbor)).setParent(current, direction);
             }
         }
-
     }
 }

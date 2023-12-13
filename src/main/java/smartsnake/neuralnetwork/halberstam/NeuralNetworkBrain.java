@@ -9,6 +9,7 @@ import java.io.IOException;
 public class NeuralNetworkBrain implements Brain {
     NeuralNetwork neuralNetwork;
     NeuralNetworkDataFactory dataFactory = new NeuralNetworkDataFactory();
+
     public NeuralNetworkBrain() {
         try {
             neuralNetwork = NeuralNetwork.readFromFile();
@@ -18,6 +19,7 @@ public class NeuralNetworkBrain implements Brain {
     }
 
     @Override
+
     public Direction move(Snake snake, Food food, Garden garden) {
         double[] directions = neuralNetwork.guess(dataFactory.toInput(garden));
         return dataFactory.toDirection(directions);

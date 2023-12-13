@@ -34,9 +34,10 @@ public class LearnAndSave {
             AstarBrain brain = new AstarBrain();
             snake.setBrain(brain);
 
-            while (true) {
+            boolean ticked = true;
+            while (ticked) {
                 double[] input = networkDataFactory.toInput(garden);
-                boolean ticked = garden.tick();
+                ticked = garden.tick();
                 neuralNetwork.train(input, networkDataFactory.toOutput(snake.getDirection()));
                 if (!ticked) {
                     break;

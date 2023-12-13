@@ -5,13 +5,15 @@ import smartsnake.astar.Node;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AstarBrain implements Brain {
     @Override
     public Direction move(Snake snake, Food food, Garden garden) {
 
         ArrayList<Node> openNodes = new ArrayList<>();
-        ArrayList<Node> closeNodes = new ArrayList<>();
+        Set<Node> closeNodes = new HashSet<>();
 
         Node start = new Node(snake.getHeadLocation(), food);
         openNodes.add(start);
@@ -74,12 +76,13 @@ public class AstarBrain implements Brain {
                         default:
                             continue;
                     }
-                    if (!openNodes.contains(neighbor))
+                    int neighborIndex = openNodes.indexOf(neighbor);
+                    if (neighborIndex == -1)
                     {
                         openNodes.add(neighbor);
                         neighbor.setParent(current, direction);
                     } else {
-                        openNodes.get(openNodes.indexOf(neighbor)).setParent(current, direction);
+                        openNodes.get(neighborIndex).setParent(current, direction);
                     }
                 }
 

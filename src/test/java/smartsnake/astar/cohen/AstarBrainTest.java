@@ -36,11 +36,22 @@ class AstarBrainTest
     @Test
     public void updateNodeParent()
     {
+        Point headLocation = snake.getHeadLocation();
+        Node current = new Node(headLocation, food);
+        Node neighbor = new Node(new Point(headLocation.x, headLocation.y - 1), food);
+        Direction direction = Direction.Up;
+        List<Node> open = new ArrayList<>();
+        List<Node> closed = new ArrayList<>();
 
+        brain.closeSnakeNodes(snake, food, closed);
+        AstarBrain.updateNodeParent(current, neighbor, direction, open, closed, garden);
+
+        assertNotNull(neighbor.getParent());
+        assertEquals(1, open.size());
     }
 
     @Test
-    public void closeSnakeNodes()
+    public void closeSnake()
     {
         //Given above objects and
         List<Node> closed = new ArrayList<>();
@@ -59,8 +70,8 @@ class AstarBrainTest
     public void getLowestCostNode()
     {
         //Given
-        List<Node> open = new ArrayList<>(List.of(new Node(new Point(12, 5), food),
-                new Node(new Point(15, 5), food)));
+        List<Node> open = List.of(new Node(new Point(12, 5), food),
+                new Node(new Point(15, 5), food));
 
         //When
         Node lowestCost = brain.getLowestCostNode(open);

@@ -89,16 +89,16 @@ public class AstarBrain implements Brain
     @VisibleForTesting
     public Node getLowestCostNode(List<Node> open)
     {
-        int minCostIndex = 0;
+        Node minCost = open.get(0);
 
-        for (int i = 0; i < open.size(); i++)
+        for (int i = 1; i < open.size(); i++)
         {
             Node point = open.get(i);
-            if (point.getCost() < open.get(minCostIndex).getCost())
+            if (point.getCost() < minCost.getCost())
             {
-                minCostIndex = i;
+                minCost = point;
             }
         }
-        return open.get(minCostIndex);
+        return minCost;
     }
 }

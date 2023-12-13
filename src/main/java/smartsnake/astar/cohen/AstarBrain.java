@@ -38,7 +38,12 @@ public class AstarBrain implements Brain
         return null;
     }
 
-    private static void updateGardenWithNeighboringPositions(Food food, Garden garden, List<Node> open, List<Node> closed, Node current, Point currentLocation)
+    private static void updateGardenWithNeighboringPositions(Food food,
+                                                             Garden garden,
+                                                             List<Node> open,
+                                                             List<Node> closed,
+                                                             Node current,
+                                                             Point currentLocation)
     {
         Node right = new Node(new Point(currentLocation.x + 1, currentLocation.y), food);
         updateNodeParent(current, right, Direction.Right, open, closed, garden);
@@ -63,7 +68,8 @@ public class AstarBrain implements Brain
             if (!open.contains(neighbor))
             {
                 open.add(neighbor);
-            }else
+            }
+            else
             {
                 neighbor = open.get(open.indexOf(neighbor));
             }

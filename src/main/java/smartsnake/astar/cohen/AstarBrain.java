@@ -63,8 +63,7 @@ public class AstarBrain implements Brain
             if (!open.contains(neighbor))
             {
                 open.add(neighbor);
-            }
-            else
+            }else
             {
                 neighbor = open.get(open.indexOf(neighbor));
             }

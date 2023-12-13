@@ -71,8 +71,8 @@ public class AstarBrain implements Brain
                                    List<Node> openNodes,
                                    List<Node> closedNodes,
                                    Garden garden) {
-
-        if (!closedNodes.contains(neighbor) && (garden.contains(current.getLocation())))
+        Point check = new Point(current.getLocation().x, current.getLocation().y);
+        if (!closedNodes.contains(neighbor) && (garden.contains(check)))
         {
             if (!openNodes.contains(neighbor))
             {

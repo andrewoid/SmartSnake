@@ -77,7 +77,7 @@ class AstarBrainTest {
         brain.addSnakeToClosed(snake, food, closedNodes);
 
         // then
-        assertEquals(snake.getSegments().get(1).getLocation(), ((Node)closedNodes.toArray()[0]).getLocation());
+        assertEquals(snake.getSegments().get(1).getLocation(), ((Node) closedNodes.toArray()[0]).getLocation());
     }
 
 }

@@ -30,29 +30,18 @@ public class AstarBrain implements Brain
             closedNodes.add(current);
 
             Point point = current.getLocation();
-            if(garden.contains(point))
-            {
-                Node up = new Node(new Point(point.x, point.y - 1), food);
-                updateNeighborhood(current, up, Direction.Up, openNodes, closedNodes);
-            }
 
-            if(garden.contains(point))
-            {
-                Node down = new Node(new Point(point.x, point.y + 1), food);
-                updateNeighborhood(current, down, Direction.Down, openNodes, closedNodes);
-            }
+            Node up = new Node(new Point(point.x, point.y - 1), food);
+            updateNeighborhood(current, up, Direction.Up, openNodes, closedNodes, garden);
 
-            if(garden.contains(point))
-            {
-                Node right = new Node(new Point(point.x + 1, point.y), food);
-                updateNeighborhood(current, right, Direction.Right, openNodes, closedNodes);
-            }
+            Node down = new Node(new Point(point.x, point.y + 1), food);
+            updateNeighborhood(current, down, Direction.Down, openNodes, closedNodes, garden);
 
-            if(garden.contains(point))
-            {
-                Node left = new Node(new Point(point.x - 1, point.y), food);
-                updateNeighborhood(current, left, Direction.Left, openNodes, closedNodes);
-            }
+            Node right = new Node(new Point(point.x + 1, point.y), food);
+            updateNeighborhood(current, right, Direction.Right, openNodes, closedNodes, garden);
+
+            Node left = new Node(new Point(point.x - 1, point.y), food);
+            updateNeighborhood(current, left, Direction.Left, openNodes, closedNodes, garden);
 
             if (point.equals(food))
             {
@@ -76,9 +65,13 @@ public class AstarBrain implements Brain
     }
 
 
-    public void updateNeighborhood(Node current, Node neighbor, Direction direction,
-                                   List<Node> openNodes, List<Node> closedNodes) {
-        if (!closedNodes.contains(neighbor))
+    public void updateNeighborhood(Node current,
+                                   Node neighbor,
+                                   Direction direction,
+                                   List<Node> openNodes,
+                                   List<Node> closedNodes,
+                                   Garden garden) {
+        if (!closedNodes.contains(neighbor) || !garden.contains(current.getLocation()))
         {
             if (!openNodes.contains(neighbor))
             {
@@ -89,5 +82,6 @@ public class AstarBrain implements Brain
                 openNodes.get(openNodes.indexOf(neighbor)).setParent(current, direction);
             }
         }
+
     }
 }

@@ -20,23 +20,23 @@ public class LearnAndSave
             AstarBrain brain = new AstarBrain();
             snake.setBrain(brain);
 
-            boolean ticked;
-            do
+            boolean ticked = true;
+            while(ticked)
             {
                 double[] input = neuralNetworkDataFactory.toInput(garden);
                 ticked = garden.tick();
-                neuralNetwork.train(input,
-                        neuralNetworkDataFactory.toOutput(snake.getDirection()));
-            } while (ticked);
-
+                neuralNetwork.train(input, neuralNetworkDataFactory.toOutput(snake.getDirection()));
+                if(!ticked)
+                {
+                    break;
+                }
+            }
         }
         neuralNetwork.writeToFile();
     }
 }
 //create a neural network
-//5 input nodes
-//256 hidden nodes
-//4 output nodes
+//5 input nodes, 256 hidden nodes, 4 output nodes
 //play 50_000 games
 //for every move, train the NN with the state of the garden,
 //and the move that your AstarBrain decides to make

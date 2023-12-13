@@ -21,7 +21,7 @@ public class AstarBrainTest
     @Test
     public void move() {
         //given
-        Garden garden = mock();
+        Garden garden = new Garden(20, 15);
         Snake snake = mock();
         Food food = new Food(15, 5);
         AstarBrain brain = new AstarBrain();

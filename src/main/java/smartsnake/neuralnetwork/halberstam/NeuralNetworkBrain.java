@@ -9,13 +9,14 @@ import java.io.IOException;
 public class NeuralNetworkBrain implements Brain {
     NeuralNetwork neuralNetwork;
     NeuralNetworkDataFactory dataFactory = new NeuralNetworkDataFactory();
-    public NeuralNetworkBrain(){
+    public NeuralNetworkBrain() {
         try {
             neuralNetwork = NeuralNetwork.readFromFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
     @Override
     public Direction move(Snake snake, Food food, Garden garden) {
         double[] directions = neuralNetwork.guess(dataFactory.toInput(garden));

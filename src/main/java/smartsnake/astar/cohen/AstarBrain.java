@@ -27,44 +27,49 @@ public class AstarBrain implements Brain
             open.remove(current);
             closed.add(current);
 
-            if (current.getLocation().equals(food))
+            Point currentLocation = current.getLocation();
+            if (currentLocation.equals(food))
             {
                 return current.getDirectionFromStart();
             }
 
-            Node right = new Node(new Point(current.getLocation().x + 1, current.getLocation().y), food);
-            Node left = new Node(new Point(current.getLocation().x - 1, current.getLocation().y), food);
-            Node up = new Node(new Point(current.getLocation().x, current.getLocation().y - 1), food);
-            Node down = new Node(new Point(current.getLocation().x, current.getLocation().y + 1), food);
-
-            List<Node> neighbors = new ArrayList<>(List.of(left, right, up, down));
-            List<String> directions = new ArrayList<>(List.of("Left", "Right", "Up", "Down"));
-
-            for (Node neighbor : neighbors)
-            {
-                if (!closed.contains(neighbor))
-                {
-                    if (!open.contains(neighbor)) //neighbor.getFromEnd() < current.getFromEnd() ||
-                    {
-                        if (!open.contains(neighbor))
-                        {
-                            open.add(neighbor);
-                        } else
-                        {
-                            neighbor = open.get(open.indexOf(neighbor));
-                        }
-                        updateNodeParent(current, neighbor, directions.get(neighbors.indexOf(neighbor)));
-                    }
-                }
-            }
+            updateGardenWithNeighboringPositions(food, garden, open, closed, current, currentLocation);
         }
         return null;
     }
 
-    @VisibleForTesting
-    public static void updateNodeParent(Node current, Node neighbor, String direction)
+    private static void updateGardenWithNeighboringPositions(Food food, Garden garden, List<Node> open, List<Node> closed, Node current, Point currentLocation)
     {
-        neighbor.setParent(current, Direction.valueOf(direction));
+        Node right = new Node(new Point(currentLocation.x + 1, currentLocation.y), food);
+        updateNodeParent(current, right, Direction.Right, open, closed, garden);
+        Node left = new Node(new Point(currentLocation.x - 1, currentLocation.y), food);
+        updateNodeParent(current, left, Direction.Left, open, closed, garden);
+        Node up = new Node(new Point(currentLocation.x, currentLocation.y - 1), food);
+        updateNodeParent(current, up, Direction.Up, open, closed, garden);
+        Node down = new Node(new Point(currentLocation.x, currentLocation.y + 1), food);
+        updateNodeParent(current, down, Direction.Down, open, closed, garden);
+    }
+
+    @VisibleForTesting
+    public static void updateNodeParent(Node current,
+                                        Node neighbor,
+                                        Direction direction,
+                                        List<Node> open,
+                                        List<Node> closed,
+                                        Garden garden)
+    {
+        if (!closed.contains(neighbor) && garden.contains(neighbor.getLocation()))
+        {
+            if (!open.contains(neighbor))
+            {
+                open.add(neighbor);
+            }
+            else
+            {
+                neighbor = open.get(open.indexOf(neighbor));
+            }
+            neighbor.setParent(current, direction);
+        }
     }
 
     @VisibleForTesting
@@ -81,17 +86,15 @@ public class AstarBrain implements Brain
     public Node getLowestCostNode(List<Node> open)
     {
         int minCostIndex = 0;
-        Node lowest = open.get(minCostIndex);
 
         for (int i = 0; i < open.size(); i++)
         {
             Node point = open.get(i);
-            if (point.getCost() < lowest.getCost())
+            if (point.getCost() < open.get(minCostIndex).getCost())
             {
                 minCostIndex = i;
-                lowest = open.get(minCostIndex);
             }
         }
-        return lowest;
+        return open.get(minCostIndex);
     }
 }

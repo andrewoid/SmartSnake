@@ -13,8 +13,7 @@ public class LearnAndSave {
         NeuralNetwork neuralNetwork;
         try {
             neuralNetwork = NeuralNetwork.readFromFile();
-        }
-        catch(IOException e) {
+        } catch(IOException e) {
             e.printStackTrace();
             neuralNetwork = new NeuralNetwork(5, 256, 4);
         }
@@ -33,7 +32,7 @@ public class LearnAndSave {
                 tick = garden.tick();
                 double[] output = dataFactory.toOutput(snake.getDirection());
                 neuralNetwork.train(gardenInput, output);
-                if(!tick) //because when game ends tick is false
+                if (!tick) //because when game ends tick is false
                 {
                     break;
                 }

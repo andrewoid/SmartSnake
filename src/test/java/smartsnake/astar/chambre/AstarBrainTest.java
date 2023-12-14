@@ -9,6 +9,8 @@ import smartsnake.astar.Node;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
@@ -59,7 +61,7 @@ class AstarBrainTest {
         Food food = new Food(5, 15);
 
         ArrayList<Node> openNodes = new ArrayList<>();
-        ArrayList<Node> closedNodes = new ArrayList<>();
+        Set<Node> closedNodes = new HashSet<>();
         Node current = new Node(new Point(4, 5), food);
         openNodes.add(current);
 

@@ -43,52 +43,31 @@ public class AstarBrain implements Brain {
 
             ArrayList<Node> neighbors = new ArrayList<>();
             Point location = current.getLocation();
-            Node up = new Node(new Point(location.x, location.y - 1), food);
-            Node down = new Node(new Point(location.x, location.y + 1), food);
-            Node right = new Node(new Point(location.x + 1, location.y), food);
-            Node left = new Node(new Point(location.x - 1, location.y), food);
 
-            neighbors.add(up);
-            neighbors.add(down);
-            neighbors.add(right);
-            neighbors.add(left);
-
-
-            for (int i = 0; i < neighbors.size(); i++) {
-                Node neighbor = neighbors.get(i);
-                if (!garden.contains(neighbor.getLocation()) || closeNodes.contains(neighbor)) {
-                    continue;
-                } else {
-                    Direction direction = null;
-                    switch (i) {
-                        case 0:
-                            direction = Direction.Up;
-                            break;
-                        case 1:
-                            direction = Direction.Down;
-                            break;
-                        case 2:
-                            direction = Direction.Right;
-                            break;
-                        case 3:
-                            direction = Direction.Left;
-                            break;
-                        default:
-                            continue;
-                    }
-                    int neighborIndex = openNodes.indexOf(neighbor);
-                    if (neighborIndex == -1)
-                    {
-                        openNodes.add(neighbor);
-                        neighbor.setParent(current, direction);
-                    } else {
-                        openNodes.get(neighborIndex).setParent(current, direction);
-                    }
-                }
-
-            }
+            checkingNeighbors(current, new Node(new Point(location.x, location.y - 1), food),
+                    Direction.Up, closeNodes, openNodes, garden);
+            checkingNeighbors(current, new Node(new Point(location.x, location.y + 1), food),
+                    Direction.Down, closeNodes, openNodes, garden);
+            checkingNeighbors(current, new Node(new Point(location.x + 1, location.y), food),
+                    Direction.Right, closeNodes, openNodes, garden);
+            checkingNeighbors(current, new Node(new Point(location.x - 1, location.y), food),
+                    Direction.Left, closeNodes, openNodes, garden);
         }
 
         return snake.getDirection();
+    }
+
+    private void checkingNeighbors(Node current, Node neighbor, Direction direction,
+                                   Set<Node> closeNodes, ArrayList<Node> openNodes, Garden garden)
+    {     if (garden.contains(neighbor.getLocation()) && !closeNodes.contains(neighbor)) {
+                int neighborIndex = openNodes.indexOf(neighbor);
+                if (neighborIndex == -1)
+                {
+                    openNodes.add(neighbor);
+                    neighbor.setParent(current, direction);
+                } else {
+                    openNodes.get(neighborIndex).setParent(current, direction);
+                }
+            }
     }
 }

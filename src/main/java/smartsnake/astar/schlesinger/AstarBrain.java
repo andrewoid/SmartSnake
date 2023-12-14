@@ -5,6 +5,8 @@ import smartsnake.astar.Node;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AstarBrain implements Brain {
 
@@ -21,7 +23,7 @@ public class AstarBrain implements Brain {
 
         //setting the open and close array lists, and the ones used to hold the neighbors
         ArrayList<Node> open = new ArrayList<>();
-        ArrayList<Point> closed = new ArrayList<>();
+        Set<Point> closed = new HashSet<>();
         ArrayList<Node> neighbors = new ArrayList<>();
 
         //adding the start node to open
@@ -75,7 +77,7 @@ public class AstarBrain implements Brain {
 
             //what is being traversed
             for (Node neighbor : neighbors) {
-                if (closed.contains(neighbor.getLocation())) {
+                if (closed.contains(neighbor.getLocation()) || !(garden.contains(neighbor.getLocation()))) {
                     continue;
                 }
 

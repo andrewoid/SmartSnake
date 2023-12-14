@@ -5,14 +5,16 @@ import smartsnake.astar.Node;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class AstarBrain implements Brain
 {
     @Override
     public Direction move(Snake snake, Food food, Garden garden) {
         List<Node> openNodes = new ArrayList<>();
-        List<Node> closedNodes = new ArrayList<>();
+        Set<Node> closedNodes = new HashSet<>();
 
         Node startNode = new Node(snake.getHeadLocation(), food);
         openNodes.add(startNode);
@@ -69,7 +71,7 @@ public class AstarBrain implements Brain
                                    Node neighbor,
                                    Direction direction,
                                    List<Node> openNodes,
-                                   List<Node> closedNodes,
+                                   Set<Node> closedNodes,
                                    Garden garden) {
         Point check = new Point(current.getLocation().x, current.getLocation().y);
         if (!closedNodes.contains(neighbor) && (garden.contains(check)))

@@ -9,10 +9,6 @@ import java.io.IOException;
 
 public class NeuralNetworkBrain implements Brain
 {
-    //Load your NN
-    //When move() is called,
-    // call guess() on the NN and then
-    // return the result as a Direction
     private final NeuralNetwork neuralNetwork;
     private final NeuralNetworkDataFactory neuralNetworkDataFactory = new NeuralNetworkDataFactory();
 

@@ -9,30 +9,33 @@ import smartsnake.astar.Node;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 public class AstarBrainTest
 {
     @Test
     public void move() {
         //given
-        Garden garden = new Garden(20, 15);
+        Garden garden = mock(); //make this a mock
         Snake snake = mock();
         Food food = new Food(15, 5);
         AstarBrain brain = new AstarBrain();
         Point snakePosition = new Point(10, 10);
         doReturn(snakePosition).when(snake).getHeadLocation();
+        doReturn(true).when(garden).contains(any());
 
         //when
         Direction direction = brain.move(snake, food, garden);
 
         //then
         assertEquals(direction, Direction.Up);
+        verify(snake).getHeadLocation();
     }
 
     @Test
@@ -58,7 +61,7 @@ public class AstarBrainTest
         Food food = new Food(new Point(20, 5));
         Node current = new Node(new Point(10, 10), food);
         List<Node> openNodes = new ArrayList<>();
-        List<Node> closedNodes = new ArrayList<>();
+        Set<Node> closedNodes = new HashSet<>();
         Node node1 = mock();
         Node node2 = mock();
         openNodes.add(node1);

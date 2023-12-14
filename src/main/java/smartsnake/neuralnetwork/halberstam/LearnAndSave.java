@@ -13,7 +13,7 @@ public class LearnAndSave {
         NeuralNetwork neuralNetwork;
         try {
             neuralNetwork = NeuralNetwork.readFromFile();
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             neuralNetwork = new NeuralNetwork(5, 256, 4);
         }

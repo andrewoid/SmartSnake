@@ -21,7 +21,7 @@ public class LearnAndSave
             snake.setBrain(brain);
 
             boolean ticked = true;
-            while(ticked)
+            while (ticked)
             {
                 double[] input = neuralNetworkDataFactory.toInput(garden);
                 ticked = garden.tick();

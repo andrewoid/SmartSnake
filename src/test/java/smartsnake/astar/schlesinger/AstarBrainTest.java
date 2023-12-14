@@ -14,14 +14,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class AstarBrainTest {
+    final Garden garden = mock();
+    final Food food = new Food(10, 6);
+    final AstarBrain brain = new AstarBrain();
+    final Snake snake = mock();
 
     @Test
     void move() {
         //given
-        Snake snake = mock();
-        Garden garden = mock();
-        Food food = new Food(10, 6);
-        AstarBrain brain = new AstarBrain();
         doReturn(new Point(10, 5)).when(snake).getHeadLocation();
         ArrayList<Point> snakeSegments = new ArrayList<>();
         snakeSegments.add(new Point(10, 5));

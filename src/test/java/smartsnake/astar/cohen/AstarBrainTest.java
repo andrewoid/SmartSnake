@@ -43,16 +43,16 @@ class AstarBrainTest
     @Test
     public void updateNodeParent()
     {
-        Node current = new Node(headLocation, food);
-        Node neighbor = new Node(new Point(headLocation.x, headLocation.y - 1), food);
-        Direction direction = Direction.Up;
-        ArrayList<Node> open = new ArrayList<>();
-        Set<Node> closed = new HashSet<>();
-
         doReturn(snake).when(garden).getSnake();
         doReturn(food).when(garden).getFood();
         doReturn(headLocation).when(snake).getHeadLocation();
         doReturn(true).when(garden).contains(any());
+
+        final Node current = new Node(headLocation, food);
+        final Node neighbor = new Node(new Point(headLocation.x, headLocation.y - 1), food);
+        final Direction direction = Direction.Up;
+        Set<Node> closed = new HashSet<>();
+        ArrayList<Node> open = new ArrayList<>();
 
         brain.closeSnakeNodes(snake, food, closed);
         AstarBrain.updateNodeParent(current, neighbor, direction, open, closed, garden);

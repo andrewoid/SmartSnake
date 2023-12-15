@@ -8,40 +8,51 @@ import smartsnake.Snake;
 import smartsnake.astar.Node;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 class AstarBrainTest
 {
     private final Point point = new Point(10, 10);
-    Snake snake = new Snake();
+    private  final Point headLocation = new Point(10, 5);
+    Snake snake = mock();
     Food food = new Food(point);
-    Garden garden = new Garden(40, 30);
+    Garden garden = mock();
     AstarBrain brain = new AstarBrain();
 
     @Test
     public void move()
     {
         //Given above objects
+        doReturn(snake).when(garden).getSnake();
+        doReturn(food).when(garden).getFood();
+        doReturn(headLocation).when(snake).getHeadLocation();
+        doReturn(true).when(garden).contains(any());
 
         //When
         Direction direction = brain.move(snake, food, garden);
-
         //Then
         assertEquals(Direction.Down, direction);
+        verify(snake).getHeadLocation();
     }
 
     @Test
     public void updateNodeParent()
     {
-        Point headLocation = snake.getHeadLocation();
         Node current = new Node(headLocation, food);
         Node neighbor = new Node(new Point(headLocation.x, headLocation.y - 1), food);
         Direction direction = Direction.Up;
-        List<Node> open = new ArrayList<>();
-        List<Node> closed = new ArrayList<>();
+        ArrayList<Node> open = new ArrayList<>();
+        Set<Node> closed = new HashSet<>();
+
+        doReturn(snake).when(garden).getSnake();
+        doReturn(food).when(garden).getFood();
+        doReturn(headLocation).when(snake).getHeadLocation();
+        doReturn(true).when(garden).contains(any());
 
         brain.closeSnakeNodes(snake, food, closed);
         AstarBrain.updateNodeParent(current, neighbor, direction, open, closed, garden);
@@ -54,7 +65,7 @@ class AstarBrainTest
     public void closeSnake()
     {
         //Given above objects and
-        List<Node> closed = new ArrayList<>();
+        Set<Node> closed = new HashSet<>();
 
         //When
         brain.closeSnakeNodes(snake, food, closed);
@@ -62,7 +73,7 @@ class AstarBrainTest
         //Then
         for (int i = 1; i < snake.getSegments().size(); i++)
         {
-            assertEquals(snake.getSegments().get(i).getLocation(), closed.get(i - 1).getLocation());
+            assertEquals(snake.getSegments().get(i).getLocation(), closed.toArray()[0]);
         }
     }
 

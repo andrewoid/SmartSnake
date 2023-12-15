@@ -7,15 +7,17 @@ import smartsnake.astar.Node;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class AstarBrain implements Brain
 {
     @Override
     public @Nullable Direction move(Snake snake, Food food, Garden garden)
     {
-        List<Node> open = new ArrayList<>();
-        List<Node> closed = new ArrayList<>();
+        ArrayList<Node> open = new ArrayList<>();
+        Set<Node> closed = new HashSet<>();
         Node start = new Node(snake.getHeadLocation(), food.getLocation());
         open.add(start);
 
@@ -40,8 +42,8 @@ public class AstarBrain implements Brain
 
     private static void updateGardenWithNeighboringPositions(Food food,
                                                              Garden garden,
-                                                             List<Node> open,
-                                                             List<Node> closed,
+                                                             ArrayList<Node> open,
+                                                             Set<Node> closed,
                                                              Node current,
                                                              Point currentLocation)
     {
@@ -59,8 +61,8 @@ public class AstarBrain implements Brain
     public static void updateNodeParent(Node current,
                                         Node neighbor,
                                         Direction direction,
-                                        List<Node> open,
-                                        List<Node> closed,
+                                        ArrayList<Node> open,
+                                        Set<Node> closed,
                                         Garden garden)
     {
         if (!closed.contains(neighbor) && garden.contains(neighbor.getLocation()))
@@ -77,7 +79,7 @@ public class AstarBrain implements Brain
     }
 
     @VisibleForTesting
-    public void closeSnakeNodes(Snake snake, Food food, List<Node> closed)
+    public void closeSnakeNodes(Snake snake, Food food, Set<Node> closed)
     {
         List<Point> snakePoints = snake.getSegments();
         for (int i = 1; i < snakePoints.size(); i++)

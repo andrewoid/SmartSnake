@@ -9,6 +9,8 @@ import smartsnake.astar.Node;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -37,7 +39,7 @@ class AstarBrainTest {
         Node current = new Node(new Point(14, 5), point);
         ArrayList<Node> openNodes = new ArrayList<>();
         openNodes.add(new Node(point, point));
-        ArrayList<Node> closedNodes = new ArrayList<>();
+        Set<Node> closedNodes = new HashSet<>();
         Food food = new Food(new Point(18, 5));
         AstarBrain brain = new AstarBrain();
         Garden garden = new Garden(20, 15);
@@ -68,16 +70,14 @@ class AstarBrainTest {
         // given
         Snake snake = new Snake();
         Food food = new Food(point);
-        ArrayList<Node> closedNodes = new ArrayList<>();
+        Set<Node> closedNodes = new HashSet<>();
         AstarBrain brain = new AstarBrain();
 
         // when
         brain.addSnakeToClosed(snake, food, closedNodes);
 
         // then
-        assertEquals(snake.getSegments().get(snake.getSegments().size() - 1).getLocation(),
-                closedNodes.get(closedNodes.size() - 1).getLocation());
-        assertEquals(snake.getSegments().get(1).getLocation(), closedNodes.get(0).getLocation());
+        assertEquals(snake.getSegments().get(1).getLocation(), ((Node) closedNodes.toArray()[0]).getLocation());
     }
 
 }

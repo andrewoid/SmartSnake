@@ -12,7 +12,7 @@ public class NeuralNetworkBrain implements Brain {
     NeuralNetwork nn;
 
     public NeuralNetworkBrain() throws IOException {
-        nn = NeuralNetwork.readFromFile("nn_data.json");
+        nn = NeuralNetwork.readFromFile();
     }
 
     @Override

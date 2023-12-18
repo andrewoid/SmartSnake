@@ -19,7 +19,7 @@ public class LearnAndSave {
         }
         NeuralNetworkDataFactory dataFactory = new NeuralNetworkDataFactory();
 
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < 10000; i++)
         {
             Garden garden = new Garden(20, 15);
             Snake snake = garden.getSnake();
@@ -32,10 +32,6 @@ public class LearnAndSave {
                 tick = garden.tick();
                 double[] output = dataFactory.toOutput(snake.getDirection());
                 neuralNetwork.train(gardenInput, output);
-                if (!tick) //because when game ends tick is false
-                {
-                    break;
-                }
             }
         }
         neuralNetwork.writeToFile();

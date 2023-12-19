@@ -6,7 +6,9 @@ import smartsnake.astar.Node;
 import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class AstarBrain implements Brain {
 
@@ -14,7 +16,7 @@ public class AstarBrain implements Brain {
     public Direction move(Snake snake, Food food, Garden garden) {
 
         ArrayList<Node> openNodes = new ArrayList<>();
-        ArrayList<Node> closedNodes = new ArrayList<>();
+        Set<Node> closedNodes = new HashSet<>();
 
         Node startNode = new Node(snake.getHeadLocation(), food);
         openNodes.add(startNode);
@@ -33,22 +35,22 @@ public class AstarBrain implements Brain {
             }
 
             updateNeighbors(current, new Point(currentLocation.x + 1, currentLocation.y),
-                    Direction.Right, openNodes, closedNodes, food);
+                    Direction.Right, openNodes, closedNodes, food, garden);
             updateNeighbors(current, new Point(currentLocation.x, currentLocation.y - 1),
-                    Direction.Up, openNodes, closedNodes, food);
+                    Direction.Up, openNodes, closedNodes, food, garden);
             updateNeighbors(current, new Point(current.getLocation().x - 1, current.getLocation().y),
-                    Direction.Left, openNodes, closedNodes, food);
+                    Direction.Left, openNodes, closedNodes, food, garden);
             updateNeighbors(current, new Point(currentLocation.x, currentLocation.y + 1),
-                    Direction.Down, openNodes, closedNodes, food);
+                    Direction.Down, openNodes, closedNodes, food, garden);
         }
         return null;
     }
 
     public void updateNeighbors(Node current, Point point, Direction direction,
-                                ArrayList<Node> openNodes, ArrayList<Node> closedNodes, Food food) {
+                                ArrayList<Node> openNodes, Set<Node> closedNodes, Food food, Garden garden) {
 
         Node directionNode = new Node(point, food);
-        if (!closedNodes.contains(directionNode)) {
+        if (!closedNodes.contains(directionNode) && garden.contains(point)) {
             int index = openNodes.indexOf(directionNode);
             if (index == -1) {
                 openNodes.add(directionNode);
@@ -69,7 +71,7 @@ public class AstarBrain implements Brain {
         return lowestfcostNode;
     }
 
-    public void addSnakeToClosed(Snake snake, Food food, ArrayList<Node> closedNodes) {
+    public void addSnakeToClosed(Snake snake, Food food, Set<Node> closedNodes) {
         List<Point> snakeSegments = snake.getSegments();
         for (int i = 1; i < snakeSegments.size(); i++) {
             closedNodes.add(new Node(snakeSegments.get(i), food));

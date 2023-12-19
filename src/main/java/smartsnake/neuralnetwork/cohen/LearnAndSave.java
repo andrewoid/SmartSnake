@@ -24,7 +24,7 @@ public class LearnAndSave
 
             boolean stillPlaying = true;
 
-            while(stillPlaying)
+            while (stillPlaying)
             {
                 double[] currentGardenState = dataFactory.toInput(garden);
                 stillPlaying = garden.tick();

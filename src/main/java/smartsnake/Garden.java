@@ -69,7 +69,6 @@ public class Garden {
      * @return true if the simulation should continue, otherwise false
      */
     public boolean tick() {
-        tickCounter++;
 
         if (snake.starved()) {
             logger.info("snake starved");
@@ -81,6 +80,7 @@ public class Garden {
             logger.info("snake intersects garden wall");
             return false;
         } else {
+            tickCounter++;
             boolean shouldGrow = snake.intersectsHead(food);
 
             if (shouldGrow) {

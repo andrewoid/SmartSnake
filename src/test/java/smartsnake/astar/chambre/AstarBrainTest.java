@@ -9,8 +9,11 @@ import smartsnake.astar.Node;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
@@ -19,13 +22,15 @@ class AstarBrainTest {
     @Test
     void move() {
         // Given
-        Garden garden = new Garden(30, 40);
+        Garden garden = mock();
         Snake snake = mock();
         Food food = new Food(15, 5);
         AstarBrain brain = new AstarBrain();
         Point point = new Point(10, 10);
+        doReturn(snake).when(garden).getSnake();
+        doReturn(food).when(garden).getFood();
         doReturn(point).when(snake).getHeadLocation();
-
+        doReturn(true).when(garden).contains(any());
 
         //When
         Direction direction = brain.move(snake, food, garden);
@@ -59,7 +64,7 @@ class AstarBrainTest {
         Food food = new Food(5, 15);
 
         ArrayList<Node> openNodes = new ArrayList<>();
-        ArrayList<Node> closedNodes = new ArrayList<>();
+        Set<Node> closedNodes = new HashSet<>();
         Node current = new Node(new Point(4, 5), food);
         openNodes.add(current);
 

@@ -18,15 +18,13 @@ public class LearnAndSave {
             Snake snake = garden.getSnake();
             snake.setBrain(astarBrain);
 
-            boolean gardenTick = garden.tick();
+            boolean gardenTick = true;
             while (gardenTick) {
                 double[] gardenInput = neuralNetworkDataFactory.toInput(garden);
                 gardenTick = garden.tick();
                 double[] snakeOutput = neuralNetworkDataFactory.toOutput(snake.getDirection());
                 neuralNetwork.train(gardenInput, snakeOutput);
-                if (!gardenTick) {
-                    break;
-                }
+
             }
         }
         neuralNetwork.writeToFile();

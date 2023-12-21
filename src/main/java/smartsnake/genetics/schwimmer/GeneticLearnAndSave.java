@@ -30,7 +30,6 @@ public class GeneticLearnAndSave {
     private static final int BREED = (int) (SNAKES * .01);
     public static final double MUTATION_PROBABILITY = 0.1;
     public static final int HIDDEN_NODES = 256;
-    public static final int LENGTH_WEIGHT = 10;
 
     public static void main(String[] args) {
         // 1. create 2000 networks
@@ -44,7 +43,10 @@ public class GeneticLearnAndSave {
         NeuralNetworkDataFactory factory = new NeuralNetworkDataFactory();
         List<NeuralNetwork> networks = new ArrayList<>();
         List<NetworkAndScore> scores = new ArrayList<>();
-        NetworkAndScore highScore = null;
+        NetworkAndScore highScore = new NetworkAndScore(
+                new Garden(1, 2),
+                new NeuralNetwork(0, 0, 0),
+                new Score(0, 0));
         for (int i = 0; i < SNAKES; i++) {
             boolean add = networks.add(new NeuralNetwork(
                     INPUT_SIZE, HIDDEN_NODES, OUTPUT_SIZE));
@@ -63,15 +65,15 @@ public class GeneticLearnAndSave {
                 } while (running);
                 int snakeSize = snake.getSegments().size();
                 int tickCounter = garden.getTurns();
-                int score = snakeSize * LENGTH_WEIGHT + tickCounter;
+                Score score = new Score(snakeSize, tickCounter);
                 scores.add(new NetworkAndScore(garden, network, score));
             }
             Collections.sort(scores);
             NetworkAndScore generationalHighScore = scores.get(0);
-            if (highScore == null || highScore.score() < generationalHighScore.score()) {
+            if (highScore == null || highScore.compareTo(generationalHighScore) > 0) {
                 highScore = generationalHighScore;
             }
-            System.out.printf("%d Snakes=%d High Score=%d\n", i, scores.size(), generationalHighScore.score());
+            System.out.printf("%d Snakes=%d High Score=%s\n", i, scores.size(), generationalHighScore.score());
             List<NetworkAndScore> oldGeneration = scores.subList(0, BREED);
             networks.clear();
             for (NetworkAndScore n : oldGeneration) {

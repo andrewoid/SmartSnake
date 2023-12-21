@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Snake {
 
-    public static final int STARVE_LIMIT = 50;
+    public static final int STARVE_LIMIT = 100;
     private final List<Point> snake;
     private Direction direction;
     private int starveTicks;

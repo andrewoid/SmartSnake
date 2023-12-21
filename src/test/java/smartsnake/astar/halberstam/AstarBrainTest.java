@@ -1,7 +1,6 @@
-package smartsnake.astar.schlesinger;
+package smartsnake.astar.halberstam;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import smartsnake.Direction;
 import smartsnake.Food;
 import smartsnake.Garden;
@@ -11,31 +10,32 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class AstarBrainTest {
-    final Garden garden = mock();
-    final Food food = new Food(10, 6);
-    final AstarBrain brain = new AstarBrain();
-    final Snake snake = mock();
-
     @Test
     void move() {
         //given
+        Snake snake = mock();
         doReturn(new Point(10, 5)).when(snake).getHeadLocation();
-        ArrayList<Point> snakeSegments = new ArrayList<>();
-        snakeSegments.add(new Point(10, 5));
-        snakeSegments.add(new Point(10, 4));
-        snakeSegments.add(new Point(10, 3));
-        doReturn(snakeSegments).when(snake).getSegments();
+
+        ArrayList<Point> segments = new ArrayList<>();
+        segments.add(new Point(10, 5));
+        segments.add(new Point(9, 5));
+        segments.add(new Point(8, 5));
+        doReturn(segments).when(snake).getSegments();
+
+        Food food = new Food(12, 5);
+        Garden garden = mock();
         doReturn(true).when(garden).contains(any());
+        AstarBrain brain = new AstarBrain();
 
         //when
         Direction direction = brain.move(snake, food, garden);
 
         //then
-        assertEquals(Direction.Down, direction);
-
+        assertEquals(Direction.Right, direction);
     }
-
 }

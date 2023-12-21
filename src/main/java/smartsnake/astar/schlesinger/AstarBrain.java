@@ -5,6 +5,8 @@ import smartsnake.astar.Node;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AstarBrain implements Brain {
 
@@ -21,7 +23,7 @@ public class AstarBrain implements Brain {
 
         //setting the open and close array lists, and the ones used to hold the neighbors
         ArrayList<Node> open = new ArrayList<>();
-        ArrayList<Point> closed = new ArrayList<>();
+        Set<Point> closed = new HashSet<>();
         ArrayList<Node> neighbors = new ArrayList<>();
 
         //adding the start node to open
@@ -75,7 +77,7 @@ public class AstarBrain implements Brain {
 
             //what is being traversed
             for (Node neighbor : neighbors) {
-                if (closed.contains(neighbor.getLocation())) {
+                if (closed.contains(neighbor.getLocation()) || !(garden.contains(neighbor.getLocation()))) {
                     continue;
                 }
 
@@ -84,14 +86,11 @@ public class AstarBrain implements Brain {
 
                     if (neighbor.equals(topNode)) {
                         open.get(open.indexOf(neighbor)).setParent(current, Direction.Up);
-                    }
-                    if (neighbor.equals(bottomNode)) {
+                    } else if (neighbor.equals(bottomNode)) {
                         open.get(open.indexOf(neighbor)).setParent(current, Direction.Down);
-                    }
-                    if (neighbor.equals(rightNode)) {
+                    } else if (neighbor.equals(rightNode)) {
                         open.get(open.indexOf(neighbor)).setParent(current, Direction.Right);
-                    }
-                    if (neighbor.equals(leftNode)) {
+                    } else if (neighbor.equals(leftNode)) {
                         open.get(open.indexOf(neighbor)).setParent(current, Direction.Left);
                     }
 
@@ -100,16 +99,13 @@ public class AstarBrain implements Brain {
                     if (neighbor.equals(topNode)) {
                         neighbor.setParent(current, Direction.Up);
                         open.add(neighbor);
-                    }
-                    if (neighbor.equals(bottomNode)) {
+                    } else if (neighbor.equals(bottomNode)) {
                         neighbor.setParent(current, Direction.Down);
                         open.add(neighbor);
-                    }
-                    if (neighbor.equals(rightNode)) {
+                    } else if (neighbor.equals(rightNode)) {
                         neighbor.setParent(current, Direction.Right);
                         open.add(neighbor);
-                    }
-                    if (neighbor.equals(leftNode)) {
+                    } else if (neighbor.equals(leftNode)) {
                         neighbor.setParent(current, Direction.Left);
                         open.add(neighbor);
                     }

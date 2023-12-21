@@ -8,7 +8,8 @@ import java.util.logging.Logger;
 /**
  * Garden class that manages objects of Snake and handles the rules of the game.
  */
-public class Garden {
+public class Garden
+{
 
     private static final Logger logger = Logger.getLogger(Garden.class.getName());
 
@@ -20,29 +21,35 @@ public class Garden {
     private Snake snake;
     private Food food;
 
-    public Garden(int width, int height) {
+    public Garden(int width, int height)
+    {
         this.width = width;
         this.height = height;
         createSnake();
         createFood();
     }
 
-    public Garden(int width, int height, Snake snake) {
+    public Garden(int width, int height, Snake snake)
+    {
         this.width = width;
         this.height = height;
         this.snake = snake;
         createFood();
     }
 
-    public void createSnake() {
+    public void createSnake()
+    {
         snake = new Snake();
     }
 
-    public void createFood() {
+    public void createFood()
+    {
         ArrayList<Point> points = new ArrayList<>();
 
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
                 points.add(new Point(x, y));
             }
         }
@@ -53,11 +60,13 @@ public class Garden {
         food = new Food(points.get(randomIndex));
     }
 
-    public Snake getSnake() {
+    public Snake getSnake()
+    {
         return snake;
     }
 
-    public Food getFood() {
+    public Food getFood()
+    {
         return food;
     }
 
@@ -68,22 +77,30 @@ public class Garden {
      *
      * @return true if the simulation should continue, otherwise false
      */
-    public boolean tick() {
-
-        if (snake.starved()) {
+    public boolean tick()
+    {
+        if (snake.starved())
+        {
             logger.info("snake starved");
             return false;
-        } else if (snake.intersectsItself()) {
+        }
+        else if (snake.intersectsItself())
+        {
             logger.info("snake intersects self");
             return false;
-        } else if (!contains(snake.getHeadLocation())) {
+        }
+        else if (!contains(snake.getHeadLocation()))
+        {
             logger.info("snake intersects garden wall");
             return false;
-        } else {
+        }
+        else
+        {
             tickCounter++;
             boolean shouldGrow = snake.intersectsHead(food);
 
-            if (shouldGrow) {
+            if (shouldGrow)
+            {
                 createFood();
             }
 
@@ -101,22 +118,26 @@ public class Garden {
     /**
      * @return the number of times tick() was called successfully.
      */
-    public int getTurns() {
+    public int getTurns()
+    {
         return tickCounter;
     }
 
-    public int getWidth() {
+    public int getWidth()
+    {
         return width;
     }
 
-    public int getHeight() {
+    public int getHeight()
+    {
         return height;
     }
 
     /**
      * @return true if the Point is inside the Garden, otherwise false.
      */
-    public boolean contains(Point location) {
+    public boolean contains(Point location)
+    {
         return location.x >= 0
                 && location.y >= 0
                 && location.x < width
